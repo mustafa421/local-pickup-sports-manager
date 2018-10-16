@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { TabNavigator } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation";
 import store from "./store";
 import WelcomeScreen from "./screens/WelcomeScreen";
 
@@ -10,7 +10,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const MainNavigator = TabNavigator({
+    const MainNavigator = createBottomTabNavigator({
       welcome: { screen: WelcomeScreen }
     });
 
