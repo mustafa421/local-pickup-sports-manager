@@ -16,16 +16,23 @@ export default class App extends React.Component {
   }
 
   render() {
-    const MainNavigator = createBottomTabNavigator({
-      welcome: { screen: WelcomeScreen },
-      auth: { screen: AuthScreen },
-      main: {
-        screen: createStackNavigator({
-          mainScreen: { screen: MainScreen },
-          settings: { screen: SettingsScreen }
-        })
+    const MainNavigator = createBottomTabNavigator(
+      {
+        welcome: { screen: WelcomeScreen },
+        auth: { screen: AuthScreen },
+        main: {
+          screen: createStackNavigator({
+            mainScreen: { screen: MainScreen },
+            settings: { screen: SettingsScreen }
+          })
+        }
+      },
+      {
+        navigationOptions: {
+          tabBarVisible: false
+        }
       }
-    });
+    );
 
     return (
       <Provider store={store}>
