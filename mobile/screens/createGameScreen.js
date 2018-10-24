@@ -65,16 +65,19 @@ class createGameScreen extends Component {
           style={{ padding: 25 }}
           placeholder="Skill Level (1-10)"
           keyboardType="numeric"
+          maxLength={2}
         />
         <TextInput
           style={{ padding: 25 }}
           placeholder="Min number of players"
           keyboardType="numeric"
+          maxLength={2}
         />
         <TextInput
           style={{ padding: 25 }}
           placeholder="Max number of players"
           keyboardType="numeric"
+          maxLength={2}
         />
         <View style={styles.ontainer}>
           <Button
