@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 export default function WelcomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your projecto!</Text>
+      <Text>Open up App.js to start working on your project!</Text>
     </View>
   );
 }
