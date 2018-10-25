@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Button } from "react-native-elements";
 
 const styles = StyleSheet.create({
   container: {
@@ -11,11 +10,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function WelcomeScreen({ navigation }) {
+export default function WelcomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>Welcome to Local Pickup Sports Manager!</Text>
-      <Button title="Sign in" onPress={() => navigation.navigate("main")} />
+      <Text>Open up App.js to start working on your projecto!</Text>
     </View>
   );
 }
