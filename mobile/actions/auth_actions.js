@@ -5,7 +5,7 @@ import { LOGIN_SUCCESS, LOGIN_FAIL } from "./types";
 // Helper methods
 const doFacebookLogin = async dispatch => {
   const { type, token } = await Facebook.logInWithReadPermissionsAsync(
-    "APP_ID",
+    "314718532447126",
     {
       permissions: ["public_profile", "email"]
     }

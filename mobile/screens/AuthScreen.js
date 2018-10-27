@@ -1,5 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { connect } from "react-redux";
+import { fbLogin } from "../actions/auth_actions";
 
 const styles = StyleSheet.create({
   container: {
@@ -10,10 +12,19 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function AuthScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>AuthScreen - Hello world</Text>
-    </View>
-  );
+class AuthScreen extends React.Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fbLogin());
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>Not supposed to show</Text>
+      </View>
+    );
+  }
 }
+
+export default connect()(AuthScreen);
