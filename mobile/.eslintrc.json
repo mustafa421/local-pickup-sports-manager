@@ -5,5 +5,8 @@
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   },
-  "parser": "babel-eslint"
+  "parser": "babel-eslint",
+  "globals": {
+    "fetch": false
+  }
 }

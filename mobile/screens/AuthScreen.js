@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, AsyncStorage } from "react-native";
 import { connect } from "react-redux";
 import { fbLogin } from "../actions/auth_actions";
 
@@ -16,6 +16,7 @@ class AuthScreen extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fbLogin());
+    AsyncStorage.removeItem("fb_token");
   }
 
   render() {
