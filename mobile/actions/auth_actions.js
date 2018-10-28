@@ -22,9 +22,23 @@ const doFacebookLogin = async dispatch => {
       const response = await fetch(
         `https://graph.facebook.com/v3.2/me?fields=id,name,gender,age_range,email&access_token=${token}`
       );
-      // Call backend with newly acquired account information to create account
+
       const account = await response.json();
-      AsyncStorage.setItem("account", JSON.stringify(account));
+      console.log(account);
+
+      // Call backend with newly acquired account information to create account
+      const request = await fetch("http://192.168.1.242:3000/createGame", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(account),
+        json: true
+      });
+
+      console.log((await request.json()).status);
+
+      // AsyncStorage.setItem("account", JSON.stringify(account));
       // console.log(await response.json());
     } catch (err) {
       console.log(`Error saving facebook token ${err}`);
