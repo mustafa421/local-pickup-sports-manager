@@ -5,11 +5,19 @@ import { Button } from "react-native-elements";
 class MainScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: "Main",
-    headerRight: (
+    headerLeft: (
       <Button
         title="Settings"
         textStyle={{ color: "rgba(0, 122, 255, 1)" }}
         onPress={() => navigation.navigate("settings")}
+        backgroundColor="rgba(0,0,0,0)"
+      />
+    ),
+    headerRight: (
+      <Button
+        title="Create Game"
+        textStyle={{ color: "rgba(0, 122, 255, 1)" }}
+        onPress={() => navigation.navigate("createGameScreen")}
         backgroundColor="rgba(0,0,0,0)"
       />
     ),

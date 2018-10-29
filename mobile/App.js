@@ -21,7 +21,12 @@ export default class App extends React.Component {
       {
         welcome: { screen: WelcomeScreen },
         auth: { screen: AuthScreen },
-        createGame: { screen: createGameScreen },
+        createGame: {
+          screen: createStackNavigator({
+            createGameScreen: { screen: createGameScreen },
+            main: { screen: MainScreen }
+          })
+        },
         main: {
           screen: createStackNavigator({
             mainScreen: { screen: MainScreen },
@@ -31,7 +36,7 @@ export default class App extends React.Component {
       },
       {
         navigationOptions: {
-          tabBarVisible: true
+          tabBarVisible: false
         }
       }
     );
