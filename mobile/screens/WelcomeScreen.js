@@ -15,7 +15,7 @@ export default function WelcomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>Welcome to Local Pickup Sports Manager!</Text>
-      <Button title="Sign in" onPress={() => navigation.navigate("main")} />
+      <Button title="Sign in" onPress={() => navigation.navigate("auth")} />
     </View>
   );
 }
