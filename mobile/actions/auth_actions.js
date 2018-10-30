@@ -28,7 +28,7 @@ const doFacebookLogin = async dispatch => {
 
       // Call backend with newly acquired account information to create account
       const request = await fetch(
-        "http://local-pickup-sports-manager.herokuapp.com/createGame",
+        "http://local-pickup-sports-manager.herokuapp.com/loginUser",
         {
           method: "POST",
           headers: {
