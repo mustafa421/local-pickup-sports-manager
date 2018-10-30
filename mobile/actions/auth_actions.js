@@ -27,14 +27,17 @@ const doFacebookLogin = async dispatch => {
       console.log(account);
 
       // Call backend with newly acquired account information to create account
-      const request = await fetch("http://192.168.1.242:3000/createGame", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(account),
-        json: true
-      });
+      const request = await fetch(
+        "http://local-pickup-sports-manager.herokuapp.com/createGame",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(account),
+          json: true
+        }
+      );
 
       console.log((await request.json()).status);
 
