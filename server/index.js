@@ -2,22 +2,15 @@ const express = require("express");
 const mysql = require("mysql");
 
 const con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database: "localPickupSportsManager"
+  host: "us-cdbr-iron-east-01.cleardb.net",
+  user: "b228d50d18d0dc",
+  password: "a7d38f2e",
+  database: "heroku_c7582aec8a53b97"
 });
 
 con.connect(err => {
   if (err) throw err;
-  console.log("Connected!");
-  const sql =
-    "INSERT INTO test (id, age, description, name) VALUES (2, 17, 'test', 'testName')";
-  con.query(sql, (err2, result) => {
-    if (err2) throw err2;
-    console.log("1 record inserted");
-    console.log(result);
-  });
+  console.log("Successfully Connected to Database!");
 });
 
 const app = express();
