@@ -20,6 +20,7 @@
     "expo": "^30.0.1",
     "npx": "^10.2.0",
     "prettier": "^1.14.3",
+    "prop-types": "^15.6.2",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
     "react-native-elements": "^0.19.1",
