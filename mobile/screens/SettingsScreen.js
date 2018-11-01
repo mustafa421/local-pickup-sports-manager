@@ -10,7 +10,7 @@ class SettingsScreen extends Component {
   render() {
     return (
       <View>
-        <Text>SettingsScreen - Hello World</Text>
+        <Text>SettingsScreen - Hello world</Text>
       </View>
     );
   }
