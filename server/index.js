@@ -41,12 +41,15 @@ app.post("/createGame", (req, res) => {
  */
 app.post("/loginUser", (req, res) => {
   // TODO - Check if user exists in database, if not, create new user
-  // console.log(req.body);
-  console.log("farts");
 
-  // let user = knex('user').where('email', req.body.email);
-  // console.log(user);
-
+  knex("user").where("email", req.body.email).then(function(user) {
+    if(user.length == 0) {
+      knex("user").insert({userID:req.body.userID, email:req.body.email, gender:req.body.gender, username:req.body.username}).then( function() {
+        console.log("User Inserted Sucessfully!");
+      });
+    }
+  });
+  
   res.send(req.body);
 });
 
