@@ -4,7 +4,6 @@ import {
   TextInput,
   View,
   Picker,
-  Alert,
   ScrollView,
   DatePickerIOS,
   Platform,
@@ -44,15 +43,36 @@ class createGameScreen extends Component {
     this.setDate = this.setDate.bind(this);
   }
 
+  async onPressButton(state) {
+    const obj = {
+      sport: state.sportValue,
+      minVal: state.sportValue,
+      maxVal: state.sportValue,
+      skill: state.sportValue,
+      chosenDate: state.sportValue,
+      location: state.sportValue,
+      duration: state.sportValue,
+    };
+    try{
+    const request = await fetch("http://localhost:3000", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(obj),
+        json: true
+      }
+    );
+    console.log((await request.json()).status);
+    }
+    catch (err) {
+      console.log("error");
+    }
+  }
+
   setDate(newDate) {
     this.setState({ chosenDate: newDate });
   }
-
-  // onPressButton() {
-  // Alert.alert("You tapped the button!");
-  // return (
-  // );
-  // }
 
   render() {
     const {
@@ -237,9 +257,7 @@ class createGameScreen extends Component {
           </Picker>
           <View style={{ padding: 75 }}>
             <Button
-              onPress={() => {
-                Alert.alert("Not currently working!"); // Want to create Game
-              }}
+              onPress={() => this.onPressButton(this.state)}
               title="Create Game"
             />
           </View>
