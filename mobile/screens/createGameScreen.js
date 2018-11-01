@@ -55,14 +55,32 @@ class createGameScreen extends Component {
   // }
 
   render() {
+    const {
+      sportValue,
+      minVal,
+      maxVal,
+      skill,
+      chosenDate,
+      location,
+      duration
+    } = this.state;
     return (
       <ScrollView>
         <View style={styles.container}>
+          <Text
+            style={{
+              paddingLeft: 50,
+              paddingTop: 50,
+              color: "grey"
+            }}
+          >
+            Sport
+          </Text>
           <Picker
             itemStyle={{ height: 144 }}
-            selectedValue={(this.state && this.state.pickerValue) || "a"}
+            selectedValue={(this.state && sportValue) || "a"}
             onValueChange={value => {
-              this.setState({ pickerValue: value });
+              this.setState({ sportValue: value });
             }}
           >
             <Picker.Item label="Basketball" value="basketball" />
@@ -71,27 +89,99 @@ class createGameScreen extends Component {
             <Picker.Item label="Soccer" value="soccer" />
             <Picker.Item label="Tennis" value="tennis" />
           </Picker>
+          <Text
+            style={{
+              paddingLeft: 50,
+              paddingTop: 50,
+              color: "grey"
+            }}
+          >
+            Min Number of Players
+          </Text>
+          <Picker
+            itemStyle={{ height: 144 }}
+            style={{ width: 200 }}
+            selectedValue={(this.state && minVal) || "a"}
+            onValueChange={value => {
+              this.setState({ minVal: value });
+            }}
+          >
+            <Picker.Item label="1" value="1" />
+            <Picker.Item label="2" value="2" />
+            <Picker.Item label="3" value="3" />
+            <Picker.Item label="4" value="4" />
+            <Picker.Item label="5" value="5" />
+            <Picker.Item label="6" value="6" />
+            <Picker.Item label="7" value="7" />
+            <Picker.Item label="8" value="8" />
+            <Picker.Item label="9" value="9" />
+            <Picker.Item label="10" value="10" />
+            <Picker.Item label="11" value="11" />
+            <Picker.Item label="12" value="12" />
+            <Picker.Item label="13" value="13" />
+            <Picker.Item label="14" value="14" />
+            <Picker.Item label="15" value="15" />
+            <Picker.Item label="16" value="16" />
+            <Picker.Item label="17" value="17" />
+            <Picker.Item label="18" value="18" />
+            <Picker.Item label="19" value="19" />
+            <Picker.Item label="20" value="20" />
+          </Picker>
+          <Text
+            style={{
+              paddingLeft: 50,
+              paddingTop: 50,
+              color: "grey"
+            }}
+          >
+            Max Number of Players
+          </Text>
+          <Picker
+            itemStyle={{ height: 144 }}
+            style={{ width: 200 }}
+            selectedValue={(this.state && maxVal) || "a"}
+            onValueChange={value => {
+              this.setState({ maxVal: value });
+            }}
+          >
+            <Picker.Item label="1" value="1" />
+            <Picker.Item label="2" value="2" />
+            <Picker.Item label="3" value="3" />
+            <Picker.Item label="4" value="4" />
+            <Picker.Item label="5" value="5" />
+            <Picker.Item label="6" value="6" />
+            <Picker.Item label="7" value="7" />
+            <Picker.Item label="8" value="8" />
+            <Picker.Item label="9" value="9" />
+            <Picker.Item label="10" value="10" />
+            <Picker.Item label="11" value="11" />
+            <Picker.Item label="12" value="12" />
+            <Picker.Item label="13" value="13" />
+            <Picker.Item label="14" value="14" />
+            <Picker.Item label="15" value="15" />
+            <Picker.Item label="16" value="16" />
+            <Picker.Item label="17" value="17" />
+            <Picker.Item label="18" value="18" />
+            <Picker.Item label="19" value="19" />
+            <Picker.Item label="20" value="20" />
+          </Picker>
+          <Text
+            style={{
+              paddingLeft: 50,
+              paddingTop: 50,
+              color: "grey"
+            }}
+          >
+            Date
+          </Text>
+          <DatePickerIOS date={chosenDate} onDateChange={this.setDate} />
           <TextInput
             style={{ padding: 50 }}
-            placeholder="Min number of players"
+            placeholder="Duration (in hours)"
             keyboardType="numeric"
-            maxLength={2}
-          />
-          <TextInput
-            style={{ padding: 50 }}
-            placeholder="Max number of players"
-            keyboardType="numeric"
-            maxLength={2}
-          />
-          <DatePickerIOS
-            date={this.state.chosenDate}
-            onDateChange={this.setDate}
-          />
-          <TextInput
-            style={{ padding: 50 }}
-            placeholder="Duration"
-            keyboardType="numeric"
-            maxLength={2}
+            maxLength={1}
+            selectedValue={(this.state && duration) || "a"}
+            onChangeText={text => this.setState({ duration: text })}
           />
           <Text
             style={{
@@ -105,9 +195,9 @@ class createGameScreen extends Component {
           <Picker
             itemStyle={{ height: 144 }}
             style={{ width: 200 }}
-            selectedValue={(this.state && this.state.pickerValue) || "a"}
+            selectedValue={(this.state && skill) || "a"}
             onValueChange={value => {
-              this.setState({ pickerValue: value });
+              this.setState({ skill: value });
             }}
           >
             <Picker.Item label="1" value="1" />
@@ -121,7 +211,30 @@ class createGameScreen extends Component {
             <Picker.Item label="9" value="9" />
             <Picker.Item label="10" value="10" />
           </Picker>
-          <TextInput style={{ padding: 50 }} placeholder="Location" />
+          <Text
+            style={{
+              paddingLeft: 50,
+              paddingTop: 50,
+              color: "grey"
+            }}
+          >
+            Location
+          </Text>
+          <Picker
+            itemStyle={{ height: 144 }}
+            selectedValue={(this.state && location) || "a"}
+            onValueChange={value => {
+              this.setState({ location: value });
+            }}
+          >
+            <Picker.Item label="Shell" value="shell" />
+            <Picker.Item label="Natatorium" value="Natatorium" />
+            <Picker.Item label="Nielsen Tennis" value="nielson" />
+            <Picker.Item label="Gordon's Field" value="gordon's" />
+            <Picker.Item label="Edward Klief Park" value="klief" />
+            <Picker.Item label="Sellery basketball" value="sellery" />
+            <Picker.Item label="James Madison Park" value="james" />
+          </Picker>
           <View style={{ padding: 75 }}>
             <Button
               onPress={() => {
