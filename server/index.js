@@ -18,6 +18,16 @@ con.connect(err => {
   console.log("Successfully Connected to Database!");
 });
 
+const knex = require("knex")({
+  client: "mysql",
+  connection: {
+    host: "us-cdbr-iron-east-01.cleardb.net",
+    user: "b228d50d18d0dc",
+    password: "a7d38f2e",
+    database: "heroku_c7582aec8a53b97"
+  }
+});
+
 app.get("/", (req, res) => res.send("Hello from API"));
 
 app.post("/createGame", (req, res) => {
@@ -31,8 +41,13 @@ app.post("/createGame", (req, res) => {
  */
 app.post("/loginUser", (req, res) => {
   // TODO - Check if user exists in database, if not, create new user
-  console.log(req.body);
-  res.send(req.body);
+  // console.log(req.body);
+  console.log("farts");
+
+  // let user = knex('user').where('email', req.body.email);
+  // console.log(user);
+
+  // res.send(req.body);
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
