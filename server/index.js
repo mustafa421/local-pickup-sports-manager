@@ -47,7 +47,7 @@ app.post("/loginUser", (req, res) => {
   // let user = knex('user').where('email', req.body.email);
   // console.log(user);
 
-  // res.send(req.body);
+  res.send(req.body);
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
