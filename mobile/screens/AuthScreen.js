@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { View, Text, StyleSheet, AsyncStorage } from "react-native";
 import { connect } from "react-redux";
-import { fbLogin } from "../actions/auth_actions";
+import { googleLogin } from "../actions/auth_actions";
 
 const styles = StyleSheet.create({
   container: {
