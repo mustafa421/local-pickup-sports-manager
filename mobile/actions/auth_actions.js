@@ -65,4 +65,25 @@ export const fbLogin = () => async dispatch => {
   }
 };
 
-export const googleLogin = () => {};
+export const googleLogin = () => async dispatch => {
+  try {
+  const result = await Expo.Google.logInAsync({
+    androidClientId:
+      "481589760389-kjshadjlhbrfgquvf5iqv7u037s24heq.apps.googleusercontent.com",
+    //iosClientId: YOUR_CLIENT_ID_HERE,  <-- if you use iOS
+    scopes: ["profile", "email"]
+  })
+
+  if (result.type === "success") {
+    this.setState({
+      signedIn: true,
+      name: result.user.name,
+      photoUrl: result.user.photoUrl
+    })
+  } else {
+    console.log("cancelled")
+  }
+} catch (e) {
+  console.log("error", e)
+}
+};

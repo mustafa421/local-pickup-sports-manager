@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 class AuthScreen extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fbLogin());
+    dispatch(googleLogin());
     AsyncStorage.removeItem("fb_token");
   }
 
