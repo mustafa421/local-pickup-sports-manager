@@ -29,8 +29,9 @@ app.post("/createGame", (req, res) => {
 app.post("/loginUser", (req, res) => {
   knex("user")
     .where("email", req.body.email)
+    .first()
     .then(user => {
-      if (user.length === 0) {
+      if (!user) {
         knex("user")
           .insert({
             userID: req.body.userID,
@@ -41,6 +42,7 @@ app.post("/loginUser", (req, res) => {
           .then(() => {
             knex("user")
               .where("email", req.body.email)
+              .first()
               .then(addedUser => {
                 res.send(addedUser);
               });
