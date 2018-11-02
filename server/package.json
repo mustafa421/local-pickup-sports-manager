@@ -19,6 +19,9 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "express": "^4.16.4",
+    "knex": "^0.15.2",
+    "mysql": "^2.16.0",
+    "mysqljs": "0.0.2-security",
     "nodemon": "^1.18.4",
     "npx": "^10.2.0",
     "prettier": "^1.14.3"

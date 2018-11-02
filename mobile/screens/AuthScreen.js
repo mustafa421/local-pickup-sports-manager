@@ -1,23 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Text, StyleSheet, AsyncStorage } from "react-native";
+import { View, AsyncStorage } from "react-native";
 import { connect } from "react-redux";
-import { googleLogin } from "../actions/auth_actions";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
+import { fbLogin, googleLogin } from "../actions/auth_actions";
 
 class AuthScreen extends React.Component {
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(googleLogin());
-    AsyncStorage.removeItem("fb_token");
+    const { dispatch, navigation } = this.props;
+    const { loginMethod } = navigation.state.params;
+    if (loginMethod === "fb") {
+      dispatch(fbLogin());
+    } else if (loginMethod === "google") {
+      dispatch(googleLogin());
+    }
+    // AsyncStorage.removeItem("fb_token");
+
   }
 
   componentDidUpdate() {
