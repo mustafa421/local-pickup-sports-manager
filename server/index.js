@@ -5,13 +5,6 @@ const app = express();
 app.use(bodyParser.json());
 const port = process.env.PORT || 3000;
 
-const con = mysql.createConnection({
-  host: "us-cdbr-iron-east-01.cleardb.net",
-  user: "b228d50d18d0dc",
-  password: "a7d38f2e",
-  database: "heroku_c7582aec8a53b97"
-});
-
 const knex = require("knex")({
   client: "mysql",
   connection: {
