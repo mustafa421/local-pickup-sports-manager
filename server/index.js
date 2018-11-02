@@ -27,23 +27,28 @@ app.post("/createGame", (req, res) => {
  * email, gender, facebook id, name
  */
 app.post("/loginUser", (req, res) => {
-  // TODO - Check if user exists in database, if not, create new user
-
-  knex("user").where("email", req.body.email).then(function(user) {
-
-    if(user.length == 0) {
-
-      knex("user").insert({userID:req.body.userID, email:req.body.email, gender:req.body.gender, username:req.body.username}).then( function() {
-        
-        knex("user").where("email", req.body.email).then(function(user) {
-          res.send(user);
-        });
-
-      });
-    } else {
-      res.send(user);
-    }
-  });
+  knex("user")
+    .where("email", req.body.email)
+    .then(user => {
+      if (user.length === 0) {
+        knex("user")
+          .insert({
+            userID: req.body.userID,
+            email: req.body.email,
+            gender: req.body.gender,
+            username: req.body.username
+          })
+          .then(() => {
+            knex("user")
+              .where("email", req.body.email)
+              .then(addedUser => {
+                res.send(addedUser);
+              });
+          });
+      } else {
+        res.send(user);
+      }
+    });
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
