@@ -43,6 +43,7 @@ class createGameScreen extends Component {
     this.setDate = this.setDate.bind(this);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async onPressButton(state) {
     const obj = {
       sport: state.sportValue,
@@ -51,23 +52,23 @@ class createGameScreen extends Component {
       skill: state.sportValue,
       chosenDate: state.sportValue,
       location: state.sportValue,
-      duration: state.sportValue,
+      duration: state.sportValue
     };
-    try{
-    const request = await fetch("http://localhost:3000", {
+    const { navigation } = this.props;
+    try {
+      const request = await fetch("http://localhost:3000/createGame", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(obj),
         json: true
-      }
-    );
-    console.log((await request.json()).status);
-    }
-    catch (err) {
+      });
+      console.log((await request.json()).status);
+    } catch (err) {
       console.log("error");
     }
+    navigation.navigate("main");
   }
 
   setDate(newDate) {
