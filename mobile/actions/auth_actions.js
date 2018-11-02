@@ -95,7 +95,8 @@ export const googleLogin = () => async dispatch => {
   const result = await Expo.Google.logInAsync({
     androidClientId:
       "481589760389-kjshadjlhbrfgquvf5iqv7u037s24heq.apps.googleusercontent.com",
-    //iosClientId: YOUR_CLIENT_ID_HERE,  <-- if you use iOS
+    iosClientId: 
+      "481589760389-a3gm628kkod3qfuq6eovhjebnqme0g3i.apps.googleusercontent.com",
     scopes: ["profile", "email"]
   })
 
