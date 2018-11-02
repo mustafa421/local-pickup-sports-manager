@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "space-evenly"
   }
 });
 
@@ -15,7 +15,16 @@ export default function WelcomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>Welcome to Local Pickup Sports Manager!</Text>
-      <Button title="Sign in" onPress={() => navigation.navigate("auth")} />
+      <Button
+        title="Sign in with Facebook"
+        backgroundColor="#3B5998"
+        onPress={() => navigation.navigate("auth", { loginMethod: "fb" })}
+      />
+      <Button
+        title="Sign in with Google"
+        backgroundColor="#f2a60c"
+        onPress={() => navigation.navigate("auth", { loginMethod: "google" })}
+      />
     </View>
   );
 }
