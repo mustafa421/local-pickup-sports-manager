@@ -70,7 +70,7 @@ export const fbLogin = () => async dispatch => {
     console.log(`Error getting data from storage: ${err}`);
   }
 
-  // If the user doesn't have a token, have them sign in or their token expired
+  // If the user doesn't have a token or their token has expired, have them sign in
   if (!token || parseInt(expiration, 10) < Date.now()) {
     token = await doFacebookLogin(dispatch);
     if (!token) {
