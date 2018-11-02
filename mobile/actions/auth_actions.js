@@ -101,15 +101,15 @@ export const googleLogin = () => async dispatch => {
   })
 
   if (result.type === "success") {
-    this.setState({
-      signedIn: true,
-      name: result.user.name,
-      photoUrl: result.user.photoUrl
-    })
+      //GET https://people.googleapis.com/v1/people/me;
+      //TODO: Cannot request gender or age yet
+      
+    setupUserData([result.user.name, result.user.id, result.user.email], result.token, dispatch);
+    console.log(result);
   } else {
-    console.log("cancelled")
+    console.log("Login with google failed")
   }
 } catch (e) {
-  console.log("error", e)
+  console.log("Google Login Error", e)
 }
 };
