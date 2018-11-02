@@ -3,8 +3,9 @@ import { Facebook } from "expo";
 import { LOGIN_SUCCESS, LOGIN_FAIL } from "./types";
 
 // Helper methods
+
+// Call backend with newly acquired account information to create account or to retrieve existing account stats
 const setupUserData = async (userInfo, token, dispatch) => {
-  // Call backend with newly acquired account information to create account or to retrieve existing account stats
   try {
     const request = await fetch(
       "http://local-pickup-sports-manager.herokuapp.com/loginUser",
@@ -30,6 +31,7 @@ const setupUserData = async (userInfo, token, dispatch) => {
   }
 };
 
+// Gets facebook login token
 const doFacebookLogin = async dispatch => {
   const { type, token, expires } = await Facebook.logInWithReadPermissionsAsync(
     "314718532447126",
@@ -46,7 +48,6 @@ const doFacebookLogin = async dispatch => {
   if (type === "success") {
     try {
       await AsyncStorage.setItem("fb_token", token); // save the user's token to their device
-      console.log(`expires: ${expires} type: ${typeof expires}, ${Date.now()}`);
       await AsyncStorage.setItem(
         "fb_token_expire",
         (expires * 1000).toString() // since expired token is in seconds since epoch and not milliseconds
