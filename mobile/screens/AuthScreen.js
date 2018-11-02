@@ -2,12 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { View, AsyncStorage } from "react-native";
 import { connect } from "react-redux";
-import { fbLogin } from "../actions/auth_actions";
+import { fbLogin, googleLogin } from "../actions/auth_actions";
 
 class AuthScreen extends React.Component {
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fbLogin());
+    const { dispatch, navigation } = this.props;
+    const { loginMethod } = navigation.state.params;
+    if (loginMethod === "fb") {
+      dispatch(fbLogin());
+    } else if (loginMethod === "google") {
+      dispatch(googleLogin());
+    }
     // AsyncStorage.removeItem("fb_token");
   }
 
