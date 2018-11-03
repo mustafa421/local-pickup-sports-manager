@@ -3,7 +3,7 @@
  
 
 1. Download the entire repository into your desired directory
-2. Downloaded both [node](https://nodejs.org/en/) and [npm](https://www.npmjs.com/get-npm)
+2. Download both [node](https://nodejs.org/en/) and [npm](https://www.npmjs.com/get-npm)
 3. Change `cd` directories to the **mobile** folder
 4. Once inside **mobile**, use the following command line tool  
 ```
