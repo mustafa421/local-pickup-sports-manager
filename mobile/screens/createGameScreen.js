@@ -56,19 +56,24 @@ class createGameScreen extends Component {
     };
     const { navigation } = this.props;
     try {
-      const request = await fetch("http://localhost:3000/createGame", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(obj),
-        json: true
-      });
-      console.log((await request.json()).status);
+      const request = await fetch(
+        "http://local-pickup-sports-manager.herokuapp.com/createGame",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(obj),
+          json: true
+        }
+      );
+      console.log(`[DEBUG] Server responded with ${request.status}`);
+      console.log(await request.json());
+      navigation.navigate("main");
     } catch (err) {
-      console.log("error");
+      console.log(`Error sending request to server ${err}`);
+      // Add alert to alert user that something went wrong
     }
-    navigation.navigate("main");
   }
 
   setDate(newDate) {
