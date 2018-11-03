@@ -47,26 +47,23 @@ class createGameScreen extends Component {
   async onPressButton(state) {
     const obj = {
       sport: state.sportValue,
-      minVal: state.sportValue,
-      maxVal: state.sportValue,
-      skill: state.sportValue,
-      chosenDate: state.sportValue,
-      location: state.sportValue,
-      duration: state.sportValue
+      minVal: state.minValue,
+      maxVal: state.maxVal,
+      skill: state.skill,
+      chosenDate: state.chosenDate,
+      location: state.location,
+      duration: state.duration
     };
     const { navigation } = this.props;
     try {
-      const request = await fetch(
-        "http://local-pickup-sports-manager.herokuapp.com/createGame",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(obj),
-          json: true
-        }
-      );
+      const request = await fetch("http://localhost:3000/createGame", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(obj),
+        json: true
+      });
       console.log((await request.json()).status);
     } catch (err) {
       console.log("error");
