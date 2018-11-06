@@ -47,12 +47,12 @@ class createGameScreen extends Component {
   async onPressButton(state) {
     const obj = {
       sport: state.sportValue,
-      minVal: state.sportValue,
-      maxVal: state.sportValue,
-      skill: state.sportValue,
-      chosenDate: state.sportValue,
-      location: state.sportValue,
-      duration: state.sportValue
+      minVal: state.minValue,
+      maxVal: state.maxVal,
+      skill: state.skill,
+      chosenDate: state.chosenDate,
+      location: state.location,
+      duration: state.duration
     };
     const { navigation } = this.props;
     try {
@@ -67,11 +67,13 @@ class createGameScreen extends Component {
           json: true
         }
       );
-      console.log((await request.json()).status);
+      console.log(`[DEBUG] Server responded with ${request.status}`);
+      console.log(await request.json());
+      navigation.navigate("main");
     } catch (err) {
-      console.log("error");
+      console.log(`Error sending request to server ${err}`);
+      // Add alert to alert user that something went wrong
     }
-    navigation.navigate("main");
   }
 
   setDate(newDate) {
