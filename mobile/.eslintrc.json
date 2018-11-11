@@ -8,6 +8,9 @@
   },
   "parser": "babel-eslint",
   "globals": {
-    "fetch": false
+    "fetch": false,
+    "expect": true,
+    "test": true,
+    "describe": true
   }
 }

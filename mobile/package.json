@@ -5,6 +5,7 @@
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
+    "test": "jest",
     "ios": "expo start --ios",
     "eject": "expo eject"
   },
@@ -28,5 +29,8 @@
     "react-redux": "^5.0.7",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0"
   }
 }
