@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Platform } from "react-native";
 import { Button } from "react-native-elements";
+import Game from '../components/Game';
 
 class MainScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -30,6 +31,9 @@ class MainScreen extends Component {
     return (
       <View>
         <Text>MainScreen - Hello world</Text>
+        <Game location='Bascom' date='11/12/2018' time='1:00'
+              number_going='2' number_interested='3'
+              difficulty='8'/>
       </View>
     );
   }
