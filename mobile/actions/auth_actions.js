@@ -103,8 +103,11 @@ export const googleLogin = () => async dispatch => {
   if (result.type === "success") {
       //GET https://people.googleapis.com/v1/people/me;
       //TODO: Cannot request gender or age yet
-      
-    setupUserData([result.user.name, result.user.id, result.user.email], result.token, dispatch);
+      //[result.user.name, result.user.id, result.user.email]
+      var info = {id: result.user.id,
+                  email: result.user.email,
+                  username: result.user.name};
+    setupUserData(info, result.token, dispatch);
     console.log(result);
   } else {
     console.log("Login with google failed")
