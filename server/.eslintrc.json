@@ -3,5 +3,11 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": ["error"]
+  },
+  "globals": {
+    "fetch": false,
+    "expect": true,
+    "test": true,
+    "describe": true
   }
 }
