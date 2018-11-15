@@ -1,52 +1,39 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { Text } from "react-native";
+import { connect } from "react-redux";
+import { Card, Button } from "react-native-elements";
 
-import { View, Text, Image } from "react-native";
+const joinGame = async userInfo => {
+  try {
+    // TODO - Swap out ip for backend value
+    const request = await fetch("http://10.141.113.68:3000/joinGame", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userInfo),
+      json: true
+    });
 
-import { Card, ListItem, Button, Icon } from "react-native-elements";
-
-const joinGame = () => {
-  const { navigation } = this.props;
-    try {
-      const request = await fetch(
-        "http://local-pickup-sports-manager.herokuapp.com/joinGame",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(userInfo),
-          json: true
-        }
-  //
+    if (request.status !== 200) {
+      throw Error("failed to connect to API");
+    }
+  } catch (ex) {
+    console.log(ex);
+  }
 };
 
-const showInterest=()=>{
-  //
-  const { navigation } = this.props;
-    try {
-      const request = await fetch(
-        "http://local-pickup-sports-manager.herokuapp.com/showInterest",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(userInfo),
-          json: true
-        }
-
-}
-
-export default function GameCard(props) {
+function GameCard(props) {
   // implemented with Text and Button as children
 
-  const { title, skillLevel, duration } = props;
+  const { title, skillLevel, duration, userID, name } = props;
 
   return (
     <Card title={title}>
-      <Text style={{ marginBottom: 10 }}>Skill Level = {skillLevel}</Text>
+      <Text style={{ marginBottom: 10 }}>Skill Level ={skillLevel}</Text>
 
-      <Text style={{ marginBottom: 10 }}>Time= {duration} </Text>
+      <Text style={{ marginBottom: 10 }}>Time = {duration} </Text>
 
       <Text style={{ marginBottom: 10 }}>Join this game now!</Text>
 
@@ -59,7 +46,13 @@ export default function GameCard(props) {
           marginBottom: 0
         }}
         title="Join Game"
-        onClick={joinGame}
+        onPress={() =>
+          joinGame({
+            userID,
+            name,
+            interested: false
+          })
+        }
       />
       <Text style={{ marginBottom: 10 }} />
 
@@ -74,21 +67,30 @@ export default function GameCard(props) {
           marginBottom: 0
         }}
         title="Interested in Game"
-        onClick={showInterest}
+        onPress={() =>
+          joinGame({
+            userID,
+            name,
+            interested: true
+          })
+        }
       />
     </Card>
   );
 }
 
-const mapStateToProps = state => ({ userInfo });
+const mapStateToProps = state => state.auth.userAccountData;
 
 export default connect(mapStateToProps)(GameCard);
 
 GameCard.propTypes = {
-  token: PropTypes.string,
-  dispatch: PropTypes.func.isRequired
+  title: PropTypes.string.isRequired,
+  skillLevel: PropTypes.string.isRequired,
+  duration: PropTypes.string.isRequired,
+  userID: PropTypes.number.isRequired,
+  name: PropTypes.string
 };
 
 GameCard.defaultProps = {
-  token: null
+  name: null
 };
