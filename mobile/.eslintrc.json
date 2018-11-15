@@ -11,6 +11,7 @@
     "fetch": false,
     "expect": true,
     "test": true,
-    "describe": true
+    "describe": true,
+    "jest": true
   }
 }
