@@ -59,6 +59,7 @@ class MainScreen extends Component {
         <ScrollView>
           {games.map(game => (
             <GameCard
+              key={game.gameId}
               title={game.title}
               skillLevel={game.skillLevel}
               duration={game.duration}
