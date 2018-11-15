@@ -23,6 +23,18 @@ app.post("/createGame", (req, res) => {
 });
 
 /**
+ * userId: string -> the user's db id
+ * name: string -> players name
+ * interested: boolean -> is the user interested or joining
+ */
+app.post("/joinGame", (req, res) => {
+  const { userId, name, interested } = req.body;
+  console.log(`${userId} ${interested} ${name}`);
+  console.log(req.body);
+  res.send();
+});
+
+/**
  * We currently get the following fields from the request object
  * email, gender, facebook id, name
  */
