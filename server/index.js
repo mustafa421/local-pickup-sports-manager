@@ -20,15 +20,17 @@ app.get('/', (req, res) => res.send('Hello from API'))
 app.post('/createGame', (req, res) => {
   console.log(req.body)
 
-  knex('game').insert({
-    sport: req.body.sport,
-    duration: req.body.duration,
-    skillLevel: req.body.skill,
-    dateTime: req.body.chosenDate,
-    location: req.body.location,
-    minPlayers: req.body.minVal,
-    maxPlayers: req.body.maxVal
-  })
+  knex('game')
+    .insert({
+      sport: req.body.sport,
+      duration: req.body.duration,
+      skillLevel: req.body.skill,
+      dateTime: req.body.chosenDate,
+      location: req.body.location,
+      minPlayers: req.body.minVal,
+      maxPlayers: req.body.maxVal
+    })
+    .then(() => {})
 
   res.send(req.body)
 })
