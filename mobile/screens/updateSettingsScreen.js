@@ -1,27 +1,18 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Platform,
-  Text,
-  TextInput,
-  Switch
-} from "react-native";
+import { StyleSheet, View, Platform, TextInput } from "react-native";
 import { Button } from "react-native-elements";
 // import {Text, Platform } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "stretch",
-    justifyContent: "center"
+    justifyContent: "flex-start"
   }
 });
 class updateSettingsScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "updateSettings",
+    title: "Edit",
     headerRight: (
       <Button
         title="Cancel"
@@ -41,48 +32,30 @@ class updateSettingsScreen extends Component {
   }
 
   render() {
-    const { phone, football, email } = this.state;
+    const { phone, email, name } = this.state;
     return (
-      <ScrollView>
-        <View style={styles.container}>
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "grey"
-            }}
-          >
-            Preferred Sports (Some Component will go here)
-          </Text>
-          <Switch
-            style={{
-              paddingLeft: 100,
-              paddingRight: 100
-            }}
-            placeholder="Hello"
-            selectedValue={(this.state && football) || "a"}
-            onValueChange={value => {
-              this.setState({ football: value });
-            }}
-          >
-            He
-          </Switch>
-          <TextInput
-            style={{ padding: 50 }}
-            placeholder="Phone Number (optional)"
-            keyboardType="numeric"
-            maxLength={10}
-            selectedValue={(this.state && phone) || "a"}
-            onChangeText={text => this.setState({ phone: text })}
-          />
-          <TextInput
-            style={{ padding: 50 }}
-            placeholder="Email address (optional)"
-            selectedValue={(this.state && email) || "a"}
-            onChangeText={text => this.setState({ email: text })}
-          />
-        </View>
-      </ScrollView>
+      <View style={styles.container}>
+        <TextInput
+          style={{ padding: 50, color: "grey" }}
+          placeholder="Name"
+          selectedValue={(this.state && name) || "a"}
+          onChangeText={text => this.setState({ name: text })}
+        />
+        <TextInput
+          style={{ padding: 50, color: "grey" }}
+          placeholder="Email address (optional)"
+          selectedValue={(this.state && email) || "a"}
+          onChangeText={text => this.setState({ email: text })}
+        />
+        <TextInput
+          style={{ padding: 50, color: "grey" }}
+          placeholder="Phone Number (optional)"
+          keyboardType="numeric"
+          maxLength={10}
+          selectedValue={(this.state && phone) || "a"}
+          onChangeText={text => this.setState({ phone: text })}
+        />
+      </View>
     );
   }
 }

@@ -21,7 +21,30 @@ class SettingsScreen extends Component {
   render() {
     return (
       <View>
-        <Text>SettingsScreen - Hello world</Text>
+        <Text
+          style={{
+            padding: 50,
+            color: "grey"
+          }}
+        >
+          Name: Max Glickman
+        </Text>
+        <Text
+          style={{
+            padding: 50,
+            color: "grey"
+          }}
+        >
+          Email: mglickman@wisc.edu
+        </Text>
+        <Text
+          style={{
+            padding: 50,
+            color: "grey"
+          }}
+        >
+          Phone Number: Not Provided
+        </Text>
       </View>
     );
   }
