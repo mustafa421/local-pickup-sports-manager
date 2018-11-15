@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, ScrollView, Platform } from "react-native";
 import { Button } from "react-native-elements";
-import { GameCard } from "../components/GameCard";
+import GameCard from "../components/GameCard";
 
 class MainScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
