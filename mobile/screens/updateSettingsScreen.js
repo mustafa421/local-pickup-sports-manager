@@ -11,8 +11,35 @@ const styles = StyleSheet.create({
   }
 });
 class updateSettingsScreen extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: "Edit",
+    headerLeft: (
+      <Button
+        title="Cancel"
+        textStyle={{ color: "rgba(0, 122, 255, 1)" }}
+        onPress={() => navigation.navigate("settings")}
+        backgroundColor="rgba(0,0,0,0)"
+      />
+    ),
+    headerRight: (
+      <Button
+        title="Update"
+        textStyle={{ color: "rgba(0, 122, 255, 1)" }}
+        onPress={() => this.onPressButton(this.state)}
+        backgroundColor="rgba(0,0,0,0)"
+      />
+    ),
+    headerStyle: {
+      marginTop: Platform.OS === "android" ? 24 : 0 // To prevent overlapping from header in Android devices
+    }
+  });
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   // eslint-disable-next-line class-methods-use-this
-  // eslint-disable-next-line react/sort-comp
   async onPressButton(state) {
     const obj = {
       phoneVal: state.phone,
@@ -41,34 +68,6 @@ class updateSettingsScreen extends Component {
       console.log(`Error sending request to server ${err}`);
       // Add alert to alert user that something went wrong
     }
-  }
-
-  static navigationOptions = ({ navigation }) => ({
-    title: "Edit",
-    headerLeft: (
-      <Button
-        title="Cancel"
-        textStyle={{ color: "rgba(0, 122, 255, 1)" }}
-        onPress={() => navigation.navigate("settings")}
-        backgroundColor="rgba(0,0,0,0)"
-      />
-    ),
-    headerRight: (
-      <Button
-        title="Update"
-        textStyle={{ color: "rgba(0, 122, 255, 1)" }}
-        onPress={() => this.onPressButton(this.state)}
-        backgroundColor="rgba(0,0,0,0)"
-      />
-    ),
-    headerStyle: {
-      marginTop: Platform.OS === "android" ? 24 : 0 // To prevent overlapping from header in Android devices
-    }
-  });
-
-  constructor(props) {
-    super(props);
-    this.state = {};
   }
 
   render() {
