@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { View, Text, Platform } from "react-native";
+import { View, ScrollView, Platform } from "react-native";
 import { Button } from "react-native-elements";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import GameCard from "../components/GameCard";
+import { getGames } from "../actions/game_actions";
 
-class MainScreen extends Component {
+export class MainScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Main",
+    title: "Active Games",
     headerLeft: (
       <Button
         title="Settings"
@@ -27,14 +30,44 @@ class MainScreen extends Component {
     }
   });
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    // Change to actual (location,preferences) params
+    dispatch(getGames(null, null));
+  }
+
   render() {
+    const { games } = this.props;
+
     return (
       <View>
-        <Text>MainScreen - Hello world</Text>
-        <GameCard title="Basketball" skillLevel="10" duration="1 Hour" />
+        <ScrollView>
+          {games
+            ? games.map(game => (
+                // eslint-disable-next-line react/jsx-indent
+                <GameCard
+                  key={game.gameId}
+                  title={game.title}
+                  skillLevel={game.skillLevel}
+                  duration={game.duration}
+                />
+              ))
+            : null}
+        </ScrollView>
       </View>
     );
   }
 }
 
-export default MainScreen;
+const mapStateToProps = ({ game }) => ({ games: game.games });
+
+export default connect(mapStateToProps)(MainScreen);
+
+MainScreen.propTypes = {
+  games: PropTypes.arrayOf(PropTypes.object),
+  dispatch: PropTypes.func.isRequired
+};
+
+MainScreen.defaultProps = {
+  games: null
+};
