@@ -32,7 +32,8 @@ export class MainScreen extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(getGames());
+    // Change to actual (location,preferences) params
+    dispatch(getGames(null, null));
   }
 
   render() {

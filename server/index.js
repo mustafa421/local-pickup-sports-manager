@@ -33,6 +33,8 @@ app.get("/", (req, res) => res.send("Hello from API"));
 app.get("/getGames", (req, res) => {
   // Retrieve GET request URL parameters
   const { location, preferences } = req.query;
+  console.log(location);
+  console.log(preferences);
 
   const games = [
     {
