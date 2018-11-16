@@ -7,7 +7,7 @@ import { Card, Button } from "react-native-elements";
 const joinGame = async userInfo => {
   try {
     // TODO - Swap out ip for backend value
-    const request = await fetch("http://10.141.113.68:3000/joinGame", {
+    const request = await fetch("localHost:3000/joinGame", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
