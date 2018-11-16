@@ -57,8 +57,9 @@ app.get("/getGames", (req, res) => {
     }
   ];
 
+  // TODO - Remove hard code and
+  // Filter based on parameters and return games
   res.send(games);
-  // res.send(games);
 });
 
 app.post("/createGame", (req, res) => {
