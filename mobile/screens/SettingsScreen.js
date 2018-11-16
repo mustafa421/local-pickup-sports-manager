@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Button, Platform } from "react-native";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class SettingsScreen extends Component {
   // A feature from React Navigation to define a title
@@ -18,29 +20,8 @@ class SettingsScreen extends Component {
     }
   });
 
-  // eslint-disable-next-line class-methods-use-this
-  async dispatch() {
-    try {
-      const request = await fetch(
-        `http://local-pickup-sports-manager.herokuapp.com/`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }
-      );
-      if (request.status !== 200) {
-        throw new Error(`Request returned ${request.status}`);
-      }
-      // const user = await request.json();
-      // dispatch({ type: NEW_GAMES, payload: games });
-    } catch (err) {
-      console.log(`Error sending request to server ${err}`);
-    }
-  }
-
-  render() {
+  function SettingsScreen(props) {
+    const { name, email, phone } = props;
     return (
       <View>
         <Text
@@ -49,7 +30,7 @@ class SettingsScreen extends Component {
             color: "grey"
           }}
         >
-          Name: Max Glickman
+          Name: {name}
         </Text>
         <Text
           style={{
@@ -57,7 +38,7 @@ class SettingsScreen extends Component {
             color: "grey"
           }}
         >
-          Email: mglickman@wisc.edu
+          Email: {email}
         </Text>
         <Text
           style={{
@@ -65,11 +46,24 @@ class SettingsScreen extends Component {
             color: "grey"
           }}
         >
-          Phone Number: Not Provided
+          Phone Number: {phone}
         </Text>
       </View>
     );
   }
-}
 
-export default SettingsScreen;
+const mapStateToProps = state => state.auth.userAccountData;
+
+export default connect(mapStateToProps)(SettingsScreen);
+
+SettingsScreen.propTypes = {
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  phone: PropTypes.string
+};
+
+SettingsScreen.defaultProps = {
+  phone: "Not provided"
+};
+
+// export default SettingsScreen;
