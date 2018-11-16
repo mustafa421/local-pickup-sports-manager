@@ -17,25 +17,32 @@ const knex = require('knex')({
 
 app.get('/', (req, res) => res.send('Hello from API'))
 
-<<<<<<< HEAD
 app.post('/createGame', (req, res) => {
-  console.log(req.body)
-
-  knex('game')
-    .insert({
-      sport: req.body.sport,
-      duration: req.body.duration,
-      skillLevel: req.body.skill,
-      dateTime: req.body.chosenDate,
-      location: req.body.location,
-      minPlayers: req.body.minVal,
-      maxPlayers: req.body.maxVal
-    })
-    .then(() => {})
-
-  res.send(req.body)
+  if (
+    req.body.sport != null &&
+    req.body.duration != null &&
+    req.body.skill != null &&
+    req.body.chosenDate != null &&
+    req.body.location != null &&
+    req.body.minVal != null &&
+    req.body.maxVal != null
+  ) {
+    knex('game')
+      .insert({
+        sport: req.body.sport,
+        duration: req.body.duration,
+        skillLevel: req.body.skill,
+        dateTime: req.body.chosenDate,
+        location: req.body.location,
+        minPlayers: req.body.minVal,
+        maxPlayers: req.body.maxVal
+      })
+      .then(() => {})
+    res.send(req.body)
+  } else {
+    res.send('One or more fields empty')
+  }
 })
-=======
 /**
  * @param
  * location -> object
@@ -49,45 +56,39 @@ app.post('/createGame', (req, res) => {
  *
  *  i.e [ { duration, skill_level, ... }]
  */
-app.get("/getGames", (req, res) => {
+app.get('/getGames', (req, res) => {
   // Retrieve GET request URL parameters
-  const { location, preferences } = req.query;
-  console.log(location);
-  console.log(preferences);
+  const { location, preferences } = req.query
+  console.log(location)
+  console.log(preferences)
 
   const games = [
     {
-      title: "Basketball",
-      skillLevel: "Beginner",
-      duration: "2 Hours"
+      title: 'Basketball',
+      skillLevel: 'Beginner',
+      duration: '2 Hours'
     },
     {
-      title: "Football",
-      skillLevel: "Intermediate",
-      duration: "1 hour"
+      title: 'Football',
+      skillLevel: 'Intermediate',
+      duration: '1 hour'
     },
     {
-      title: "Soccer",
-      skillLevel: "Expert",
-      duration: "30 minutes"
+      title: 'Soccer',
+      skillLevel: 'Expert',
+      duration: '30 minutes'
     },
     {
-      title: "Hockey",
-      skillLevel: "Beginner",
-      duration: "1 hour"
+      title: 'Hockey',
+      skillLevel: 'Beginner',
+      duration: '1 hour'
     }
-  ];
+  ]
 
   // TODO - Remove hard code and
   // Filter based on parameters and return games
-  res.send(games);
-});
-
-app.post("/createGame", (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-});
->>>>>>> master
+  res.send(games)
+})
 
 /**
  * userId: string -> the user's db id
