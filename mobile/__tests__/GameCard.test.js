@@ -8,6 +8,7 @@ import { AsyncStorage } from "react-native";
 import { shallow } from "enzyme";
 import Button from "./Button";
 import renderer from "react-test-renderer";
+import MainScreen from "../screens/MainScreen";
 
 import GameCard from "../components/GameCard";
 
@@ -47,5 +48,10 @@ describe("Testing GameCard Components", () => {
     const button = shallow(<Button onPress={mockCallBack}>Ok!</Button>);
     button.find("button").simulate("click");
     expect(mockCallBack.mock.calls.length).toEqual(1);
+  });
+
+  test("snapshot", () => {
+    const tree = renderer.create(<MainScreen />).toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });
