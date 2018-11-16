@@ -5,12 +5,11 @@ import thunk from "redux-thunk";
 import MockAsyncStorage from "mock-async-storage";
 import fetchMock from "fetch-mock";
 import { AsyncStorage } from "react-native";
-
+import { shallow } from "enzyme";
+import Button from "./Button";
 import renderer from "react-test-renderer";
 
 import GameCard from "../components/GameCard";
-
-// test snapshots with different parameters
 
 // test join game (component is sending post requests)
 const middlewares = [thunk];
@@ -40,5 +39,13 @@ describe("Testing GameCard Components", () => {
     // Check to see if we match
     const store = mockStore();
     expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  test("Test click event", () => {
+    const mockCallBack = jest.fn();
+
+    const button = shallow(<Button onPress={mockCallBack}>Ok!</Button>);
+    button.find("button").simulate("click");
+    expect(mockCallBack.mock.calls.length).toEqual(1);
   });
 });
