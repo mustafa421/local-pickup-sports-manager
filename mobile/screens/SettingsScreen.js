@@ -18,6 +18,28 @@ class SettingsScreen extends Component {
     }
   });
 
+  // eslint-disable-next-line class-methods-use-this
+  async dispatch() {
+    try {
+      const request = await fetch(
+        `http://local-pickup-sports-manager.herokuapp.com/`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      if (request.status !== 200) {
+        throw new Error(`Request returned ${request.status}`);
+      }
+      // const user = await request.json();
+      // dispatch({ type: NEW_GAMES, payload: games });
+    } catch (err) {
+      console.log(`Error sending request to server ${err}`);
+    }
+  }
+
   render() {
     return (
       <View>
