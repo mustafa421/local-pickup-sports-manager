@@ -13,7 +13,7 @@ export const getGames = (location, preferences) => async dispatch => {
   try {
     // TODO - Update link after merge to cloud
     const request = await fetch(
-      `http://192.168.1.2:3000/getGames?location=${location}&preferences=${preferences}`,
+      `http://local-pickup-sports-manager.herokuapp.com/getGames?location=${location}&preferences=${preferences}`,
       {
         method: "GET",
         headers: {
