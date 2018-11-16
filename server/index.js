@@ -17,6 +17,50 @@ const knex = require("knex")({
 
 app.get("/", (req, res) => res.send("Hello from API"));
 
+/**
+ * @param
+ * location -> object
+ *      * latitude -> number
+ *      * longitude -> number
+ * preferences -> array
+ *      * TODO -> Define what this looks like
+ *
+ * @returns an array containing game objects that match the
+ *  user's preferences
+ *
+ *  i.e [ { duration, skill_level, ... }]
+ */
+app.get("/getGames", (req, res) => {
+  // Retrieve GET request URL parameters
+  const { location, preferences } = req.query;
+
+  const games = [
+    {
+      title: "Basketball",
+      skillLevel: "Beginner",
+      duration: "2 Hours"
+    },
+    {
+      title: "Football",
+      skillLevel: "Intermediate",
+      duration: "1 hour"
+    },
+    {
+      title: "Soccer",
+      skillLevel: "Expert",
+      duration: "30 minutes"
+    },
+    {
+      title: "Hockey",
+      skillLevel: "Beginner",
+      duration: "1 hour"
+    }
+  ];
+
+  res.send(games);
+  // res.send(games);
+});
+
 app.post("/createGame", (req, res) => {
   console.log(req.body);
   res.send(req.body);
