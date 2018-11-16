@@ -20,8 +20,9 @@ class SettingsScreen extends Component {
     }
   });
 
-  function SettingsScreen(props) {
-    const { name, email, phone } = props;
+  render() {
+    const { name, email, phone } = this.props;
+    console.log(`${name}, ${email}, ${phone}`);
     return (
       <View>
         <Text
@@ -51,6 +52,7 @@ class SettingsScreen extends Component {
       </View>
     );
   }
+}
 
 const mapStateToProps = state => state.auth.userAccountData;
 
