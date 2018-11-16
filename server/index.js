@@ -56,6 +56,7 @@ app.post('/loginUser', (req, res) => {
     if (!user) {
       knex('user')
         .insert({
+          vendorID: req.body.id,
           email: req.body.email,
           gender: req.body.gender,
           username: req.body.username
