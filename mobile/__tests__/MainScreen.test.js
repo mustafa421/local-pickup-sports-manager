@@ -60,21 +60,25 @@ describe("Testing Main Screen functionality", () => {
   test("Main screen populates fixed games to match snapshopt", () => {
     const games = [
       {
+        gameId: 1,
         title: "Basketball",
         skillLevel: "Beginner",
         duration: "2 Hours"
       },
       {
+        gameId: 2,
         title: "Football",
         skillLevel: "Intermediate",
         duration: "1 hour"
       },
       {
+        gameId: 3,
         title: "Soccer",
         skillLevel: "Expert",
         duration: "30 minutes"
       },
       {
+        gameId: 4,
         title: "Hockey",
         skillLevel: "Beginner",
         duration: "1 hour"
@@ -83,7 +87,7 @@ describe("Testing Main Screen functionality", () => {
 
     // Pass dummy dispatch prop that returns our hardcoded games
     const tree = renderer
-      .create(<MainScreen dispatch={() => games} />)
+      .create(<MainScreen games={games} dispatch={() => false} />)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
