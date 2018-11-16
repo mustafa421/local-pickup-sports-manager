@@ -11,13 +11,53 @@ const styles = StyleSheet.create({
   }
 });
 class updateSettingsScreen extends Component {
+  // eslint-disable-next-line class-methods-use-this
+  // eslint-disable-next-line react/sort-comp
+  async onPressButton(state) {
+    const obj = {
+      phoneVal: state.phone,
+      emailVal: state.email,
+      nameVal: state.name
+    };
+
+    const { navigation } = this.props;
+
+    try {
+      const request = await fetch(
+        "http://local-pickup-sports-manager.herokuapp.com",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(obj),
+          json: true
+        }
+      );
+      console.log(`[DEBUG] Server responded with ${request.status}`);
+      console.log(await request.json());
+      navigation.navigate("settings");
+    } catch (err) {
+      console.log(`Error sending request to server ${err}`);
+      // Add alert to alert user that something went wrong
+    }
+  }
+
   static navigationOptions = ({ navigation }) => ({
     title: "Edit",
-    headerRight: (
+    headerLeft: (
       <Button
         title="Cancel"
         textStyle={{ color: "rgba(0, 122, 255, 1)" }}
         onPress={() => navigation.navigate("settings")}
+        backgroundColor="rgba(0,0,0,0)"
+      />
+    ),
+    headerRight: (
+      <Button
+        title="Update"
+        textStyle={{ color: "rgba(0, 122, 255, 1)" }}
+        onPress={() => this.onPressButton(this.state)}
         backgroundColor="rgba(0,0,0,0)"
       />
     ),

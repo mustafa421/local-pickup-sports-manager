@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 class SettingsScreen extends Component {
   // A feature from React Navigation to define a title
   static navigationOptions = ({ navigation }) => ({
-    title: "Settings",
+    title: "Profile",
     headerRight: (
       <Button
         title="Edit"
@@ -31,7 +31,8 @@ class SettingsScreen extends Component {
             color: "grey"
           }}
         >
-          Name: {name}
+          Name:
+          {name}
         </Text>
         <Text
           style={{
@@ -39,7 +40,8 @@ class SettingsScreen extends Component {
             color: "grey"
           }}
         >
-          Email: {email}
+          Email:
+          {email}
         </Text>
         <Text
           style={{
@@ -47,7 +49,8 @@ class SettingsScreen extends Component {
             color: "grey"
           }}
         >
-          Phone Number: {phone}
+          Phone Number:
+          {phone}
         </Text>
       </View>
     );
