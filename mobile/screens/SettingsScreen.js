@@ -62,13 +62,13 @@ const mapStateToProps = state => state.auth.userAccountData;
 export default connect(mapStateToProps)(SettingsScreen);
 
 SettingsScreen.propTypes = {
-  name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  email: PropTypes.string,
   phone: PropTypes.string
 };
 
 SettingsScreen.defaultProps = {
+  name: "",
+  email: "",
   phone: "Not provided"
 };
-
-// export default SettingsScreen;

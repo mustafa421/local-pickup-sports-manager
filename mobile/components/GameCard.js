@@ -27,7 +27,7 @@ const joinGame = async userInfo => {
   }
 };
 
-function GameCard(props) {
+export function GameCard(props) {
   // implemented with Text and Button as children
 
   const { title, skillLevel, duration, userID, name } = props;

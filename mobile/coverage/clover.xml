@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1542426347609" clover="3.2.0">
+  <project timestamp="1542426347609" name="All files">
+    <metrics statements="129" coveredstatements="61" conditionals="56" coveredconditionals="34" methods="51" coveredmethods="15" elements="236" coveredelements="110" complexity="0" loc="129" ncloc="129" packages="4" files="10" classes="10">
+      <package name="actions">
+        <metrics statements="46" coveredstatements="27" conditionals="14" coveredconditionals="5" methods="9" coveredmethods="5"/>
+        <file name="auth_actions.js" path="/Users/mustafaabdelhamid/Desktop/local-pickup-sports-manager/mobile/actions/auth_actions.js">
+          <metrics statements="34" coveredstatements="17" conditionals="12" coveredconditionals="4" methods="5" coveredmethods="3"/>
+          <line num="8" count="1" type="stmt"/>
+          <line num="9" count="1" type="stmt"/>
+          <line num="10" count="1" type="stmt"/>
+          <line num="23" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="24" count="0" type="stmt"/>
+          <line num="27" count="1" type="stmt"/>
+          <line num="28" count="1" type="stmt"/>
+          <line num="30" count="0" type="stmt"/>
+          <line num="35" count="1" type="stmt"/>
+          <line num="36" count="0" type="stmt"/>
+          <line num="43" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="44" count="0" type="stmt"/>
+          <line num="45" count="0" type="stmt"/>
+          <line num="48" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="49" count="0" type="stmt"/>
+          <line num="50" count="0" type="stmt"/>
+          <line num="51" count="0" type="stmt"/>
+          <line num="56" count="0" type="stmt"/>
+          <line num="60" count="0" type="stmt"/>
+          <line num="63" count="1" type="stmt"/>
+          <line num="66" count="1" type="stmt"/>
+          <line num="67" count="1" type="stmt"/>
+          <line num="68" count="1" type="stmt"/>
+          <line num="70" count="0" type="stmt"/>
+          <line num="74" count="1" type="cond" truecount="3" falsecount="1"/>
+          <line num="75" count="0" type="stmt"/>
+          <line num="76" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="77" count="0" type="stmt"/>
+          <line num="81" count="1" type="stmt"/>
+          <line num="82" count="1" type="stmt"/>
+          <line num="86" count="1" type="stmt"/>
+          <line num="87" count="1" type="stmt"/>
+          <line num="89" count="0" type="stmt"/>
+          <line num="93" count="1" type="stmt"/>
+        </file>
+        <file name="game_actions.js" path="/Users/mustafaabdelhamid/Desktop/local-pickup-sports-manager/mobile/actions/game_actions.js">
+          <metrics statements="9" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="2"/>
+          <line num="3" count="1" type="stmt"/>
+          <line num="12" count="2" type="stmt"/>
+          <line num="13" count="1" type="stmt"/>
+          <line num="15" count="1" type="stmt"/>
+          <line num="25" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="26" count="0" type="stmt"/>
+          <line num="29" count="1" type="stmt"/>
+          <line num="30" count="1" type="stmt"/>
+          <line num="32" count="0" type="stmt"/>
+        </file>
+        <file name="types.js" path="/Users/mustafaabdelhamid/Desktop/local-pickup-sports-manager/mobile/actions/types.js">
+          <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="2" type="stmt"/>
+          <line num="2" count="2" type="stmt"/>
+          <line num="3" count="2" type="stmt"/>
+        </file>
+      </package>
+      <package name="components">
+        <metrics statements="13" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <file name="GameCard.js" path="/Users/mustafaabdelhamid/Desktop/local-pickup-sports-manager/mobile/components/GameCard.js">
+          <metrics statements="13" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="0"/>
+          <line num="7" count="2" type="stmt"/>
+          <line num="8" count="0" type="stmt"/>
+          <line num="10" count="0" type="stmt"/>
+          <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="20" count="0" type="stmt"/>
+          <line num="23" count="0" type="stmt"/>
+          <line num="30" count="0" type="stmt"/>
+          <line num="32" count="0" type="stmt"/>
+          <line num="50" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
+          <line num="82" count="2" type="stmt"/>
+          <line num="86" count="2" type="stmt"/>
+          <line num="94" count="2" type="stmt"/>
+        </file>
+      </package>
+      <package name="reducers">
+        <metrics statements="4" coveredstatements="3" conditionals="3" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <file name="game_reducer.js" path="/Users/mustafaabdelhamid/Desktop/local-pickup-sports-manager/mobile/reducers/game_reducer.js">
+          <metrics statements="4" coveredstatements="3" conditionals="3" coveredconditionals="1" methods="1" coveredmethods="1"/>
+          <line num="4" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="10" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="screens">
+        <metrics statements="66" coveredstatements="27" conditionals="37" coveredconditionals="28" methods="36" coveredmethods="9"/>
+        <file name="CreateGameScreen.js" path="/Users/mustafaabdelhamid/Desktop/local-pickup-sports-manager/mobile/screens/CreateGameScreen.js">
+          <metrics statements="24" coveredstatements="6" conditionals="20" coveredconditionals="18" methods="13" coveredmethods="2"/>
+          <line num="15" count="1" type="stmt"/>
+          <line num="24" count="0" type="stmt"/>
+          <line num="30" count="0" type="stmt"/>
+          <line num="40" count="1" type="stmt"/>
+          <line num="41" count="1" type="stmt"/>
+          <line num="43" count="1" type="stmt"/>
+          <line num="48" count="0" type="stmt"/>
+          <line num="57" count="0" type="stmt"/>
+          <line num="58" count="0" type="stmt"/>
+          <line num="59" count="0" type="stmt"/>
+          <line num="70" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
+          <line num="72" count="0" type="stmt"/>
+          <line num="74" count="0" type="stmt"/>
+          <line num="80" count="0" type="stmt"/>
+          <line num="92" count="1" type="stmt"/>
+          <line num="93" count="1" type="stmt"/>
+          <line num="109" count="0" type="stmt"/>
+          <line num="132" count="0" type="stmt"/>
+          <line num="170" count="0" type="stmt"/>
+          <line num="210" count="0" type="stmt"/>
+          <line num="226" count="0" type="stmt"/>
+          <line num="246" count="0" type="stmt"/>
+          <line num="259" count="0" type="stmt"/>
+        </file>
+        <file name="MainScreen.js" path="/Users/mustafaabdelhamid/Desktop/local-pickup-sports-manager/mobile/screens/MainScreen.js">
+          <metrics statements="11" coveredstatements="8" conditionals="4" coveredconditionals="1" methods="7" coveredmethods="3"/>
+          <line num="10" count="0" type="stmt"/>
+          <line num="16" count="0" type="stmt"/>
+          <line num="24" count="0" type="stmt"/>
+          <line num="34" count="1" type="stmt"/>
+          <line num="36" count="1" type="stmt"/>
+          <line num="40" count="1" type="stmt"/>
+          <line num="42" count="1" type="stmt"/>
+          <line num="48" count="4" type="stmt"/>
+          <line num="62" count="1" type="stmt"/>
+          <line num="66" count="1" type="stmt"/>
+          <line num="71" count="1" type="stmt"/>
+        </file>
+        <file name="SettingsScreen.js" path="/Users/mustafaabdelhamid/Desktop/local-pickup-sports-manager/mobile/screens/SettingsScreen.js">
+          <metrics statements="8" coveredstatements="6" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="1"/>
+          <line num="8" count="0" type="stmt"/>
+          <line num="14" count="0" type="stmt"/>
+          <line num="24" count="1" type="stmt"/>
+          <line num="25" count="1" type="stmt"/>
+          <line num="26" count="1" type="stmt"/>
+          <line num="60" count="1" type="stmt"/>
+          <line num="64" count="1" type="stmt"/>
+          <line num="70" count="1" type="stmt"/>
+        </file>
+        <file name="UpdateSettingsScreen.js" path="/Users/mustafaabdelhamid/Desktop/local-pickup-sports-manager/mobile/screens/UpdateSettingsScreen.js">
+          <metrics statements="19" coveredstatements="5" conditionals="11" coveredconditionals="9" methods="9" coveredmethods="2"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="14" count="0" type="stmt"/>
+          <line num="20" count="0" type="stmt"/>
+          <line num="28" count="0" type="stmt"/>
+          <line num="38" count="1" type="stmt"/>
+          <line num="39" count="1" type="stmt"/>
+          <line num="44" count="0" type="stmt"/>
+          <line num="50" count="0" type="stmt"/>
+          <line num="52" count="0" type="stmt"/>
+          <line num="53" count="0" type="stmt"/>
+          <line num="64" count="0" type="stmt"/>
+          <line num="65" count="0" type="stmt"/>
+          <line num="66" count="0" type="stmt"/>
+          <line num="68" count="0" type="stmt"/>
+          <line num="74" count="1" type="stmt"/>
+          <line num="75" count="1" type="stmt"/>
+          <line num="81" count="0" type="stmt"/>
+          <line num="87" count="0" type="stmt"/>
+          <line num="95" count="0" type="stmt"/>
+        </file>
+        <file name="WelcomeScreen.js" path="/Users/mustafaabdelhamid/Desktop/local-pickup-sports-manager/mobile/screens/WelcomeScreen.js">
+          <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="15" count="1" type="stmt"/>
+          <line num="21" count="0" type="stmt"/>
+          <line num="26" count="0" type="stmt"/>
+        </file>
+      </package>
+    </metrics>
+  </project>
+</coverage>
