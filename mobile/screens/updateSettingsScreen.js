@@ -66,7 +66,7 @@ class UpdateSettingsScreen extends Component {
       navigation.navigate("settings");
     } catch (err) {
       console.log(`Error sending request to server ${err}`);
-      // Add alert to alert user that something went wrong
+      // Add alert to tell user that something went wrong
     }
   }
 
