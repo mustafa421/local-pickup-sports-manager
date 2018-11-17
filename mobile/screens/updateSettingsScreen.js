@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start"
   }
 });
-class updateSettingsScreen extends Component {
+class UpdateSettingsScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: "Edit",
     headerLeft: (
@@ -98,4 +98,4 @@ class updateSettingsScreen extends Component {
     );
   }
 }
-export default updateSettingsScreen;
+export default UpdateSettingsScreen;
