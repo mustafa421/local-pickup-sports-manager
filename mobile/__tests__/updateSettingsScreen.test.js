@@ -1,14 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import updateSettingsScreen from "../screens/updateSettingsScreen";
+import UpdateSettingsScreen from "../screens/UpdateSettingsScreen";
 
-describe("sample test suite", () => {
-  test("test", () => {
-    expect(1 + 2).toBe(3);
-  });
-
+describe("update settings screen tests", () => {
   test("snapshot", () => {
-    const tree = renderer.create(<updateSettingsScreen />).toJSON();
+    const tree = renderer.create(<UpdateSettingsScreen />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
