@@ -4,15 +4,16 @@ import { Constants } from 'expo';
 
 // or any pure javascript modules available in npm
 import { CheckBox } from 'react-native-elements';
+import {createStackNavigator} from 'react-navigation';
+import { ListItem } from 'react-native-elements'
+
+import Icon from 'react-native-vector-icons/Ionicons';
+import ActionButton from 'react-native-action-button';
 import { Button } from 'react-native';
+
 import axios from 'axios';
 import {AsyncStorage} from 'react-native';
 
-//originally used import statements
-// import {createStackNavigator} from 'react-navigation';
-// import { ListItem } from 'react-native-elements'
-// import Icon from 'react-native-vector-icons/Ionicons';
-// import ActionButton from 'react-native-action-button';
 
 import "@expo/vector-icons";
 
@@ -58,8 +59,8 @@ export default class CustomizePreferences extends Component {
   handleSubmit = () => {
     storePreferences;
     console.log('SUBMITTED');
-    // navigate('MainScreen', {name: 'MainScreen'})
-    this.props.navigation.navigate('MainScreen')}
+    navigate('MainScreen', {name: 'MainScreen'})
+    this.props.navigation.navigate('MainScreen')
   }
 
   //unused alternative db submission
