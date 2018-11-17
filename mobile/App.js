@@ -42,9 +42,9 @@ export default class App extends React.Component {
     );
 
     return (
-       <Provider store={store}>
-         <MainNavigator />
-       </Provider>
+      <Provider store={store}>
+        <MainNavigator />
+      </Provider>
     );
   }
 }
