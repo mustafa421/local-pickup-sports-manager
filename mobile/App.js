@@ -10,7 +10,7 @@ import AuthScreen from "./screens/AuthScreen";
 import MainScreen from "./screens/MainScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import CreateGameScreen from "./screens/CreateGameScreen";
-import Game from "./components/Game";
+
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -31,7 +31,7 @@ export default class App extends React.Component {
         main: {
           screen: createStackNavigator({
             mainScreen: { screen: Game },
-            settings: { screen: SettingsScreen }
+            settings: { screen: MainScreen }
           })
         }
       },
@@ -43,17 +43,19 @@ export default class App extends React.Component {
     );
 
     return (
-      // <Provider store={store}>
-      //   <MainNavigator />
-      // </Provider>
-      <Game
-        location={"madison"}
-        date={"Tomorrow"}
-        time={"12:00"}
-        number_interested={3}
-        number_going={4}
-        difficulty={1}
-        />
+       <Provider store={store}>
+         <MainNavigator />
+       </Provider>
+
+       //For Testing the game component
+      //<Game
+      // location={"madison"}
+       // date={"Tomorrow"}
+      //  time={"12:00"}
+       // number_interested={3}
+       // number_going={4}
+       // difficulty={1}
+      //  />
     );
   }
 }
