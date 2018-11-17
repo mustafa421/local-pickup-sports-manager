@@ -3,7 +3,7 @@ import { View, Text, Button, Platform } from "react-native";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-class SettingsScreen extends Component {
+export class SettingsScreen extends Component {
   // A feature from React Navigation to define a title
   static navigationOptions = ({ navigation }) => ({
     title: "Profile",
