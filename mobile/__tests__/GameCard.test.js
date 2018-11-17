@@ -35,6 +35,11 @@ describe("Testing GameCard Components", () => {
       "http://local-pickup-sports-manager.herokuapp.com/joinGame",
       customerMock
     );
+    const expectedActions = [
+      {
+        payload: { userAccountData: customerMock }
+      }
+    ];
 
     // Check to see if we match
     const store = mockStore();
