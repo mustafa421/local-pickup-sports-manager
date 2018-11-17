@@ -10,6 +10,7 @@ import AuthScreen from "./screens/AuthScreen";
 import MainScreen from "./screens/MainScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import CreateGameScreen from "./screens/CreateGameScreen";
+import GameScreen from "./screens/GameScreen"
 
 export default class App extends React.Component {
   componentDidMount() {
