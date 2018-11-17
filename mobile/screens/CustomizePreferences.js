@@ -1,20 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, FlatList, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, FlatList, Text, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
-
-// or any pure javascript modules available in npm
 import { CheckBox } from 'react-native-elements';
-import {createStackNavigator} from 'react-navigation';
-import { ListItem } from 'react-native-elements'
-
-import Icon from 'react-native-vector-icons/Ionicons';
-import ActionButton from 'react-native-action-button';
 import { Button } from 'react-native';
-
 import axios from 'axios';
-import {AsyncStorage} from 'react-native';
-
-
 import "@expo/vector-icons";
 
 //list of all sports (should pull from database)
@@ -59,7 +48,7 @@ export default class CustomizePreferences extends Component {
   handleSubmit = () => {
     storePreferences;
     console.log('SUBMITTED');
-    navigate('MainScreen', {name: 'MainScreen'})
+    // navigate('MainScreen', {name: 'MainScreen'})
     this.props.navigation.navigate('MainScreen')
   }
 
