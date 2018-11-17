@@ -11,7 +11,6 @@ import MainScreen from "./screens/MainScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import CreateGameScreen from "./screens/CreateGameScreen";
 
-
 export default class App extends React.Component {
   componentDidMount() {
     // Is called when the component is mounted on the screen
@@ -46,8 +45,6 @@ export default class App extends React.Component {
        <Provider store={store}>
          <MainNavigator />
        </Provider>
-
-
     );
   }
 }
