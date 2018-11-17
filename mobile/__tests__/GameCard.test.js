@@ -31,9 +31,8 @@ describe("Testing GameCard Components", () => {
       gender: "male"
     };
 
-    fetchMock.getOnce("*", customerMock);
     fetchMock.postOnce(
-      "http://local-pickup-sports-manager.herokuapp.com/loginUser",
+      "http://local-pickup-sports-manager.herokuapp.com/joinGame",
       customerMock
     );
 
@@ -49,10 +48,5 @@ describe("Testing GameCard Components", () => {
     button.find("button").simulate("click");
 
     expect(mockCallBack.mock.calls.length).toEqual(1);
-  });
-
-  test("snapshot", () => {
-    const tree = renderer.create(<MainScreen />).toJSON();
-    expect(tree).toMatchSnapshot();
   });
 });

@@ -20,7 +20,7 @@ const joinGame = async userInfo => {
     );
 
     if (request.status !== 200) {
-      throw Error("failed to connect to API");
+      throw Error("Failed to connect to API");
     }
   } catch (ex) {
     console.log(ex);
