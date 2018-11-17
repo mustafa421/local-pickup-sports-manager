@@ -17,6 +17,7 @@ const knex = require("knex")({
 
 app.get("/", (req, res) => res.send("Hello from API"));
 
+// TODO - Documentation for exact parameters expected as well as their types
 app.post("/createGame", (req, res) => {
   if (
     req.body.sport != null &&
