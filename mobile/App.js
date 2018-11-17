@@ -30,8 +30,8 @@ export default class App extends React.Component {
         },
         main: {
           screen: createStackNavigator({
-            mainScreen: { screen: Game },
-            settings: { screen: MainScreen }
+            mainScreen: { screen: MainScreen },
+            settings: { screen: SettingsScreen }
           })
         }
       },
