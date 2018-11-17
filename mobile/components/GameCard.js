@@ -7,14 +7,17 @@ import { Card, Button } from "react-native-elements";
 const joinGame = async userInfo => {
   try {
     // TODO - Swap out ip for backend value
-    const request = await fetch("localHost:3000/joinGame", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(userInfo),
-      json: true
-    });
+    const request = await fetch(
+      "http://local-pickup-sports-manager.herokuapp.com/joinGame",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userInfo),
+        json: true
+      }
+    );
 
     if (request.status !== 200) {
       throw Error("failed to connect to API");

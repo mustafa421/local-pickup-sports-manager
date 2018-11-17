@@ -47,6 +47,7 @@ describe("Testing GameCard Components", () => {
 
     const button = shallow(<Button onPress={mockCallBack}>Ok!</Button>);
     button.find("button").simulate("click");
+
     expect(mockCallBack.mock.calls.length).toEqual(1);
   });
 
