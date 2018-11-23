@@ -34,6 +34,10 @@ function GameCard(props) {
 
   return (
     <Card title={title}>
+      <Text style={{ marginBottom: 10 }}>Skill Level ={skillLevel}</Text>
+
+      <Text style={{ marginBottom: 10 }}>Time = {duration} </Text>
+
       <Button
         backgroundColor="#03A9F4"
         buttonStyle={{
@@ -52,8 +56,6 @@ function GameCard(props) {
         }
       />
       <Text style={{ marginBottom: 10 }} />
-
-      <Text style={{ marginBottom: 10 }}>Show interest in this game!</Text>
 
       <Button
         backgroundColor="#03A9F4"

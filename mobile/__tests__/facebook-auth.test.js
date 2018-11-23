@@ -13,6 +13,7 @@ const mockStore = configureMockStore(middlewares);
  * Prepare mock for AsyncStorage since we don't have a physical device
  * during testing
  */
+
 const mock = () => {
   const mockImpl = new MockAsyncStorage();
   jest.mock("AsyncStorage", () => mockImpl);
