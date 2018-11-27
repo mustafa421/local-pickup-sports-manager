@@ -3,7 +3,7 @@ import { View, Text, Button, Platform } from "react-native";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-class SettingsScreen extends Component {
+export class SettingsScreen extends Component {
   // A feature from React Navigation to define a title
   static navigationOptions = ({ navigation }) => ({
     title: "Profile",
@@ -62,13 +62,13 @@ const mapStateToProps = state => state.auth.userAccountData;
 export default connect(mapStateToProps)(SettingsScreen);
 
 SettingsScreen.propTypes = {
-  name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  email: PropTypes.string,
   phone: PropTypes.string
 };
 
 SettingsScreen.defaultProps = {
+  name: "",
+  email: "",
   phone: "Not provided"
 };
-
-// export default SettingsScreen;
