@@ -11,6 +11,7 @@ import MainScreen from "./screens/MainScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import CreateGameScreen from "./screens/CreateGameScreen";
 import GameScreen from "./screens/GameScreen"
+import UpdateSettingsScreen from "./screens/UpdateSettingsScreen";
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -20,6 +21,12 @@ export default class App extends React.Component {
   render() {
     const MainNavigator = createBottomTabNavigator(
       {
+        game: {
+          screen: createStackNavigator({
+            gameScreen: { screen: GameScreen },
+            main: { screen: MainScreen }
+          })
+        },
         welcome: { screen: WelcomeScreen },
         auth: { screen: AuthScreen },
         createGame: {
@@ -31,7 +38,14 @@ export default class App extends React.Component {
         main: {
           screen: createStackNavigator({
             mainScreen: { screen: MainScreen },
+            game: { screen: GameScreen},
             settings: { screen: SettingsScreen }
+          })
+        },
+        updateSettingsScreen: {
+          screen: createStackNavigator({
+            updateSettings: { screen: UpdateSettingsScreen },
+            settingsScreen: { screen: SettingsScreen }
           })
         }
       },

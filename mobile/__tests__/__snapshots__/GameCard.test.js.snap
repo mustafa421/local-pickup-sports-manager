@@ -1,0 +1,328 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GameCard tests snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "white",
+        "borderColor": "#e1e8ee",
+        "borderWidth": 1,
+        "margin": 15,
+        "marginBottom": 0,
+        "padding": 15,
+        "shadowColor": "rgba(0,0,0, .2)",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 1,
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+        },
+        undefined,
+        undefined,
+      ]
+    }
+  >
+    <View>
+      <Text
+        style={
+          Array [
+            Object {},
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            Array [
+              Object {
+                "color": "#43484d",
+                "fontSize": 17.5,
+                "fontWeight": "bold",
+                "marginBottom": 15,
+                "textAlign": "center",
+              },
+              undefined,
+              undefined,
+              undefined,
+            ],
+          ]
+        }
+      >
+        Basketball
+      </Text>
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#e1e8ee",
+              "height": 1,
+            },
+            Array [
+              Object {
+                "marginBottom": 15,
+              },
+              undefined,
+            ],
+          ]
+        }
+      />
+    </View>
+    <Text
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      Skill Level =
+      Begginner
+    </Text>
+    <Text
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      Time = 
+      1 hour
+       
+    </Text>
+    <Text
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      Join this game now!
+    </Text>
+    <View
+      style={
+        Array [
+          Object {
+            "marginLeft": 15,
+            "marginRight": 15,
+          },
+          undefined,
+          undefined,
+          undefined,
+        ]
+      }
+    >
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={null}
+      >
+        <View
+          pointerEvents="box-only"
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#9E9E9E",
+                "flexDirection": "row",
+                "justifyContent": "center",
+                "padding": 19,
+              },
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              Object {
+                "backgroundColor": "#03A9F4",
+              },
+              undefined,
+              Object {
+                "padding": 12,
+              },
+              undefined,
+              undefined,
+              undefined,
+              Object {
+                "borderRadius": 0,
+                "marginBottom": 0,
+                "marginLeft": 0,
+                "marginRight": 0,
+              },
+              undefined,
+              undefined,
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {},
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontSize": 20,
+                  },
+                  undefined,
+                  Object {
+                    "fontSize": 17.5,
+                  },
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                ],
+              ]
+            }
+          >
+            Join Game
+          </Text>
+        </View>
+      </View>
+    </View>
+    <Text
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      Show interest in this game!
+    </Text>
+    <View
+      style={
+        Array [
+          Object {
+            "marginLeft": 15,
+            "marginRight": 15,
+          },
+          undefined,
+          undefined,
+          undefined,
+        ]
+      }
+    >
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={null}
+      >
+        <View
+          pointerEvents="box-only"
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#9E9E9E",
+                "flexDirection": "row",
+                "justifyContent": "center",
+                "padding": 19,
+              },
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              Object {
+                "backgroundColor": "#03A9F4",
+              },
+              undefined,
+              Object {
+                "padding": 12,
+              },
+              undefined,
+              undefined,
+              undefined,
+              Object {
+                "borderRadius": 0,
+                "marginBottom": 0,
+                "marginLeft": 0,
+                "marginRight": 0,
+              },
+              undefined,
+              undefined,
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {},
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontSize": 20,
+                  },
+                  undefined,
+                  Object {
+                    "fontSize": 17.5,
+                  },
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                ],
+              ]
+            }
+          >
+            Interested in Game
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

@@ -7,24 +7,27 @@ import { Card, Button } from "react-native-elements";
 const joinGame = async userInfo => {
   try {
     // TODO - Swap out ip for backend value
-    const request = await fetch("http://10.141.113.68:3000/joinGame", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(userInfo),
-      json: true
-    });
+    const request = await fetch(
+      "http://local-pickup-sports-manager.herokuapp.com/joinGame",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userInfo),
+        json: true
+      }
+    );
 
     if (request.status !== 200) {
-      throw Error("failed to connect to API");
+      throw Error("Failed to connect to API");
     }
   } catch (ex) {
     console.log(ex);
   }
 };
 
-function GameCard(props) {
+export function GameCard(props) {
   // implemented with Text and Button as children
 
   const { title, skillLevel, duration, userID, name } = props;
