@@ -17,6 +17,33 @@ const knex = require("knex")({
 
 app.get("/", (req, res) => res.send("Hello from API"));
 
+// TODO - Documentation for exact parameters expected as well as their types
+app.post("/createGame", (req, res) => {
+  if (
+    req.body.sport != null &&
+    req.body.duration != null &&
+    req.body.skill != null &&
+    req.body.chosenDate != null &&
+    req.body.location != null &&
+    req.body.minVal != null &&
+    req.body.maxVal != null
+  ) {
+    knex("game")
+      .insert({
+        sport: req.body.sport,
+        duration: req.body.duration,
+        skillLevel: req.body.skill,
+        dateTime: req.body.chosenDate,
+        location: req.body.location,
+        minPlayers: req.body.minVal,
+        maxPlayers: req.body.maxVal
+      })
+      .then(() => {});
+    res.send(req.body);
+  } else {
+    res.send("One or more fields empty");
+  }
+});
 /**
  * @param
  * location -> object
@@ -64,11 +91,6 @@ app.get("/getGames", (req, res) => {
   res.send(games);
 });
 
-app.post("/createGame", (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-});
-
 /**
  * userId: string -> the user's db id
  * name: string -> players name
@@ -93,7 +115,7 @@ app.post("/loginUser", (req, res) => {
       if (!user) {
         knex("user")
           .insert({
-            userID: req.body.id,
+            vendorID: req.body.id,
             email: req.body.email,
             gender: req.body.gender,
             username: req.body.username

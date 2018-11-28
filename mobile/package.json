@@ -6,6 +6,7 @@
     "start": "expo start",
     "android": "expo start --android",
     "test": "node ./node_modules/jest/bin/jest.js",
+    "update-tests": "node ./node_modules/jest/bin/jest.js --updateSnapshot",
     "ios": "expo start --ios",
     "eject": "expo eject"
   },

@@ -16,3 +16,7 @@
 9. Open the Expo Client on your device
 10. Use it to scan the QR code printed by executing ` expo start ` or ` npm start `within the **mobile** directory
 11. There may be some wait time as our project bundles and loads for the first time. However, a preview should generate of our project
+
+
+
+**To Run The Test Cases:** Simply run `npm test`
