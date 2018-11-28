@@ -30,12 +30,14 @@ function GameCard(props) {
   const { title, skillLevel, duration, userID, name } = props;
 
   return (
+    
     <Card title={title}>
+
+    onPress{()=>navigation.navigate("GameScreen")
+
       <Text style={{ marginBottom: 10 }}>Skill Level ={skillLevel}</Text>
 
       <Text style={{ marginBottom: 10 }}>Time = {duration} </Text>
-
-      <Text style={{ marginBottom: 10 }}>Join this game now!</Text>
 
       <Button
         backgroundColor="#03A9F4"
@@ -54,9 +56,7 @@ function GameCard(props) {
           })
         }
       />
-      <Text style={{ marginBottom: 10 }} />
-
-      <Text style={{ marginBottom: 10 }}>Show interest in this game!</Text>
+      //<Text style={{ marginBottom: 10 }} />
 
       <Button
         backgroundColor="#03A9F4"
