@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { View, ScrollView, Platform } from "react-native";
+import { Permissions, Location } from "expo";
+import { View, ScrollView, Platform, Alert } from "react-native";
 import { Button } from "react-native-elements";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import GameCard from "../components/GameCard";
+import { GameCard } from "../components/GameCard";
 import { getGames } from "../actions/game_actions";
 
 export class MainScreen extends Component {
@@ -33,8 +34,22 @@ export class MainScreen extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     // Change to actual (location,preferences) params
-    dispatch(getGames(null, null));
+    const location = this.getLocationAsync();
+    dispatch(getGames(location[0], location[1]));
   }
+
+  getLocationAsync = async () => {
+    const { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== "granted") {
+      Alert.alert(
+        "Permission to get location denied, unable to get games by location",
+        { text: "OK" }
+      );
+      return [null, null];
+    }
+    const location = await Location.getCurrentPositionAsync({});
+    return [location.coords.latitude, location.coords.longitude];
+  };
 
   render() {
     const { games } = this.props;
