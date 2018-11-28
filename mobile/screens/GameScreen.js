@@ -26,6 +26,11 @@ const joinGame = async userInfo => {
 
 class GameScreen extends Component {
 
+  componentDidMount() {
+
+    const {gameID, userID} = this.props;
+  }
+
   static navigationOptions = ({ navigation }) => ({
     title: "Game Screen",
     headerRight: (
@@ -42,6 +47,9 @@ class GameScreen extends Component {
   });
 
   render() {
+
+    const {gameID, userID} = this.props;
+    
     return (
       <View>
         <Text></Text>
