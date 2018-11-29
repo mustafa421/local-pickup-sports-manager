@@ -6,7 +6,6 @@ import { Card, Button } from "react-native-elements";
 
 const joinGame = async userInfo => {
   try {
-    // TODO - Swap out ip for backend value
     const request = await fetch(
       "http://local-pickup-sports-manager.herokuapp.com/joinGame",
       {
@@ -28,17 +27,12 @@ const joinGame = async userInfo => {
 };
 
 export function GameCard(props) {
-  // implemented with Text and Button as children
-  
-  static navigationOptions = ({ navigation }) =>
-
-  const { title, skillLevel, duration, userID, name } = props;
+  const { title, skillLevel, duration, userID, name, navigation } = props;
 
   return (
     <Card title={title}>
-
-      onPress{() => navigation.navigate("GameScreen")}
-      
+      onPress
+      {() => navigation.navigate("GameScreen")}
       <Text style={{ marginBottom: 10 }}>Skill Level ={skillLevel} </Text>
       <Text style={{ marginBottom: 10 }}>Time = {duration} </Text>
       <Button
