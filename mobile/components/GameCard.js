@@ -29,19 +29,18 @@ const joinGame = async userInfo => {
 
 export function GameCard(props) {
   // implemented with Text and Button as children
+  
+  static navigationOptions = ({ navigation }) =>
 
   const { title, skillLevel, duration, userID, name } = props;
 
   return (
-    
     <Card title={title}>
 
-    onPress{()=>navigation.navigate("GameScreen")
-
-      <Text style={{ marginBottom: 10 }}>Skill Level ={skillLevel}</Text>
-
+      onPress{() => navigation.navigate("GameScreen")}
+      
+      <Text style={{ marginBottom: 10 }}>Skill Level ={skillLevel} </Text>
       <Text style={{ marginBottom: 10 }}>Time = {duration} </Text>
-
       <Button
         backgroundColor="#03A9F4"
         buttonStyle={{
@@ -59,8 +58,8 @@ export function GameCard(props) {
           })
         }
       />
-      //<Text style={{ marginBottom: 10 }} />
-
+      //
+      <Text style={{ marginBottom: 10 }} />
       <Button
         backgroundColor="#03A9F4"
         buttonStyle={{
