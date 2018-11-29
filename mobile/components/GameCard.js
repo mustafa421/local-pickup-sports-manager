@@ -27,7 +27,15 @@ const joinGame = async userInfo => {
 };
 
 export function GameCard(props) {
-  const { title, skillLevel, duration, userID, name, navigation } = props;
+  const {
+    title,
+    skillLevel,
+    duration,
+    userID,
+    name,
+    gameID,
+    navigation
+  } = props;
 
   return (
     <Card title={title}>
@@ -52,7 +60,6 @@ export function GameCard(props) {
           })
         }
       />
-      //
       <Text style={{ marginBottom: 10 }} />
       <Button
         backgroundColor="#03A9F4"
@@ -84,7 +91,8 @@ GameCard.propTypes = {
   skillLevel: PropTypes.string.isRequired,
   duration: PropTypes.string.isRequired,
   userID: PropTypes.number.isRequired,
-  name: PropTypes.string
+  name: PropTypes.string,
+  gameID: PropTypes.string.isRequired
 };
 
 GameCard.defaultProps = {
