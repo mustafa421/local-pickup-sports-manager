@@ -101,7 +101,7 @@ app.post("/joinGame", (req, res) => {
 
 /**
  * We currently get the following fields from the request object
- * email, gender, facebook id, name
+ * email, gender, facebook id/google id, name
  */
 app.post("/loginUser", (req, res) => {
   knex("user")

@@ -4,7 +4,8 @@ import { View, ScrollView, Platform, Alert } from "react-native";
 import { Button } from "react-native-elements";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { GameCard } from "../components/GameCard";
+// eslint-disable-next-line import/no-named-as-default
+import GameCard from "../components/GameCard";
 import { getGames } from "../actions/game_actions";
 
 export class MainScreen extends Component {
