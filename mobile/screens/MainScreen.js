@@ -32,23 +32,23 @@ export class MainScreen extends Component {
   });
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    // Change to actual (location,preferences) params
-    const location = this.getLocationAsync();
-    dispatch(getGames(location[0], location[1]));
+    this.getLocationAsyncAndGetGames();
   }
 
-  getLocationAsync = async () => {
+  getLocationAsyncAndGetGames = async () => {
+    const { dispatch } = this.props;
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== "granted") {
       Alert.alert(
-        "Permission to get location denied, unable to get games by location",
-        { text: "OK" }
+        "Unable to get location",
+        "Permission to get location denied, unable to get games by location, you may have to reenable permissions in settings",
+        [{ text: "OK" }],
+        { cancelable: false }
       );
-      return [null, null];
+      dispatch(getGames(null, null));
     }
     const location = await Location.getCurrentPositionAsync({});
-    return [location.coords.latitude, location.coords.longitude];
+    dispatch(getGames(location.coords.latitude, location.coords.longitude));
   };
 
   render() {

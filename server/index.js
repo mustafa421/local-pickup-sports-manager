@@ -45,13 +45,10 @@ app.post("/createGame", (req, res) => {
   }
 });
 /**
- * @param
- * location -> object
- *      * latitude -> number
- *      * longitude -> number
- * preferences -> array
+ * @param {*} latitude -> number
+ * @param {*} longitude -> number
+ * @param {*} preferences -> array
  *      * TODO -> Define what this looks like
- *
  * @returns an array containing game objects that match the
  *  user's preferences
  *
@@ -59,9 +56,8 @@ app.post("/createGame", (req, res) => {
  */
 app.get("/getGames", (req, res) => {
   // Retrieve GET request URL parameters
-  const { location, preferences } = req.query;
-  console.log(location);
-  console.log(preferences);
+  const { latitude, longitude, preferences } = req.query;
+  // console.log(preferences);
 
   const games = [
     {
