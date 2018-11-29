@@ -55,6 +55,7 @@ export function GameCard(props) {
         onPress={() =>
           joinGame({
             userID,
+            gameID,
             name,
             interested: false
           })
@@ -73,6 +74,7 @@ export function GameCard(props) {
         onPress={() =>
           joinGame({
             userID,
+            gameID,
             name,
             interested: true
           })
