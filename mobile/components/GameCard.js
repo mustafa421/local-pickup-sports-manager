@@ -6,7 +6,6 @@ import { Card, Button } from "react-native-elements";
 
 const joinGame = async userInfo => {
   try {
-    // TODO - Swap out ip for backend value
     const request = await fetch(
       "http://local-pickup-sports-manager.herokuapp.com/joinGame",
       {

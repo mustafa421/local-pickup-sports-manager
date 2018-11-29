@@ -4,16 +4,18 @@ export const createGame = () => async dispatch => {};
 
 /**
  *
- * @param {*} location - a string representing the users location
- * TODO - Expo gives us locations via lat/long coordinates, this should
- * be added to this function
+ * @param {*} latitude - a number
+ * @param {*} longitude - a number
  * @param {*} preferences - a fixed array representing the user's preferences
  */
-export const getGames = (location, preferences) => async dispatch => {
+export const getGames = (
+  latitude,
+  longitude,
+  preferences
+) => async dispatch => {
   try {
-    // TODO - Update link after merge to cloud
     const request = await fetch(
-      `http://local-pickup-sports-manager.herokuapp.com/getGames?location=${location}&preferences=${preferences}`,
+      `http://local-pickup-sports-manager.herokuapp.com/getGames?latitude=${latitude}&longitude=${longitude}&preferences=${preferences}`,
       {
         method: "GET",
         headers: {
