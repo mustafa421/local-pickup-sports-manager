@@ -14,7 +14,6 @@ export const getGames = (
   preferences
 ) => async dispatch => {
   try {
-    // TODO - Update link after merge to cloud
     const request = await fetch(
       `http://local-pickup-sports-manager.herokuapp.com/getGames?latitude=${latitude}&longitude=${longitude}&preferences=${preferences}`,
       {
