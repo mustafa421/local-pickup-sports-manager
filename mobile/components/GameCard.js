@@ -92,7 +92,7 @@ GameCard.propTypes = {
   duration: PropTypes.string.isRequired,
   userID: PropTypes.number.isRequired,
   name: PropTypes.string,
-  gameID: PropTypes.string.isRequired
+  gameID: PropTypes.number.isRequired
 };
 
 GameCard.defaultProps = {
