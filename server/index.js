@@ -69,7 +69,11 @@ app.get("/getGames", (req, res) => {
   FROM game  
   ORDER BY distance LIMIT 0, 20;`
     )
-    .then(resp => res.send(resp[0].map(result => Object.assign({}, result))));
+    .then(resp => res.send(resp[0].map(result => Object.assign({}, result))))
+    .catch(err => {
+      res.status = 500;
+      res.send(`Error getting games: ${err}`);
+    });
 });
 
 /**
