@@ -1,8 +1,8 @@
 //Import Statements
 import React, { Component } from "react";
 import { View, Text, Platform } from "react-native";
-import Game from "../components/Game";
 import { Button } from "react-native-elements";
+import Game from "../components/Game";
 
 const joinGame = async userInfo => {
   try {
@@ -56,9 +56,10 @@ class GameScreen extends Component {
         <Text />
         <View style={{ alignItems: "flex-start" }}>
           <Game
-            location={"madison"}
-            date={"Tomorrow"}
-            time={"12:00"}
+            name="Basketball"
+            location="Madison"
+            date="Tomorrow"
+            time="12:00"
             number_interested={3}
             number_going={4}
             difficulty={1}
@@ -76,6 +77,7 @@ class GameScreen extends Component {
           onPress={() =>
             joinGame({
               userID,
+              gameID,
               name,
               interested: false
             })
@@ -94,6 +96,7 @@ class GameScreen extends Component {
           onPress={() =>
             joinGame({
               userID,
+              gameID,
               name,
               interested: true
             })
