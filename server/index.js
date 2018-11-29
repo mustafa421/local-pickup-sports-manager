@@ -44,11 +44,11 @@ app.post("/createGame", (req, res) => {
     res.send("One or more fields empty");
   }
 });
+
 /**
  * @param {*} latitude -> number
  * @param {*} longitude -> number
- * @param {*} preferences -> array
- *      * TODO -> Define what this looks like
+ * @param {*} preferences -> array TODO -> Define what this looks like
  * @returns an array containing game objects that match the
  *  user's preferences
  *
@@ -57,34 +57,19 @@ app.post("/createGame", (req, res) => {
 app.get("/getGames", (req, res) => {
   // Retrieve GET request URL parameters
   const { latitude, longitude, preferences } = req.query;
-  // console.log(preferences);
 
-  const games = [
-    {
-      title: "Basketball",
-      skillLevel: "Beginner",
-      duration: "2 Hours"
-    },
-    {
-      title: "Football",
-      skillLevel: "Intermediate",
-      duration: "1 hour"
-    },
-    {
-      title: "Soccer",
-      skillLevel: "Expert",
-      duration: "30 minutes"
-    },
-    {
-      title: "Hockey",
-      skillLevel: "Beginner",
-      duration: "1 hour"
-    }
-  ];
-
-  // TODO - Remove hard code and
-  // Filter based on parameters and return games
-  res.send(games);
+  // Add "HAVING distance < 25" to restrict games to under 25 miles
+  knex
+    .raw(
+      `SELECT *, (3959 * acos(cos(radians(${latitude})) * cos(radians(latitude)) * cos(radians(longitude) - 
+     radians(${longitude})) + 
+     sin(radians(${latitude})) * 
+     sin(radians(latitude)))
+  ) AS distance 
+  FROM game  
+  ORDER BY distance LIMIT 0, 20;`
+    )
+    .then(resp => res.send(resp[0].map(result => Object.assign({}, result))));
 });
 
 /**
@@ -130,4 +115,6 @@ app.post("/loginUser", (req, res) => {
     });
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () =>
+  console.log(`Local Pickup Sports Manager backend listening on port ${port}!`)
+);
