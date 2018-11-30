@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { View, ScrollView, Platform } from "react-native";
+import { Permissions, Location } from "expo";
+import { View, ScrollView, Platform, Alert } from "react-native";
 import { Button } from "react-native-elements";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+// eslint-disable-next-line import/no-named-as-default
 import GameCard from "../components/GameCard";
 import { getGames } from "../actions/game_actions";
 
@@ -31,10 +33,24 @@ export class MainScreen extends Component {
   });
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    // Change to actual (location,preferences) params
-    dispatch(getGames(null, null));
+    this.getLocationAsyncAndGetGames();
   }
+
+  getLocationAsyncAndGetGames = async () => {
+    const { dispatch } = this.props;
+    const { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== "granted") {
+      Alert.alert(
+        "Unable to get location",
+        "Permission to get location denied, unable to get games by location, you may have to reenable permissions in settings",
+        [{ text: "OK" }],
+        { cancelable: false }
+      );
+      dispatch(getGames(null, null));
+    }
+    const location = await Location.getCurrentPositionAsync({});
+    dispatch(getGames(location.coords.latitude, location.coords.longitude));
+  };
 
   render() {
     const { games } = this.props;
