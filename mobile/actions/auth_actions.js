@@ -7,9 +7,11 @@ import { LOGIN_SUCCESS, LOGIN_FAIL } from "./types";
 // Call backend with newly acquired account information to create account or to retrieve existing account stats
 const setupUserData = async (userInfo, token, dispatch) => {
   try {
+    //console.log("reached");
     const request = await fetch(
       "http://local-pickup-sports-manager.herokuapp.com/loginUser",
       {
+      //  console.log("reached");
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -107,12 +109,12 @@ export const googleLogin = () => async dispatch => {
       var info = {id: result.user.id,
                   email: result.user.email,
                   username: result.user.name};
-    setupUserData(info, result.token, dispatch);
+    await setupUserData(info, result.token, dispatch);
     console.log(result);
   } else {
     console.log("Login with google failed")
   }
-} catch (e) {
-  console.log("Google Login Error", e)
+} catch (err) {
+  console.log(`Error fetching google account data: ${err}`)
 }
 };
