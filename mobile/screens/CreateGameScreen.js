@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Location } from "expo";
 import {
   StyleSheet,
   View,
@@ -72,6 +73,9 @@ class createGameScreen extends Component {
     if (obj.location === undefined) {
       obj.location = "Shell";
     }
+    if (obj.location === "curr") {
+      obj.location = await Location.getCurrentPositionAsync({});
+    }
     const { navigation } = this.props;
     try {
       const request = await fetch(
@@ -86,7 +90,7 @@ class createGameScreen extends Component {
         }
       );
       console.log(`[DEBUG] Server responded with ${request.status}`);
-      // console.log(obj);
+      console.log(obj);
       console.log(await request.json());
       navigation.navigate("main");
     } catch (err) {
@@ -288,6 +292,7 @@ class createGameScreen extends Component {
               this.setState({ location: value });
             }}
           >
+            <Picker.Item label="Current Location" value="curr" />
             <Picker.Item label="Shell" value="Shell" />
             <Picker.Item label="Natatorium" value="Natatorium" />
             <Picker.Item label="Nielsen Tennis" value="Nielson Tennis" />
