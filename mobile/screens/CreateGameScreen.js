@@ -62,6 +62,8 @@ class createGameScreen extends Component {
       skill: state.skill,
       chosenDate: state.chosenDate,
       location: state.location,
+      latitude: "",
+      longitude: "",
       duration: parseInt(state.duration, 10)
     };
     if (obj.sport === undefined) {
@@ -70,11 +72,11 @@ class createGameScreen extends Component {
     if (obj.skill === undefined) {
       obj.skill = "Beginner";
     }
-    if (obj.location === undefined) {
-      obj.location = "Shell";
-    }
-    if (obj.location === "curr") {
-      obj.location = await Location.getCurrentPositionAsync({});
+    if (obj.location === "Current Location" || obj.location === undefined) {
+      const location = await Location.getCurrentPositionAsync({});
+      obj.location = "Current Location";
+      obj.latitude = location.coords.latitude;
+      obj.longitude = location.coords.longitude;
     }
     const { navigation } = this.props;
     try {
@@ -90,7 +92,7 @@ class createGameScreen extends Component {
         }
       );
       console.log(`[DEBUG] Server responded with ${request.status}`);
-      console.log(obj);
+      // console.log(obj);
       console.log(await request.json());
       navigation.navigate("main");
     } catch (err) {
@@ -102,7 +104,7 @@ class createGameScreen extends Component {
       minVal: 1,
       maxVal: 1,
       skill: 1,
-      location: "Shell",
+      location: "Current Location",
       duration: 1
     });
   }
@@ -292,7 +294,7 @@ class createGameScreen extends Component {
               this.setState({ location: value });
             }}
           >
-            <Picker.Item label="Current Location" value="curr" />
+            <Picker.Item label="Current Location" value="Current Location" />
             <Picker.Item label="Shell" value="Shell" />
             <Picker.Item label="Natatorium" value="Natatorium" />
             <Picker.Item label="Nielsen Tennis" value="Nielson Tennis" />
