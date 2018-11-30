@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Settings screen test snapshot 1`] = `
+<View>
+  <Text
+    style={
+      Object {
+        "color": "grey",
+        "padding": 50,
+      }
+    }
+  >
+    Name:
+    
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "grey",
+        "padding": 50,
+      }
+    }
+  >
+    Email:
+    
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "grey",
+        "padding": 50,
+      }
+    }
+  >
+    Phone Number:
+    Not provided
+  </Text>
+</View>
+`;

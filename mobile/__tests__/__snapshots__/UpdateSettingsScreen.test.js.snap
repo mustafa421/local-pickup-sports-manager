@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`update settings screen tests snapshot 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    onChangeText={[Function]}
+    placeholder="Name"
+    selectedValue="a"
+    style={
+      Object {
+        "color": "grey",
+        "padding": 50,
+      }
+    }
+    underlineColorAndroid="transparent"
+  />
+  <TextInput
+    allowFontScaling={true}
+    onChangeText={[Function]}
+    placeholder="Email address (optional)"
+    selectedValue="a"
+    style={
+      Object {
+        "color": "grey",
+        "padding": 50,
+      }
+    }
+    underlineColorAndroid="transparent"
+  />
+  <TextInput
+    allowFontScaling={true}
+    keyboardType="numeric"
+    maxLength={10}
+    onChangeText={[Function]}
+    placeholder="Phone Number (optional)"
+    selectedValue="a"
+    style={
+      Object {
+        "color": "grey",
+        "padding": 50,
+      }
+    }
+    underlineColorAndroid="transparent"
+  />
+</View>
+`;

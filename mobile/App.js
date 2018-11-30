@@ -9,7 +9,8 @@ import WelcomeScreen from "./screens/WelcomeScreen";
 import AuthScreen from "./screens/AuthScreen";
 import MainScreen from "./screens/MainScreen";
 import SettingsScreen from "./screens/SettingsScreen";
-import createGameScreen from "./screens/createGameScreen";
+import CreateGameScreen from "./screens/CreateGameScreen";
+import UpdateSettingsScreen from "./screens/UpdateSettingsScreen";
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -23,7 +24,7 @@ export default class App extends React.Component {
         auth: { screen: AuthScreen },
         createGame: {
           screen: createStackNavigator({
-            createGameScreen: { screen: createGameScreen },
+            createGameScreen: { screen: CreateGameScreen },
             main: { screen: MainScreen }
           })
         },
@@ -31,6 +32,12 @@ export default class App extends React.Component {
           screen: createStackNavigator({
             mainScreen: { screen: MainScreen },
             settings: { screen: SettingsScreen }
+          })
+        },
+        updateSettingsScreen: {
+          screen: createStackNavigator({
+            updateSettings: { screen: UpdateSettingsScreen },
+            settingsScreen: { screen: SettingsScreen }
           })
         }
       },
