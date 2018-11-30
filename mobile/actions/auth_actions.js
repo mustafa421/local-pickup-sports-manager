@@ -108,8 +108,9 @@ export const googleLogin = () => async dispatch => {
       //[result.user.name, result.user.id, result.user.email]
       var info = {id: result.user.id,
                   email: result.user.email,
-                  username: result.user.name};
-    await setupUserData(info, result.token, dispatch);
+                  username: result.user.name,
+                gender: "male"};
+    await setupUserData(info, result.accessToken, dispatch);
     console.log(result);
   } else {
     console.log("Login with google failed")
