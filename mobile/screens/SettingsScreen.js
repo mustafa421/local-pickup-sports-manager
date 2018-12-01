@@ -1,7 +1,35 @@
 import React, { Component } from "react";
-import { View, Text, Button, Platform } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  Platform,
+  TouchableOpacity,
+  StyleSheet
+} from "react-native";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+const styles = StyleSheet.create({
+  fab: {
+    position: "absolute",
+    width: 76,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    right: 20,
+    bottom: 20,
+    backgroundColor: "#03A9F4",
+    borderRadius: 20,
+    elevation: 8
+  },
+  fabIcon: {
+    fontSize: 11,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "white"
+  }
+});
 
 export class SettingsScreen extends Component {
   // A feature from React Navigation to define a title
@@ -21,7 +49,7 @@ export class SettingsScreen extends Component {
   });
 
   render() {
-    const { name, email, phone } = this.props;
+    const { name, email, phone, navigation } = this.props;
     console.log(`${name}, ${email}, ${phone}`);
     return (
       <View>
@@ -52,6 +80,12 @@ export class SettingsScreen extends Component {
           Phone Number:
           {phone}
         </Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("PreferencesScreen")}
+          style={styles.fab}
+        >
+          <Text style={styles.fabIcon}> Preferences</Text>
+        </TouchableOpacity>
       </View>
     );
   }
