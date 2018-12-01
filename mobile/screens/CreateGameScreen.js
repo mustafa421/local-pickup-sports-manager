@@ -62,8 +62,8 @@ class createGameScreen extends Component {
       skill: state.skill,
       chosenDate: state.chosenDate,
       location: state.location,
-      latitude: "",
-      longitude: "",
+      latitude: 0.0,
+      longitude: 0.0,
       duration: parseInt(state.duration, 10)
     };
     if (obj.sport === undefined) {
