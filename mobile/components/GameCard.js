@@ -88,7 +88,7 @@ export default connect(mapStateToProps)(GameCard);
 GameCard.propTypes = {
   title: PropTypes.string.isRequired,
   skillLevel: PropTypes.string.isRequired,
-  duration: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired,
   userID: PropTypes.number.isRequired,
   name: PropTypes.string
 };
