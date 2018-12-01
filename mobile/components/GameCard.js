@@ -27,18 +27,22 @@ const joinGame = async userInfo => {
 };
 
 export function GameCard(props) {
-  // implemented with Text and Button as children
-
-  const { title, skillLevel, duration, userID, name } = props;
+  const {
+    title,
+    skillLevel,
+    duration,
+    userID,
+    name,
+    gameID,
+    navigation
+  } = props;
 
   return (
     <Card title={title}>
-      <Text style={{ marginBottom: 10 }}>Skill Level ={skillLevel}</Text>
-
+      onPress
+      {() => navigation.navigate("GameScreen")}
+      <Text style={{ marginBottom: 10 }}>Skill Level ={skillLevel} </Text>
       <Text style={{ marginBottom: 10 }}>Time = {duration} </Text>
-
-      <Text style={{ marginBottom: 10 }}>Join this game now!</Text>
-
       <Button
         backgroundColor="#03A9F4"
         buttonStyle={{
@@ -51,15 +55,13 @@ export function GameCard(props) {
         onPress={() =>
           joinGame({
             userID,
+            gameID,
             name,
             interested: false
           })
         }
       />
       <Text style={{ marginBottom: 10 }} />
-
-      <Text style={{ marginBottom: 10 }}>Show interest in this game!</Text>
-
       <Button
         backgroundColor="#03A9F4"
         buttonStyle={{
@@ -72,6 +74,7 @@ export function GameCard(props) {
         onPress={() =>
           joinGame({
             userID,
+            gameID,
             name,
             interested: true
           })
@@ -90,7 +93,8 @@ GameCard.propTypes = {
   skillLevel: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
   userID: PropTypes.number.isRequired,
-  name: PropTypes.string
+  name: PropTypes.string,
+  gameID: PropTypes.number.isRequired
 };
 
 GameCard.defaultProps = {

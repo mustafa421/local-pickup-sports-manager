@@ -1,0 +1,329 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rejects date 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <Text>
+    Location: 
+    Madison
+     
+  </Text>
+  <Text>
+    Date: 
+    4
+     
+  </Text>
+  <Text>
+    Time: 
+    3 PM
+     
+  </Text>
+  <Text>
+    Going: 
+    9
+     
+  </Text>
+  <Text>
+    Interested: 
+    1
+     
+  </Text>
+  <Text>
+    Difficulty: 
+    4
+     
+  </Text>
+</View>
+`;
+
+exports[`rejects difficulty 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <Text>
+    Location: 
+    Courts
+     
+  </Text>
+  <Text>
+    Date: 
+    11/27
+     
+  </Text>
+  <Text>
+    Time: 
+    3 PM
+     
+  </Text>
+  <Text>
+    Going: 
+    9
+     
+  </Text>
+  <Text>
+    Interested: 
+    1
+     
+  </Text>
+  <Text>
+    Difficulty: 
+    4
+     
+  </Text>
+</View>
+`;
+
+exports[`rejects location 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <Text>
+    Location: 
+    4
+     
+  </Text>
+  <Text>
+    Date: 
+    11/27
+     
+  </Text>
+  <Text>
+    Time: 
+    3 PM
+     
+  </Text>
+  <Text>
+    Going: 
+    9
+     
+  </Text>
+  <Text>
+    Interested: 
+    1
+     
+  </Text>
+  <Text>
+    Difficulty: 
+    4
+     
+  </Text>
+</View>
+`;
+
+exports[`rejects number going 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <Text>
+    Location: 
+    Courts
+     
+  </Text>
+  <Text>
+    Date: 
+    11/27
+     
+  </Text>
+  <Text>
+    Time: 
+    3 PM
+     
+  </Text>
+  <Text>
+    Going: 
+    9
+     
+  </Text>
+  <Text>
+    Interested: 
+    1
+     
+  </Text>
+  <Text>
+    Difficulty: 
+    4
+     
+  </Text>
+</View>
+`;
+
+exports[`rejects number interested 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <Text>
+    Location: 
+    Courts
+     
+  </Text>
+  <Text>
+    Date: 
+    11/27
+     
+  </Text>
+  <Text>
+    Time: 
+    3 PM
+     
+  </Text>
+  <Text>
+    Going: 
+    9
+     
+  </Text>
+  <Text>
+    Interested: 
+    1
+     
+  </Text>
+  <Text>
+    Difficulty: 
+    4
+     
+  </Text>
+</View>
+`;
+
+exports[`rejects time 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <Text>
+    Location: 
+    Madison
+     
+  </Text>
+  <Text>
+    Date: 
+    November 1
+     
+  </Text>
+  <Text>
+    Time: 
+    6
+     
+  </Text>
+  <Text>
+    Going: 
+    9
+     
+  </Text>
+  <Text>
+    Interested: 
+    1
+     
+  </Text>
+  <Text>
+    Difficulty: 
+    4
+     
+  </Text>
+</View>
+`;
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <Text>
+    Location: 
+    madison
+     
+  </Text>
+  <Text>
+    Date: 
+    Tomorrow
+     
+  </Text>
+  <Text>
+    Time: 
+    12:00
+     
+  </Text>
+  <Text>
+    Going: 
+    4
+     
+  </Text>
+  <Text>
+    Interested: 
+    3
+     
+  </Text>
+  <Text>
+    Difficulty: 
+    1
+     
+  </Text>
+</View>
+`;
+
+exports[`renders correctly again 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <Text>
+    Location: 
+    Courts
+     
+  </Text>
+  <Text>
+    Date: 
+    11/27
+     
+  </Text>
+  <Text>
+    Time: 
+    3 PM
+     
+  </Text>
+  <Text>
+    Going: 
+    9
+     
+  </Text>
+  <Text>
+    Interested: 
+    1
+     
+  </Text>
+  <Text>
+    Difficulty: 
+    4
+     
+  </Text>
+</View>
+`;
