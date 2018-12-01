@@ -32,6 +32,7 @@ app.post("/createGame", (req, res) => {
   ) {
     knex("game")
       .insert({
+        title: req.body.title,
         sport: req.body.sport,
         duration: req.body.duration,
         skillLevel: req.body.skill,
@@ -69,8 +70,9 @@ app.get("/getGames", (req, res) => {
      radians(${longitude})) + 
      sin(radians(${latitude})) * 
      sin(radians(latitude)))
-  ) AS distance 
-  FROM game  
+  ) AS distance   
+  FROM game
+  HAVING distance < 25  
   ORDER BY distance LIMIT 0, 20;`
     )
     .then(resp => res.send(resp[0].map(result => Object.assign({}, result))))

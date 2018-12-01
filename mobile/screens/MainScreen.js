@@ -63,6 +63,7 @@ export class MainScreen extends Component {
                 // eslint-disable-next-line react/jsx-indent
                 <GameCard
                   key={game.gameId}
+                  sport={game.sport}
                   title={game.title}
                   skillLevel={game.skillLevel}
                   duration={game.duration}

@@ -1,8 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Text } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { Card, Button } from "react-native-elements";
+
+const styles = StyleSheet.create({
+  text: {
+    marginBottom: 10
+  }
+});
 
 const joinGame = async userInfo => {
   try {
@@ -27,17 +33,14 @@ const joinGame = async userInfo => {
 };
 
 export function GameCard(props) {
-  // implemented with Text and Button as children
-
-  const { title, skillLevel, duration, userID, name } = props;
+  const { title, skillLevel, duration, userID, name, sport } = props;
 
   return (
     <Card title={title}>
-      <Text style={{ marginBottom: 10 }}>Skill Level ={skillLevel}</Text>
-
-      <Text style={{ marginBottom: 10 }}>Time = {duration} </Text>
-
-      <Text style={{ marginBottom: 10 }}>Join this game now!</Text>
+      <Text style={styles.text}>Sport = {sport} </Text>
+      <Text style={styles.text}>Skill Level = {skillLevel}</Text>
+      <Text style={styles.text}>Time = {duration} </Text>
+      <Text style={styles.text}>Join this game now!</Text>
 
       <Button
         backgroundColor="#03A9F4"
@@ -86,7 +89,8 @@ const mapStateToProps = state => state.auth.userAccountData;
 export default connect(mapStateToProps)(GameCard);
 
 GameCard.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  sport: PropTypes.string,
   skillLevel: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
   userID: PropTypes.number.isRequired,
@@ -94,5 +98,7 @@ GameCard.propTypes = {
 };
 
 GameCard.defaultProps = {
-  name: null
+  name: null,
+  sport: null,
+  title: null
 };
