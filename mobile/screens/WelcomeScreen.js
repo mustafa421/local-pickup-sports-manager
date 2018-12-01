@@ -15,7 +15,6 @@ export default function WelcomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>Welcome to Local Pickup Sports Manager!</Text>
-
       <Button
         title="Sign in with Facebook"
         backgroundColor="#3B5998"
@@ -26,7 +25,6 @@ export default function WelcomeScreen({ navigation }) {
         backgroundColor="#f2a60c"
         onPress={() => navigation.navigate("auth", { loginMethod: "google" })}
       />
-
     </View>
   );
 }
