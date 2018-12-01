@@ -28,7 +28,7 @@ export class SettingsScreen extends Component {
         <Text
           style={{
             padding: 50,
-            color: "grey"
+            color: "blue"
           }}
         >
           Name:
@@ -37,7 +37,7 @@ export class SettingsScreen extends Component {
         <Text
           style={{
             padding: 50,
-            color: "grey"
+            color: "blue"
           }}
         >
           Email:
@@ -46,7 +46,7 @@ export class SettingsScreen extends Component {
         <Text
           style={{
             padding: 50,
-            color: "grey"
+            color: "blue"
           }}
         >
           Phone Number:

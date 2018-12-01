@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { Location } from "expo";
 import {
   StyleSheet,
-  TextInput,
   View,
   Picker,
   ScrollView,
@@ -44,16 +44,40 @@ class createGameScreen extends Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  async onPressButton(state) {
+  async onPressButton(states) {
+    const state = states;
+    if (state.minVal === undefined) {
+      state.minVal = "1";
+    }
+    if (state.maxVal === undefined) {
+      state.maxVal = "1";
+    }
+    if (state.duration === undefined) {
+      state.duration = "1";
+    }
     const obj = {
       sport: state.sportValue,
-      minVal: state.minValue,
-      maxVal: state.maxVal,
+      minVal: parseInt(state.minVal, 10),
+      maxVal: parseInt(state.maxVal, 10),
       skill: state.skill,
       chosenDate: state.chosenDate,
       location: state.location,
-      duration: state.duration
+      latitude: 0.0,
+      longitude: 0.0,
+      duration: parseInt(state.duration, 10)
     };
+    if (obj.sport === undefined) {
+      obj.sport = "Basketball";
+    }
+    if (obj.skill === undefined) {
+      obj.skill = "Beginner";
+    }
+    if (obj.location === "Current Location" || obj.location === undefined) {
+      const location = await Location.getCurrentPositionAsync({});
+      obj.location = "Current Location";
+      obj.latitude = location.coords.latitude;
+      obj.longitude = location.coords.longitude;
+    }
     const { navigation } = this.props;
     try {
       const request = await fetch(
@@ -68,12 +92,21 @@ class createGameScreen extends Component {
         }
       );
       console.log(`[DEBUG] Server responded with ${request.status}`);
+      // console.log(obj);
       console.log(await request.json());
       navigation.navigate("main");
     } catch (err) {
       console.log(`Error sending request to server ${err}`);
       // Add alert to alert user that something went wrong
     }
+    this.setState({
+      sportValue: "Basketball",
+      minVal: 1,
+      maxVal: 1,
+      skill: 1,
+      location: "Current Location",
+      duration: 1
+    });
   }
 
   setDate(newDate) {
@@ -97,7 +130,7 @@ class createGameScreen extends Component {
             style={{
               paddingLeft: 50,
               paddingTop: 50,
-              color: "grey"
+              color: "blue"
             }}
           >
             Sport
@@ -109,24 +142,24 @@ class createGameScreen extends Component {
               this.setState({ sportValue: value });
             }}
           >
-            <Picker.Item label="Basketball" value="basketball" />
-            <Picker.Item label="Football" value="football" />
-            <Picker.Item label="Ultimate Frisbee" value="frisbee" />
-            <Picker.Item label="Soccer" value="soccer" />
-            <Picker.Item label="Tennis" value="tennis" />
+            <Picker.Item label="Basketball" value="Basketball" />
+            <Picker.Item label="Football" value="Football" />
+            <Picker.Item label="Ultimate Frisbee" value="Ultimate Frisbee" />
+            <Picker.Item label="Soccer" value="Soccer" />
+            <Picker.Item label="Tennis" value="Tennis" />
           </Picker>
           <Text
             style={{
               paddingLeft: 50,
               paddingTop: 50,
-              color: "grey"
+              color: "blue"
             }}
           >
             Min Number of Players
           </Text>
           <Picker
             itemStyle={{ height: 144 }}
-            style={{ width: 200 }}
+            // style={{ width: 200 }}
             selectedValue={(this.state && minVal) || "a"}
             onValueChange={value => {
               this.setState({ minVal: value });
@@ -157,14 +190,14 @@ class createGameScreen extends Component {
             style={{
               paddingLeft: 50,
               paddingTop: 50,
-              color: "grey"
+              color: "blue"
             }}
           >
             Max Number of Players
           </Text>
           <Picker
             itemStyle={{ height: 144 }}
-            style={{ width: 200 }}
+            // style={{ width: 200 }}
             selectedValue={(this.state && maxVal) || "a"}
             onValueChange={value => {
               this.setState({ maxVal: value });
@@ -195,46 +228,61 @@ class createGameScreen extends Component {
             style={{
               paddingLeft: 50,
               paddingTop: 50,
-              color: "grey"
+              color: "blue"
             }}
           >
             Date
           </Text>
           <DatePickerIOS date={chosenDate} onDateChange={this.setDate} />
-          <TextInput
-            style={{ padding: 50 }}
-            placeholder="Duration (in hours)"
-            keyboardType="numeric"
-            maxLength={1}
-            selectedValue={(this.state && duration) || "a"}
-            onChangeText={text => this.setState({ duration: text })}
-          />
           <Text
             style={{
               paddingLeft: 50,
               paddingTop: 50,
-              color: "grey"
+              color: "blue"
+            }}
+          >
+            Duration (in hours)
+          </Text>
+          <Picker
+            itemStyle={{ height: 144 }}
+            // style={{ width: 200 }}
+            selectedValue={(this.state && duration) || "a"}
+            onValueChange={value => {
+              this.setState({ duration: value });
+            }}
+          >
+            <Picker.Item label="1" value="1" />
+            <Picker.Item label="1.5" value="1.5" />
+            <Picker.Item label="2" value="2" />
+            <Picker.Item label="2.5" value="2.5" />
+            <Picker.Item label="3" value="3" />
+          </Picker>
+          <Text
+            style={{
+              paddingLeft: 50,
+              paddingTop: 50,
+              color: "blue"
             }}
           >
             Skill Level
           </Text>
           <Picker
             itemStyle={{ height: 144 }}
-            style={{ width: 200 }}
+            // style={{ width: 200 }}
             selectedValue={(this.state && skill) || "a"}
             onValueChange={value => {
               this.setState({ skill: value });
             }}
           >
-            <Picker.Item label="Beginner" value="beginner" />
-            <Picker.Item label="Intermediate" value="intermediate" />
-            <Picker.Item label="Expert" value="expert" />
+            <Picker.Item label="Beginner" value="Beginner" />
+            <Picker.Item label="Intermediate" value="Intermediate" />
+            <Picker.Item label="Expert" value="Expert" />
           </Picker>
           <Text
             style={{
               paddingLeft: 50,
               paddingTop: 50,
-              color: "grey"
+              color: "blue"
             }}
           >
             Location
@@ -246,16 +294,24 @@ class createGameScreen extends Component {
               this.setState({ location: value });
             }}
           >
-            <Picker.Item label="Shell" value="shell" />
+            <Picker.Item label="Current Location" value="Current Location" />
+            <Picker.Item label="Shell" value="Shell" />
             <Picker.Item label="Natatorium" value="Natatorium" />
-            <Picker.Item label="Nielsen Tennis" value="nielson" />
-            <Picker.Item label="Gordon's Field" value="gordon's" />
-            <Picker.Item label="Edward Klief Park" value="klief" />
-            <Picker.Item label="Sellery basketball" value="sellery" />
-            <Picker.Item label="James Madison Park" value="james" />
+            <Picker.Item label="Nielsen Tennis" value="Nielson Tennis" />
+            <Picker.Item label="Gordon's Field" value="Gordon's Field" />
+            <Picker.Item label="Edward Klief Park" value="Edward Klief Park" />
+            <Picker.Item
+              label="Sellery basketball"
+              value="Sellery basketball"
+            />
+            <Picker.Item
+              label="James Madison Park"
+              value="James Madison Park"
+            />
           </Picker>
           <View style={{ padding: 75 }}>
             <Button
+              color="blue"
               onPress={() => this.onPressButton(this.state)}
               title="Create Game"
             />

@@ -1,5 +1,5 @@
 import { AsyncStorage } from "react-native";
-import { Facebook } from "expo";
+import { Facebook, Google } from "expo";
 import { LOGIN_SUCCESS, LOGIN_FAIL } from "./types";
 
 // Helper methods
@@ -90,4 +90,33 @@ export const fbLogin = () => async dispatch => {
   }
 };
 
-export const googleLogin = () => {};
+export const googleLogin = () => async dispatch => {
+  try {
+    const result = await Google.logInAsync({
+      androidClientId:
+        "481589760389-kjshadjlhbrfgquvf5iqv7u037s24heq.apps.googleusercontent.com",
+      iosClientId:
+        "481589760389-a3gm628kkod3qfuq6eovhjebnqme0g3i.apps.googleusercontent.com",
+      scopes: ["profile", "email"],
+      behavior: "web"
+    });
+
+    if (result.type === "success") {
+      //GET https://people.googleapis.com/v1/people/me;
+      //TODO: Cannot request gender or age yet
+      //[result.user.name, result.user.id, result.user.email]
+      const info = {
+        id: result.user.id,
+        email: result.user.email,
+        username: result.user.name,
+        gender: "male"
+      };
+      await setupUserData(info, result.accessToken, dispatch);
+      console.log(result);
+    } else {
+      console.log("Login with google failed");
+    }
+  } catch (err) {
+    console.log(`Error fetching google account data: ${err}`);
+  }
+};
