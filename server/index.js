@@ -26,7 +26,9 @@ app.post("/createGame", (req, res) => {
     req.body.chosenDate != null &&
     req.body.location != null &&
     req.body.minVal != null &&
-    req.body.maxVal != null
+    req.body.maxVal != null &&
+    req.body.latitude != null &&
+    req.body.longitude != null
   ) {
     knex("game")
       .insert({
@@ -36,7 +38,9 @@ app.post("/createGame", (req, res) => {
         dateTime: req.body.chosenDate,
         location: req.body.location,
         minPlayers: req.body.minVal,
-        maxPlayers: req.body.maxVal
+        maxPlayers: req.body.maxVal,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude
       })
       .then(() => {});
     res.send(req.body);
@@ -115,6 +119,38 @@ app.post("/loginUser", (req, res) => {
           });
       } else {
         res.send(user);
+      }
+    });
+});
+
+app.get("/getUserByID", (req, res) => {
+  const { id } = req.query;
+
+  knex("user")
+    .where("userID", id)
+    .first()
+    .then(user => {
+      if (user) {
+        res.send(user);
+      } else {
+        res.status(500);
+        res.send("Error: User does not exist.");
+      }
+    });
+});
+
+app.get("/getGameByID", (req, res) => {
+  const { id } = req.query;
+
+  knex("game")
+    .where("gameID", id)
+    .first()
+    .then(game => {
+      if (game) {
+        res.send(game);
+      } else {
+        res.status(500);
+        res.send("Error: Game does not exist.");
       }
     });
 });
