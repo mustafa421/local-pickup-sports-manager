@@ -124,27 +124,33 @@ app.post("/loginUser", (req, res) => {
 });
 
 app.get("/getUserByID", (req, res) => {
+  const { id } = req.query;
+
   knex("user")
-    .where("userID", req.body.id)
+    .where("userID", id)
     .first()
     .then(user => {
       if (user) {
         res.send(user);
       } else {
-        res.send("user does not exist");
+        res.status(500);
+        res.send("Error: User does not exist.");
       }
     });
 });
 
 app.get("/getGameByID", (req, res) => {
+  const { id } = req.query;
+
   knex("game")
-    .where("gameID", req.body.id)
+    .where("gameID", id)
     .first()
     .then(game => {
       if (game) {
         res.send(game);
       } else {
-        res.send("game does not exist");
+        res.status(500);
+        res.send("Error: Game does not exist.");
       }
     });
 });
