@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View, AsyncStorage } from "react-native";
+import { View } from "react-native";
 import { connect } from "react-redux";
 import { fbLogin, googleLogin } from "../actions/auth_actions";
 
