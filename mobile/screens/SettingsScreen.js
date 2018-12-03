@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { View, Text, Button, Platform } from "react-native";
+import { View, Text, Platform } from "react-native";
+import { Button } from "react-native-elements";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { doLogout } from "../actions/auth_actions";
 
 export class SettingsScreen extends Component {
   // A feature from React Navigation to define a title
@@ -21,7 +23,7 @@ export class SettingsScreen extends Component {
   });
 
   render() {
-    const { name, email, phone } = this.props;
+    const { name, email, phone, navigation } = this.props;
     console.log(`${name}, ${email}, ${phone}`);
     return (
       <View>
@@ -52,6 +54,12 @@ export class SettingsScreen extends Component {
           Phone Number:
           {phone}
         </Text>
+        <Button
+          raised
+          title="Logout"
+          backgroundColor="#E31414"
+          onPress={() => doLogout(navigation)}
+        />
       </View>
     );
   }

@@ -112,11 +112,24 @@ export const googleLogin = () => async dispatch => {
         gender: "male"
       };
       await setupUserData(info, result.accessToken, dispatch);
-      console.log(result);
     } else {
       console.log("Login with google failed");
     }
   } catch (err) {
     console.log(`Error fetching google account data: ${err}`);
+  }
+};
+
+/**
+ * Logs out the current user by removing any existing tokens
+ * @param {*} navigation - navigation func to call to redirect back to welcome screen
+ */
+export const doLogout = async navigation => {
+  try {
+    await AsyncStorage.removeItem("fb_token");
+    await AsyncStorage.removeItem("google_token");
+    navigation.navigate("welcome");
+  } catch (err) {
+    console.log(`Error logging out: ${err}`);
   }
 };
