@@ -1,6 +1,6 @@
 import { AsyncStorage } from "react-native";
 import { Facebook, Google } from "expo";
-import { LOGIN_SUCCESS, LOGIN_FAIL } from "./types";
+import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from "./types";
 
 // Helper methods
 
@@ -124,12 +124,12 @@ export const googleLogin = () => async dispatch => {
  * Logs out the current user by removing any existing tokens
  * @param {*} navigation - navigation func to call to redirect back to welcome screen
  */
-export const doLogout = async navigation => {
+export const doLogout = () => async dispatch => {
   try {
     await AsyncStorage.removeItem("fb_token");
     await AsyncStorage.removeItem("google_token");
-    navigation.navigate("welcome");
   } catch (err) {
     console.log(`Error logging out: ${err}`);
   }
+  return dispatch({ type: LOGOUT });
 };

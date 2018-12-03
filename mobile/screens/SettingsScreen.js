@@ -23,7 +23,7 @@ export class SettingsScreen extends Component {
   });
 
   render() {
-    const { name, email, phone, navigation } = this.props;
+    const { name, email, phone, navigation, dispatch } = this.props;
     console.log(`${name}, ${email}, ${phone}`);
     return (
       <View>
@@ -58,7 +58,10 @@ export class SettingsScreen extends Component {
           raised
           title="Logout"
           backgroundColor="#E31414"
-          onPress={() => doLogout(navigation)}
+          onPress={() => {
+            dispatch(doLogout(navigation));
+            navigation.navigate("welcome");
+          }}
         />
       </View>
     );
@@ -70,6 +73,7 @@ const mapStateToProps = state => state.auth.userAccountData;
 export default connect(mapStateToProps)(SettingsScreen);
 
 SettingsScreen.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   name: PropTypes.string,
   email: PropTypes.string,
   phone: PropTypes.string
