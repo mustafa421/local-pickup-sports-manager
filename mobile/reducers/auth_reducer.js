@@ -1,9 +1,4 @@
-import {
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-  RESET_LOGOUT_STATUS
-} from "../actions/types";
+import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from "../actions/types";
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -17,9 +12,6 @@ export default function(state = {}, action) {
     }
     case LOGIN_FAIL: {
       return { token: null };
-    }
-    case RESET_LOGOUT_STATUS: {
-      return { token: null, logoutStatus: true };
     }
     case LOGOUT: {
       return { token: null, logoutStatus: true };
