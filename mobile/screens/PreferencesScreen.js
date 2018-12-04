@@ -86,15 +86,15 @@ class PreferencesScreen extends Component {
   handleSubmit = () => {
     storePreferences;
     const { navigation } = this.props;
-    console.log("SUBMITTED");
+    console.log("SUBMITTED" + checked);
     navigation.navigate("MainScreen");
   };
 
-  handleCancel = () => {
-    const { navigation } = this.props;
-    console.log("Canceled");
-    navigation.navigate("MainScreen");
-  };
+  // handleCancel = () => {
+  //   const { navigation } = this.props;
+  //   console.log("Canceled");
+  //   navigation.navigate("settings");
+  // };
 
   checkItem = item => {
     const { checked } = this.state;
@@ -109,9 +109,11 @@ class PreferencesScreen extends Component {
 
   render() {
     console.log(this.props);
+    const {goBack} = this.props.navigation;
+
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>User Prefernces</Text>
+        <Text style={styles.welcome}>Game Preferences</Text>
         <Text style={styles.category}>Sports</Text>
         <Text style={styles.description}>
           Select any of the following that interest you
@@ -145,9 +147,16 @@ class PreferencesScreen extends Component {
           userDistance={this.state.messageBody}
         />
 
-        <Button title="Cancel" color="#D3D3D3" onPress={this.handleCancel} />
+        <Button 
+        title="Cancel" 
+        color="#D3D3D3" 
+        onPress={() => goBack()}
+        />
 
-        <Button title="Save" onPress={this.handleSubmit} />
+        <Button 
+        title="Save" 
+        onPress={() => this.handleSubmit} 
+        />
       </View>
     );
   }
