@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     right: 20,
-    bottom: 20,
+    bottom: 0,
     backgroundColor: "#03A9F4",
     borderRadius: 20,
     elevation: 8
@@ -84,7 +84,7 @@ export class SettingsScreen extends Component {
           onPress={() => navigation.navigate("PreferencesScreen")}
           style={styles.fab}
         >
-          <Text style={styles.fabIcon}> Preferences</Text>
+          <Text style={styles.fabIcon}>Game Preferences</Text>
         </TouchableOpacity>
       </View>
     );
