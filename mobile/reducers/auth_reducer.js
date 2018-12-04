@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL } from "../actions/types";
+import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from "../actions/types";
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -6,11 +6,15 @@ export default function(state = {}, action) {
       const { token, userAccountData } = action.payload;
       return {
         token,
-        userAccountData
+        userAccountData,
+        logoutStatus: false
       };
     }
     case LOGIN_FAIL: {
       return { token: null };
+    }
+    case LOGOUT: {
+      return { token: null, logoutStatus: true };
     }
     default:
       return state;

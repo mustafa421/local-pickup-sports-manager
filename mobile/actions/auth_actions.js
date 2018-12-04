@@ -1,6 +1,6 @@
 import { AsyncStorage } from "react-native";
 import { Facebook, Google } from "expo";
-import { LOGIN_SUCCESS, LOGIN_FAIL } from "./types";
+import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from "./types";
 
 // Helper methods
 
@@ -41,7 +41,6 @@ const doFacebookLogin = async dispatch => {
   );
 
   if (type === "cancel") {
-    dispatch({ type: LOGIN_FAIL });
     return null;
   }
 
@@ -74,7 +73,7 @@ export const fbLogin = () => async dispatch => {
   if (!token || parseInt(expiration, 10) < Date.now()) {
     token = await doFacebookLogin(dispatch);
     if (!token) {
-      return;
+      return dispatch({ type: LOGIN_FAIL });
     }
   }
 
@@ -112,11 +111,24 @@ export const googleLogin = () => async dispatch => {
         gender: "male"
       };
       await setupUserData(info, result.accessToken, dispatch);
-      console.log(result);
     } else {
       console.log("Login with google failed");
     }
   } catch (err) {
     console.log(`Error fetching google account data: ${err}`);
   }
+};
+
+/**
+ * Logs out the current user by removing any existing tokens
+ * @param {*} navigation - navigation func to call to redirect back to welcome screen
+ */
+export const doLogout = () => async dispatch => {
+  try {
+    await AsyncStorage.removeItem("fb_token");
+    await AsyncStorage.removeItem("google_token");
+  } catch (err) {
+    console.log(`Error logging out: ${err}`);
+  }
+  return dispatch({ type: LOGOUT });
 };
