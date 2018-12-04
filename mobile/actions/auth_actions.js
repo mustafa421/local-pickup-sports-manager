@@ -41,7 +41,6 @@ const doFacebookLogin = async dispatch => {
   );
 
   if (type === "cancel") {
-    dispatch({ type: LOGIN_FAIL });
     return null;
   }
 
@@ -74,7 +73,7 @@ export const fbLogin = () => async dispatch => {
   if (!token || parseInt(expiration, 10) < Date.now()) {
     token = await doFacebookLogin(dispatch);
     if (!token) {
-      return;
+      return dispatch({ type: LOGIN_FAIL });
     }
   }
 
