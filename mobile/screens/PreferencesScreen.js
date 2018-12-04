@@ -90,12 +90,6 @@ class PreferencesScreen extends Component {
     navigation.navigate("MainScreen");
   };
 
-  // handleCancel = () => {
-  //   const { navigation } = this.props;
-  //   console.log("Canceled");
-  //   navigation.navigate("settings");
-  // };
-
   checkItem = item => {
     const { checked } = this.state;
 
