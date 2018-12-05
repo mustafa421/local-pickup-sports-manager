@@ -18,9 +18,7 @@ export default function WelcomeScreen({ navigation }) {
       <Button
         title="Sign in with Facebook"
         backgroundColor="#3B5998"
-        onPress={() => {
-          navigation.navigate("auth", { loginMethod: "fb" });
-        }}
+        onPress={() => navigation.navigate("auth", { loginMethod: "fb" })}
       />
       <Button
         title="Sign in with Google"
