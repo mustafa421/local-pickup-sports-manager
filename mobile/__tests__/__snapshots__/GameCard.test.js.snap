@@ -90,7 +90,17 @@ exports[`GameCard tests snapshot 1`] = `
         }
       }
     >
-      Skill Level =
+      Sport = 
+       
+    </Text>
+    <Text
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      Skill Level = 
       Begginner
     </Text>
     <Text
