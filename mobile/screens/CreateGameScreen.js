@@ -89,6 +89,23 @@ class createGameScreen extends Component {
       obj.latitude = location.coords.latitude;
       obj.longitude = location.coords.longitude;
     }
+
+    if (obj.location === "Shell") {
+      obj.latitude = 43.0699;
+      obj.longitude = -89.411;
+    } else if (obj.location === "Natatorium") {
+      obj.latitude = 43.0768;
+      obj.longitude = -89.4201;
+    } else if (obj.location === "Nielson Tennis") {
+      obj.latitude = 43.0796;
+      obj.longitude = -89.4303;
+    } else if (obj.location === "Gordon's Field") {
+      obj.latitude = 43.0712;
+      obj.longitude = -89.3986;
+    } else if (obj.location === "Edward Klief Park") {
+      obj.latitude = 43.066663;
+      obj.longitude = -89.4065082;
+    }
     const { navigation } = this.props;
     try {
       const request = await fetch(
@@ -118,7 +135,8 @@ class createGameScreen extends Component {
       maxVal: 1,
       skill: 1,
       location: "Current Location",
-      duration: 1
+      duration: 1,
+      title: ""
     });
   }
 
