@@ -34,8 +34,8 @@ class UpdateSettingsScreen extends Component {
   // eslint-disable-next-line class-methods-use-this
   async onPressButton(state) {
     const obj = {
-      name: state.email,
-      email: state.name
+      email: state.email,
+      name: state.name
     };
 
     const { navigation } = this.props;
