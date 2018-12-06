@@ -310,7 +310,7 @@ class createGameScreen extends Component {
           </Picker>
           <View style={{ padding: 75 }}>
             <Button
-              color="blue"
+              backgroundColor="blue"
               onPress={() => this.onPressButton(this.state)}
               title="Create Game"
             />
