@@ -72,6 +72,7 @@ app.get("/getGames", (req, res) => {
      sin(radians(latitude)))
   ) AS distance   
   FROM game
+  WHERE ADDTIME(dateTime, CONCAT(duration, ":00")) > SUBTIME(NOW(), "6:00")
   HAVING distance < 25  
   ORDER BY distance LIMIT 0, 20;`
     )
