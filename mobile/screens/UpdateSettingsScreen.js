@@ -21,14 +21,6 @@ class UpdateSettingsScreen extends Component {
         backgroundColor="rgba(0,0,0,0)"
       />
     ),
-    headerRight: (
-      <Button
-        title="Update"
-        textStyle={{ color: "rgba(0, 122, 255, 1)" }}
-        onPress={() => this.onPressButton(this.state)}
-        backgroundColor="rgba(0,0,0,0)"
-      />
-    ),
     headerStyle: {
       marginTop: Platform.OS === "android" ? 24 : 0 // To prevent overlapping from header in Android devices
     }
@@ -48,7 +40,6 @@ class UpdateSettingsScreen extends Component {
     };
 
     const { navigation } = this.props;
-
     try {
       const request = await fetch(
         "http://local-pickup-sports-manager.herokuapp.com",
@@ -93,6 +84,12 @@ class UpdateSettingsScreen extends Component {
           maxLength={10}
           selectedValue={(this.state && phone) || "a"}
           onChangeText={text => this.setState({ phone: text })}
+        />
+        <Button
+          title="Update"
+          textStyle={{ color: "rgba(0, 122, 255, 1)" }}
+          onPress={() => this.onPressButton(this.state)}
+          backgroundColor="rgba(0,0,0,0)"
         />
       </View>
     );
