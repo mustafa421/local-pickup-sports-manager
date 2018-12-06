@@ -42,7 +42,7 @@ class UpdateSettingsScreen extends Component {
     const { navigation } = this.props;
     try {
       const request = await fetch(
-        "http://local-pickup-sports-manager.herokuapp.com",
+        "http://local-pickup-sports-manager.herokuapp.com/editUser",
         {
           method: "POST",
           headers: {
@@ -62,7 +62,7 @@ class UpdateSettingsScreen extends Component {
   }
 
   render() {
-    const { phone, email, name } = this.state;
+    const { email, name } = this.state;
     return (
       <View style={styles.container}>
         <TextInput
@@ -73,23 +73,14 @@ class UpdateSettingsScreen extends Component {
         />
         <TextInput
           style={{ padding: 50, color: "grey" }}
-          placeholder="Email address (optional)"
+          placeholder="Email address"
           selectedValue={(this.state && email) || "a"}
           onChangeText={text => this.setState({ email: text })}
         />
-        <TextInput
-          style={{ padding: 50, color: "grey" }}
-          placeholder="Phone Number (optional)"
-          keyboardType="numeric"
-          maxLength={10}
-          selectedValue={(this.state && phone) || "a"}
-          onChangeText={text => this.setState({ phone: text })}
-        />
         <Button
           title="Update"
-          textStyle={{ color: "rgba(0, 122, 255, 1)" }}
+          backgroundColor="blue"
           onPress={() => this.onPressButton(this.state)}
-          backgroundColor="rgba(0,0,0,0)"
         />
       </View>
     );
