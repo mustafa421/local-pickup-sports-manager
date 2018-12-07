@@ -50,6 +50,40 @@ app.post("/createGame", (req, res) => {
   }
 });
 
+app.post("/editUser", (req, res) => {
+  const { userID, name, email } = req.body;
+
+  if (userID != null && (name != null || email != null)) {
+    let updateBody = {};
+    if (name != null && email != null) {
+      updateBody = {
+        username: name,
+        email
+      };
+    } else if (name != null) {
+      updateBody = {
+        username: name
+      };
+    } else {
+      updateBody = {
+        email
+      };
+    }
+    knex("user")
+      .where("userID", req.body.userID)
+      .update(updateBody)
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(err => {
+        res.status = 500;
+        res.send(`Error updating user: ${err}`);
+      });
+  } else {
+    res.send("One or more required fields empty");
+  }
+});
+
 /**
  * @param {*} latitude -> number
  * @param {*} longitude -> number
