@@ -105,10 +105,17 @@ app.post("/joinGame", (req, res) => {
               .first()
               .then(joinedgame => {
                 res.send(joinedgame);
+              })
+              .catch(err => {
+                res.status = 500;
+                res.send(`Error joining player to this game: ${err}`);
               });
           });
       } else {
-        res.send(joingame);
+        res.send(joingame).catch(err => {
+          res.status = 500;
+          res.send(`Error joining player to this game: ${err}`);
+        });
       }
     });
 });
@@ -136,10 +143,17 @@ app.post("/interestedGame", (req, res) => {
               .first()
               .then(interestedgame => {
                 res.send(interestedgame);
+              })
+              .catch(err => {
+                res.status = 500;
+                res.send(`Error adding player interest to this game: ${err}`);
               });
           });
       } else {
-        res.send(interestgame);
+        res.send(interestgame).catch(err => {
+          res.status = 500;
+          res.send(`Error adding player interest to this game: ${err}`);
+        });
       }
     });
 });
