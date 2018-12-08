@@ -24,7 +24,7 @@ export class SettingsScreen extends Component {
   });
 
   render() {
-    const { name, email, navigation, dispatch } = this.props;
+    const { username, email, navigation, dispatch } = this.props;
     return (
       <View>
         <Text
@@ -34,7 +34,7 @@ export class SettingsScreen extends Component {
           }}
         >
           Name:
-          {name}
+          {username}
         </Text>
         <Text
           style={{
@@ -70,12 +70,12 @@ export default connect(mapStateToProps)(SettingsScreen);
 
 SettingsScreen.propTypes = {
   dispatch: PropTypes.func,
-  name: PropTypes.string,
+  username: PropTypes.string,
   email: PropTypes.string
 };
 
 SettingsScreen.defaultProps = {
   dispatch: null,
-  name: "",
+  username: "",
   email: ""
 };
