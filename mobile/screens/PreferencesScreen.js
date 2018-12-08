@@ -6,11 +6,11 @@ import {
   Text,
   Button,
   TextInput,
+  Alert,
   AsyncStorage
 } from "react-native";
 import { Constants } from "expo";
 import { CheckBox } from "react-native-elements";
-// import "@expo/vector-icons";
 
 const styles = StyleSheet.create({
   container: {
@@ -52,43 +52,96 @@ let userPref = defaultPreferences;
 const defaultDistance = 5;
 let userDistance = defaultDistance;
 
-const storePreferences = async userPref => {
+const storePreferences = async (userPref, userDistance) => {
+  console.log('start store');
   if (userPref == null) {
+    console.log('userPref is null');
     userPref = defaultPreferences;
   }
+  if (userDistance == null) {
+    userDistance = defaultDistance;
+  }
   try {
-    await AsyncStorage.setItem("user_Preferences", userPref);
-    await AsyncStorage.setItem("user_Distance", userDistance);
+    await AsyncStorage.setItem("user_Preferences", JSON.stringify(userPref));
+    await AsyncStorage.setItem("user_Distance", JSON.stringify(userDistance));
   } catch (error) {
     console.log(error.message);
   }
+  console.log('end store');
 };
 
 const getPreferences = async () => {
-  if (userPref == null) {
-    userPref = defaultPreferences;
-  }
+  console.log('start getPreferences');
   try {
-    userDistance = (await AsyncStorage.getItem("user_Distance")) || "none";
-    userPref = (await AsyncStorage.getItem("user_Preferences")) || "none";
+    const retrievedPreferences = (await AsyncStorage.getItem("user_Preferences"));
+    const parsedPreferences = JSON.parse(retrievedPreferences);
+    if (parsedPreferences == null) {
+      return defaultPreferences;
+    }
+    return parsedPreferences;
   } catch (error) {
     console.log(error.message);
   }
-  return userPref;
+  console.log('end getPreferences');
+  return;
+};
+
+const getDistance = async () => {
+  console.log('start getDistance');
+  try {
+    const retrievedDistance = (await AsyncStorage.getItem("user_Distance"));
+    const parsedDistance = JSON.parse(retrievedDistance);
+    if (parsedDistance == null) {
+      return defaultDistance;
+    }
+    return parsedDistance;
+  } catch (error) {
+    console.log(error.message);
+  }
+  console.log('end getDistance');
+  return;
 };
 
 class PreferencesScreen extends Component {
   userPref = getPreferences;
+  userDistance = getDistance;
   state = {
     checked: userPref
   };
 
-  handleSubmit = () => {
-    storePreferences;
-    const { navigation } = this.props;
-    console.log("SUBMITTED" + checked);
-    navigation.navigate("MainScreen");
+    
+  handleSave = () => {
+    console.log('start save');
+    storePreferences(userPref, userDistance);
+    const {goBack} = this.props.navigation;
+
+    Alert.alert(
+      'Save Successful',
+      'Click "Cancel" to continue editing, or "Ok" to save and return.',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed')},
+        {text: 'Ok', onPress: () => goBack(), style: 'description'},
+      ],
+      { cancelable: false }
+    )
+    console.log("SUBMITTED");
   };
+
+  //force checks the supposed numeric input
+  onChanged(text){
+    let newText = '';
+    let numbers = '0123456789';
+
+    for (var i=0; i < text.length; i++) {
+        if(numbers.indexOf(text[i]) > -1 ) {
+            newText = newText + text[i];
+        }
+        else {
+            alert("please enter numbers only");
+        }
+    }
+    this.setState({ myNumber: newText });
+}
 
   checkItem = item => {
     const { checked } = this.state;
@@ -99,10 +152,12 @@ class PreferencesScreen extends Component {
       this.setState({ checked: checked.filter(a => a !== item) });
     }
     userPref = checked;
+    console.log(item);
+    console.log(checked);
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const {goBack} = this.props.navigation;
 
     return (
@@ -142,14 +197,14 @@ class PreferencesScreen extends Component {
         />
 
         <Button 
-        title="Cancel" 
+        title="Back" 
         color="#D3D3D3" 
         onPress={() => goBack()}
         />
 
         <Button 
         title="Save" 
-        onPress={() => this.handleSubmit} 
+        onPress={this.handleSave.bind(this)} 
         />
       </View>
     );
