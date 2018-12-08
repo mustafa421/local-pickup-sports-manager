@@ -56,7 +56,7 @@ const storePreferences = async (userPref, userDistance) => {
   if (userPref === null || userPref === undefined || userPref.length < 1) {
     userPref = defaultPreferences;
   }
-  if (userDistance === null || !isNaN(userDistance)) {
+  if (userDistance === null || Number.isNaN(userDistance)) {
     userDistance = defaultDistance;
   }
   try {
@@ -107,7 +107,7 @@ class PreferencesScreen extends Component {
 
     
   handleSave = () => {
-    if(!isNaN(userDistance)){
+    if(Number.isNaN(userDistance)){
       Alert.alert("Distance must be a valid number");
       userDistance = defaultDistance;
     }
