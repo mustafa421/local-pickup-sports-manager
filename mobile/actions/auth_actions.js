@@ -83,6 +83,7 @@ export const fbLogin = () => async dispatch => {
     );
 
     const account = await response.json();
+    account.username = account.name;
     await setupUserData(account, token, dispatch);
   } catch (err) {
     console.log(`Error fetching user account data: ${err}`);

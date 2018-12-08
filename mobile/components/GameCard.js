@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Alert } from "react-native";
 import { connect } from "react-redux";
 import { Card, Button } from "react-native-elements";
 
@@ -23,17 +23,57 @@ const joinGame = async userInfo => {
         json: true
       }
     );
-
     if (request.status !== 200) {
-      throw Error("Failed to connect to API");
+      throw Error("Failed to connect to join game");
     }
   } catch (ex) {
     console.log(ex);
+    Alert.alert(
+      "Unable to join game",
+      "Error in attempting to join game. Please try again later.",
+      [{ text: "OK" }],
+      { cancelable: false }
+    );
+  }
+};
+
+const interestedGame = async userInfo => {
+  try {
+    const request = await fetch(
+      "http://local-pickup-sports-manager.herokuapp.com/interestedGame",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userInfo),
+        json: true
+      }
+    );
+    if (request.status !== 200) {
+      throw new Error("Failed to send interested game");
+    }
+  } catch (err) {
+    console.log(err);
+    Alert.alert(
+      "Unable to set interest",
+      "Error in attempting to show interest in game. Please try again later.",
+      [{ text: "OK" }],
+      { cancelable: false }
+    );
   }
 };
 
 export function GameCard(props) {
-  const { title, skillLevel, duration, userID, name, sport } = props;
+  const {
+    title,
+    skillLevel,
+    duration,
+    userID,
+    username,
+    sport,
+    gameID
+  } = props;
 
   return (
     <Card title={title}>
@@ -54,8 +94,8 @@ export function GameCard(props) {
         onPress={() =>
           joinGame({
             userID,
-            name,
-            interested: false
+            gameID,
+            name: username
           })
         }
       />
@@ -73,10 +113,10 @@ export function GameCard(props) {
         }}
         title="Interested in Game"
         onPress={() =>
-          joinGame({
+          interestedGame({
             userID,
-            name,
-            interested: true
+            gameID,
+            name: username
           })
         }
       />
@@ -94,11 +134,12 @@ GameCard.propTypes = {
   skillLevel: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
   userID: PropTypes.number.isRequired,
-  name: PropTypes.string
+  gameID: PropTypes.number.isRequired,
+  username: PropTypes.string
 };
 
 GameCard.defaultProps = {
-  name: null,
+  username: null,
   sport: null,
   title: null
 };

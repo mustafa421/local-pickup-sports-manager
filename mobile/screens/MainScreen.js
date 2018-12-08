@@ -63,7 +63,7 @@ export class MainScreen extends Component {
   };
 
   render() {
-    const { games } = this.props;
+    const { games, name } = this.props;
     const { refreshing } = this.state;
 
     /* eslint-disable react/jsx-wrap-multilines */
@@ -82,6 +82,7 @@ export class MainScreen extends Component {
               // eslint-disable-next-line react/jsx-indent
               <GameCard
                 key={game.gameID}
+                gameID={game.gameID}
                 sport={game.sport}
                 title={game.title}
                 skillLevel={game.skillLevel}
