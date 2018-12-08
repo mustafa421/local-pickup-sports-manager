@@ -53,12 +53,10 @@ const defaultDistance = 5;
 let userDistance = defaultDistance;
 
 const storePreferences = async (userPref, userDistance) => {
-  console.log('start store');
-  if (userPref == null) {
-    console.log('userPref is null');
+  if (userPref === null || userPref === undefined || userPref.length < 1) {
     userPref = defaultPreferences;
   }
-  if (userDistance == null) {
+  if (userDistance === null || !isNaN(userDistance)) {
     userDistance = defaultDistance;
   }
   try {
@@ -67,11 +65,9 @@ const storePreferences = async (userPref, userDistance) => {
   } catch (error) {
     console.log(error.message);
   }
-  console.log('end store');
 };
 
 const getPreferences = async () => {
-  console.log('start getPreferences');
   try {
     const retrievedPreferences = (await AsyncStorage.getItem("user_Preferences"));
     const parsedPreferences = JSON.parse(retrievedPreferences);
@@ -82,36 +78,47 @@ const getPreferences = async () => {
   } catch (error) {
     console.log(error.message);
   }
-  console.log('end getPreferences');
   return;
 };
 
 const getDistance = async () => {
-  console.log('start getDistance');
   try {
     const retrievedDistance = (await AsyncStorage.getItem("user_Distance"));
     const parsedDistance = JSON.parse(retrievedDistance);
     if (parsedDistance == null) {
       return defaultDistance;
     }
+    userDistance = parsedDistance;
     return parsedDistance;
   } catch (error) {
     console.log(error.message);
   }
-  console.log('end getDistance');
   return;
 };
 
 class PreferencesScreen extends Component {
-  userPref = getPreferences;
-  userDistance = getDistance;
+  userPref = getPreferences();
+  userDistance = getDistance();
+  
+
   state = {
     checked: userPref
   };
 
     
   handleSave = () => {
-    console.log('start save');
+    if(!isNaN(userDistance)){
+      Alert.alert("Distance must be a valid number");
+      userDistance = defaultDistance;
+    }
+
+    let userPref_Length = parseInt(userPref.length, 10);
+    if (userPref === null || userPref === undefined || userPref_Length.length < 1){
+      Alert.alert("Please select at least one game");
+      userPref = defaultPreferences;
+      checked = userPref;
+    }
+
     storePreferences(userPref, userDistance);
     const {goBack} = this.props.navigation;
 
@@ -124,13 +131,13 @@ class PreferencesScreen extends Component {
       ],
       { cancelable: false }
     )
-    console.log("SUBMITTED");
+    console.log("Saved");
   };
 
   //force checks the supposed numeric input
   onChanged(text){
     let newText = '';
-    let numbers = '0123456789';
+    let numbers = '0123456789.';
 
     for (var i=0; i < text.length; i++) {
         if(numbers.indexOf(text[i]) > -1 ) {
@@ -138,79 +145,47 @@ class PreferencesScreen extends Component {
         }
         else {
             alert("please enter numbers only");
+            text = defaultDistance;
         }
     }
-    this.setState({ myNumber: newText });
-}
 
-  // puchToArray = (item) => {
-  //   let tmp = this.state.userPref
-  //   tmp.push(item)
-  //   this.setState({ userPref: tmp })
-  //   console.log(item);
-  //   console.log(tmp);
-  //   userPref = tmp;
-  // }
+    let tempNum = parseInt(newText, 10);  
+    if (tempNum === 0 || tempNum < 0){
+      userDistance = defaultDistance;
+      Alert.alert("Please enter a value greater than 0");
+      text = defaultDistance;
+      return;
+    }
 
-  // removeFromArray = (item) => {
-  //   let tmp = this.state.userPref
-  //   let index = tmp.indexOf(item);
-  //   if (index>-1){
-  //       tmp.splice(index, 1);
-  //       this.setState({ userPref: tmp })
-  //   }
-  //   console.log(item);
-  //   console.log(tmp);
-  //   userPref = tmp;
-  // }
+    userDistance = newText;
+    this.setState({ userDistance: newText });
+  }
 
   checkItem = item => {
     const { checked } = this.state;
     userPref = checked;
 
     if (!checked.includes(item)) {
-      console.log(item + " is new");
-      console.log("before: " + userPref)
       this.setState({ checked: [...checked, item] });
 
-      // this.setState({ userPref: [...checked, item] }) //simple value
       userPref.push(item);
-      console.log("after: " + userPref)
-      // item => {this.puchToArray(item)}
     } else {
-      console.log(item + " exists");
-      console.log("before: " + userPref)
       this.setState({ checked: checked.filter(a => a !== item) });
-      // this.setState({ userPref: userPref.filter((_, i) => i !== item) });
 
       let index = -1;
       for(let i = 0; i < userPref.length; i++) {
-        console.log("for loop");
         if(userPref[i] === item) {
             index = i;
-            console.log("found at " + index);
         }
       }
-      userPref.splice(index, 1);
-      // this.setState({userPref: array});
-
-      // let array = [...this.state.checked]; // make a separate copy of the array
-      // let index = array.indexOf(item.target.value)
-      // if (index !== -1) {
-      //   array.splice(index, 1);
-      //   this.setState({userPref: array});
-      // }
-
-      console.log("after: " + userPref)
-      // item => {this.removeFromArray(item)}
+      if(index != -1){
+        userPref.splice(index, 1);
+      }
     }
-    // userPref = checked;
-    // console.log(item);
-    // console.log(checked);
   };
 
   render() {
-    // console.log(this.props);
+
     const {goBack} = this.props.navigation;
 
     return (
@@ -241,12 +216,11 @@ class PreferencesScreen extends Component {
         </Text>
         <TextInput
           style={{ padding: 30, color: "grey" }}
-          placeholder="5 (miles)"
+          placeholder= {userDistance + ' (miles)'}
           keyboardType="numeric"
           maxLength={4}
-          selectedValue={this.state || "a"}
-          onChangeText={text => this.setState({ distance: text })}
-          userDistance={this.state.messageBody}
+          onChangeText={(text)=> this.onChanged(text)}
+          value={this.state.userDistance}
         />
 
         <Button 
