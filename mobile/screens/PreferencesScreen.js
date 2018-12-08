@@ -143,17 +143,70 @@ class PreferencesScreen extends Component {
     this.setState({ myNumber: newText });
 }
 
+  // puchToArray = (item) => {
+  //   let tmp = this.state.userPref
+  //   tmp.push(item)
+  //   this.setState({ userPref: tmp })
+  //   console.log(item);
+  //   console.log(tmp);
+  //   userPref = tmp;
+  // }
+
+  // removeFromArray = (item) => {
+  //   let tmp = this.state.userPref
+  //   let index = tmp.indexOf(item);
+  //   if (index>-1){
+  //       tmp.splice(index, 1);
+  //       this.setState({ userPref: tmp })
+  //   }
+  //   console.log(item);
+  //   console.log(tmp);
+  //   userPref = tmp;
+  // }
+
   checkItem = item => {
     const { checked } = this.state;
+    userPref = checked;
 
     if (!checked.includes(item)) {
+      console.log(item + " is new");
+      console.log("before: " + userPref)
       this.setState({ checked: [...checked, item] });
+
+      // this.setState({ userPref: [...checked, item] }) //simple value
+      userPref.push(item);
+      console.log("after: " + userPref)
+      // item => {this.puchToArray(item)}
     } else {
+      console.log(item + " exists");
+      console.log("before: " + userPref)
       this.setState({ checked: checked.filter(a => a !== item) });
+      // this.setState({ userPref: userPref.filter((_, i) => i !== item) });
+
+      let index = -1;
+      for(let i = 0; i < userPref.length; i++) {
+        console.log("for loop");
+        if(userPref[i] === item) {
+            index = i;
+            console.log("found at " + index);
+        }
+      }
+      userPref.splice(index, 1);
+      // this.setState({userPref: array});
+
+      // let array = [...this.state.checked]; // make a separate copy of the array
+      // let index = array.indexOf(item.target.value)
+      // if (index !== -1) {
+      //   array.splice(index, 1);
+      //   this.setState({userPref: array});
+      // }
+
+      console.log("after: " + userPref)
+      // item => {this.removeFromArray(item)}
     }
-    userPref = checked;
-    console.log(item);
-    console.log(checked);
+    // userPref = checked;
+    // console.log(item);
+    // console.log(checked);
   };
 
   render() {
