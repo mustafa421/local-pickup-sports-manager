@@ -23,7 +23,28 @@ export class SettingsScreen extends Component {
     }
   });
 
+  setupUserData = async (userInfo, token, dispatch) => {
+    try {
+      const request = await fetch(
+        "http://local-pickup-sports-manager.herokuapp.com/loginUser",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(userInfo),
+          json: true
+        }
+      );
+      const userAccountData = await request.json();
+      dispatch({ payload: { token, userAccountData } });
+    } catch (err) {
+      console.log(`Error retrieving user account from backend: ${err}`);
+    }
+  };
+
   render() {
+    this.setupUserData();
     const { username, email, navigation, dispatch } = this.props;
     return (
       <View>

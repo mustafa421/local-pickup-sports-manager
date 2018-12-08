@@ -62,7 +62,11 @@ class UpdateSettingsScreen extends Component {
       );
       console.log(obj);
       console.log(`[DEBUG] Server responded with ${request.status}`);
-      console.log(await request.json());
+      if (request.status !== 200) {
+        console.log("whoops");
+        throw new Error(await request.json());
+      }
+      // console.log(await request.json());
       navigation.navigate("settings");
     } catch (err) {
       console.log(`Error sending request to server ${err}`);
