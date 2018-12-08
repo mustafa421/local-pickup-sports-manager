@@ -81,7 +81,7 @@ export class MainScreen extends Component {
             games.map(game => (
               // eslint-disable-next-line react/jsx-indent
               <GameCard
-                key={game.gameId}
+                key={game.gameID}
                 sport={game.sport}
                 title={game.title}
                 skillLevel={game.skillLevel}
