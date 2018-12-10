@@ -3,7 +3,7 @@ import { StyleSheet, View, Platform, TextInput } from "react-native";
 import { Button } from "react-native-elements";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { LOGIN_SUCCESS } from "../actions/types";
+import { UPDATE_ACCOUNT } from "../actions/types";
 // import {Text, Platform } from "react-native";
 
 const styles = StyleSheet.create({
@@ -35,20 +35,15 @@ class UpdateSettingsScreen extends Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  async onPressButton(state) {
-    const { navigation, userID, email, username, dispatch } = this.props;
+  async onPressButton() {
+    const { nameVal, emailVal } = this.state;
+    const { navigation, userID, username, email, dispatch } = this.props;
     const obj = {
       userID,
-      name: state.nameVal,
-      email: state.emailVal
+      name: !nameVal ? username : nameVal,
+      email: !emailVal ? email : emailVal
     };
-    // console.log(obj);
-    if (obj.email === undefined || obj.email === "") {
-      obj.email = email;
-    }
-    if (obj.name === undefined || obj.name === "") {
-      obj.name = username;
-    }
+
     try {
       const request = await fetch(
         "http://local-pickup-sports-manager.herokuapp.com/editUser",
@@ -67,8 +62,9 @@ class UpdateSettingsScreen extends Component {
         console.log("whoops");
         throw new Error(await request.json());
       }
-      dispatch({ type: LOGIN_SUCCESS, payload: { obj } });
-      // console.log(await request.json());
+
+      obj.username = obj.name;
+      dispatch({ type: UPDATE_ACCOUNT, payload: { userAccountData: obj } });
       navigation.navigate("settings");
     } catch (err) {
       console.log(`Error sending request to server ${err}`);
@@ -77,25 +73,26 @@ class UpdateSettingsScreen extends Component {
   }
 
   render() {
-    const { emailVal, nameVal } = this.state;
+    // const { emailVal, nameVal } = this.state;
+    const { username, email } = this.props;
     return (
       <View style={styles.container}>
         <TextInput
           style={{ padding: 50, color: "grey" }}
           placeholder="Name"
-          selectedValue={(this.state && nameVal) || "a"}
+          defaultValue={username}
           onChangeText={text => this.setState({ nameVal: text })}
         />
         <TextInput
           style={{ padding: 50, color: "grey" }}
           placeholder="Email address"
-          selectedValue={(this.state && emailVal) || "a"}
+          defaultValue={email}
           onChangeText={text => this.setState({ emailVal: text })}
         />
         <Button
           title="Update"
           backgroundColor="blue"
-          onPress={() => this.onPressButton(this.state)}
+          onPress={() => this.onPressButton()}
         />
       </View>
     );
@@ -107,9 +104,13 @@ export default connect(mapStateToProps)(UpdateSettingsScreen);
 
 UpdateSettingsScreen.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
-  userID: PropTypes.number
+  userID: PropTypes.number,
+  username: PropTypes.string,
+  email: PropTypes.string
 };
 
 UpdateSettingsScreen.defaultProps = {
-  userID: null
+  userID: null,
+  username: "",
+  email: ""
 };
