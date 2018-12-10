@@ -3,6 +3,7 @@ import { StyleSheet, View, Platform, TextInput } from "react-native";
 import { Button } from "react-native-elements";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { LOGIN_SUCCESS } from "../actions/types";
 // import {Text, Platform } from "react-native";
 
 const styles = StyleSheet.create({
@@ -35,7 +36,7 @@ class UpdateSettingsScreen extends Component {
 
   // eslint-disable-next-line class-methods-use-this
   async onPressButton(state) {
-    const { navigation, userID, email, username } = this.props;
+    const { navigation, userID, email, username, dispatch } = this.props;
     const obj = {
       userID,
       name: state.nameVal,
@@ -66,6 +67,7 @@ class UpdateSettingsScreen extends Component {
         console.log("whoops");
         throw new Error(await request.json());
       }
+      dispatch({ type: LOGIN_SUCCESS, payload: { obj } });
       // console.log(await request.json());
       navigation.navigate("settings");
     } catch (err) {
