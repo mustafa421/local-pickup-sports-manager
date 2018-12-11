@@ -12,27 +12,10 @@ import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { doLogout } from "../actions/auth_actions";
+import { Constants } from 'expo';
 
 const styles = StyleSheet.create({
   prefButton: {
-    position: "absolute",
-    width: 76,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    right: 20,
-    bottom: 0,
-    backgroundColor: "#03A9F4",
-    borderRadius: 20,
-    elevation: 8
-  },
-  prefIcon: {
-    fontSize: 11,
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "white"
-  },
-  logoutButton: {
     flex: 1,
     height: 80,
     padding: 100
@@ -79,11 +62,15 @@ export class SettingsScreen extends Component {
           {email}
         </Text>
 
-        <View style={styles.logoutButton}>
           <Button
             raised
             title="Logout"
             backgroundColor="#E31414"
+            containerStyle={{ 
+              margin: 5,
+              padding: 10,
+              flex: 1
+            }}
             onPress={() => {
               dispatch(doLogout(navigation));
               // Reset history so we won't directed back to the settings screen
@@ -94,14 +81,18 @@ export class SettingsScreen extends Component {
               navigation.navigate("welcome");
             }}
           />
-        </View>
-        <View style={{flex: 2}}>
-          <TouchableOpacity
+        <View style={styles.prefButton}>
+          <Button
             onPress={() => navigation.navigate("PreferencesScreen")}
-            style={styles.prefButton}
+            containerStyle={{flex: 1}}
+            buttonStyle={{
+              width: 200,
+              height: 50
+            }}
+            title="Game Preferences"
+            backgroundColor="#0000FF"
           >
-            <Text style={styles.prefIcon}>Game Preferences</Text>
-          </TouchableOpacity>
+          </Button>
         </View>
       </View>
     );
