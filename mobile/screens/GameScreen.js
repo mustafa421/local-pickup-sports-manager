@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Platform } from "react-native";
+import { View, Text, Platform, ScrollView } from "react-native";
 import { Button } from "react-native-elements";
 import Game from "../components/Game";
 
@@ -32,16 +32,26 @@ class GameScreen extends Component {
   }
 
   static navigationOptions = ({ navigation }) => ({
-    title: "Game Screen",
     headerRight: (
       <Button
+        title="Settings"
+        textStyle={{ color: "black" }}
+        onPress={() => navigation.navigate("settings")}
+        backgroundColor="paleturquoise"
+        buttonStyle={{ borderColor: "black", borderWidth: 1, borderRadius: 5 }}
+      />
+    ),
+    headerLeft: (
+      <Button
         title="Return to Main Screen"
-        textStyle={{ color: "rgba(0, 122, 255, 1)" }}
+        textStyle={{ color: "black" }}
         onPress={() => navigation.navigate("main")}
-        backgroundColor="rgba(0,0,0,0)"
+        backgroundColor="paleturquoise"
+        buttonStyle={{ borderColor: "black", borderWidth: 1, borderRadius: 5 }}
       />
     ),
     headerStyle: {
+      backgroundColor: "#03A9F4",
       marginTop: Platform.OS === "android" ? 24 : 0 // To prevent overlapping from header in Android devices
     }
   });
@@ -50,58 +60,18 @@ class GameScreen extends Component {
     const { gameID, userID } = this.props;
 
     return (
-      <View>
-        <Text />
-        <Text />
-        <View style={{ alignItems: "flex-start" }}>
-          <Game
-            name="Basketball"
-            location="Madison"
-            date="Tomorrow"
-            time="12:00"
-            number_interested={3}
-            number_going={4}
-            difficulty={1}
-          />
-        </View>
-        <Button
-          backgroundColor="#03A9F4"
-          buttonStyle={{
-            borderRadius: 0,
-            marginLeft: 0,
-            marginRight: 0,
-            marginBottom: 0
-          }}
-          title="Join Game"
-          onPress={() =>
-            joinGame({
-              userID,
-              gameID,
-              name,
-              interested: false
-            })
-          }
+      <ScrollView contentContainerStyle={{ alignItems: "flex-start" }}>
+        <Game
+          title="2v2 Pickup Basketball"
+          name="Basketball"
+          location="Madison"
+          date="Tomorrow"
+          time="12:00"
+          number_interested={3}
+          number_going={4}
+          difficulty={1}
         />
-        <Text />
-        <Button
-          backgroundColor="#03A9F4"
-          buttonStyle={{
-            borderRadius: 0,
-            marginLeft: 0,
-            marginRight: 0,
-            marginBottom: 0
-          }}
-          title="Interested in Game"
-          onPress={() =>
-            joinGame({
-              userID,
-              gameID,
-              name,
-              interested: true
-            })
-          }
-        />
-      </View>
+      </ScrollView>
     );
   }
 }

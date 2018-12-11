@@ -21,6 +21,13 @@ export default class App extends React.Component {
   render() {
     const MainNavigator = createBottomTabNavigator(
       {
+        game: {
+          screen: createStackNavigator({
+            gameScreen: { screen: GameScreen },
+            main: { screen: MainScreen },
+            settings: { screen: SettingsScreen }
+          })
+        },
         welcome: { screen: WelcomeScreen },
         auth: { screen: AuthScreen },
         createGame: {
@@ -33,12 +40,6 @@ export default class App extends React.Component {
           screen: createStackNavigator({
             mainScreen: { screen: MainScreen },
             settings: { screen: SettingsScreen }
-          })
-        },
-        game: {
-          screen: createStackNavigator({
-            gameScreen: { screen: GameScreen },
-            main: { screen: MainScreen }
           })
         },
         updateSettingsScreen: {
