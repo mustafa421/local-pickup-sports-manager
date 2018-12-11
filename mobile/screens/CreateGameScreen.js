@@ -105,6 +105,21 @@ class createGameScreen extends Component {
     } else if (obj.location === "Edward Klief Park") {
       obj.latitude = 43.066663;
       obj.longitude = -89.4065082;
+    } else if (obj.location === "James Madison Park") {
+      obj.latitude = 43.0814;
+      obj.longitude = -89.3829;
+    } else if (obj.location === "Sellery Basketball") {
+      obj.latitude = 43.0716;
+      obj.longitude = -89.4003;
+    } else if (obj.location === "Near East Fields") {
+      obj.latitude = 43.077;
+      obj.longitude = -89.4172;
+    } else if (obj.location === "Near West Fields") {
+      obj.latitude = 43.0775;
+      obj.longitude = -89.4235;
+    } else if (obj.location === "University Bay Fields") {
+      obj.latitude = 43.0818;
+      obj.longitude = -89.4346;
     }
     const { navigation } = this.props;
     try {
@@ -275,12 +290,18 @@ class createGameScreen extends Component {
             <Picker.Item label="Current Location" value="Current Location" />
             <Picker.Item label="Shell" value="Shell" />
             <Picker.Item label="Natatorium" value="Natatorium" />
+            <Picker.Item label="Near East Fields" value="Near East Fields" />
+            <Picker.Item label="Near West Fields" value="Near West Fields" />
+            <Picker.Item
+              label="Sellery Basketball"
+              value="Sellery Basketball"
+            />
             <Picker.Item label="Nielsen Tennis" value="Nielson Tennis" />
             <Picker.Item label="Gordon's Field" value="Gordon's Field" />
             <Picker.Item label="Edward Klief Park" value="Edward Klief Park" />
             <Picker.Item
-              label="Sellery basketball"
-              value="Sellery basketball"
+              label="University Bay Fields"
+              value="University Bay Fields"
             />
             <Picker.Item
               label="James Madison Park"
@@ -289,7 +310,7 @@ class createGameScreen extends Component {
           </Picker>
           <View style={{ padding: 75 }}>
             <Button
-              color="blue"
+              backgroundColor="blue"
               onPress={() => this.onPressButton(this.state)}
               title="Create Game"
             />
