@@ -50,44 +50,52 @@ function Game(props) {
           {"@" + props.location}
         </Text>
       </Card>
-      <View
-        style={{
-          flex: 2,
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: 15
-        }}
-      >
+      <View style={{ flexDirection: "row" }}>
+        <Text
+          style={{
+            paddingLeft: 15,
+            fontWeight: "bold",
+            fontSize: 30,
+            paddingVertical: 5
+          }}
+        >
+          Difficulty:
+        </Text>
         <Rating
           type="star"
           fractions={1}
           ratingCount={10}
           startingValue={props.difficulty}
           readonly
-          imageSize={10}
+          imageSize={15}
           onFinishRating={this.ratingCompleted}
           onStartRating={this.ratingStarted}
-          style={{ paddingVertical: 2 }}
-        />
-        <SectionList
-          containerStyle={{
-            marginLeft: 10,
-            marginTop: 10,
-            marginBottom: 0
-          }}
-          renderItem={({ item, index, section }) => (
-            <Text key={index}>{item}</Text>
-          )}
-          renderSectionHeader={({ section: { title } }) => (
-            <Text style={{ fontWeight: "bold", fontSize: 30 }}>{title}</Text>
-          )}
-          sections={[
-            { title: "Participants: ", data: [props.number_going] },
-            { title: "Interested: ", data: [props.number_interested] } //user profiles could go here
-          ]}
-          keyExtractor={(item, index) => item + index}
+          style={{ paddingLeft: 15, paddingVertical: 20, paddingRight: 15 }}
         />
       </View>
+      <SectionList
+        containerStyle={{
+          marginLeft: 10,
+          marginTop: 10,
+          marginBottom: 0,
+          paddingVertical: 0
+        }}
+        renderItem={({ item, index, section }) => (
+          <Text key={index} style={{ paddingLeft: 15 }}>
+            {item}
+          </Text>
+        )}
+        renderSectionHeader={({ section: { title } }) => (
+          <Text style={{ fontWeight: "bold", fontSize: 30, paddingLeft: 15 }}>
+            {title}
+          </Text>
+        )}
+        sections={[
+          { title: "Participants: ", data: [props.number_going] },
+          { title: "Interested: ", data: [props.number_interested] } //user profiles could go here
+        ]}
+        keyExtractor={(item, index) => item + index}
+      />
       <Button
         backgroundColor="paleturquoise"
         color="black"
