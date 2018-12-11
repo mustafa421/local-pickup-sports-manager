@@ -7,10 +7,11 @@ import {
   ScrollView,
   DatePickerIOS,
   Platform,
-  Text
+  Text,
+  Alert,
+  TextInput
 } from "react-native";
 import { Button } from "react-native-elements";
-// import {Text, Platform } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,6 +19,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "stretch",
     justifyContent: "center"
+  },
+  text: {
+    paddingLeft: 50,
+    paddingTop: 50,
+    color: "blue"
+  },
+  input: {
+    paddingLeft: 50,
+    paddingTop: 50
   }
 });
 class createGameScreen extends Component {
@@ -56,6 +66,7 @@ class createGameScreen extends Component {
       state.duration = "1";
     }
     const obj = {
+      title: state.title,
       sport: state.sportValue,
       minVal: parseInt(state.minVal, 10),
       maxVal: parseInt(state.maxVal, 10),
@@ -78,6 +89,23 @@ class createGameScreen extends Component {
       obj.latitude = location.coords.latitude;
       obj.longitude = location.coords.longitude;
     }
+
+    if (obj.location === "Shell") {
+      obj.latitude = 43.0699;
+      obj.longitude = -89.411;
+    } else if (obj.location === "Natatorium") {
+      obj.latitude = 43.0768;
+      obj.longitude = -89.4201;
+    } else if (obj.location === "Nielson Tennis") {
+      obj.latitude = 43.0796;
+      obj.longitude = -89.4303;
+    } else if (obj.location === "Gordon's Field") {
+      obj.latitude = 43.0712;
+      obj.longitude = -89.3986;
+    } else if (obj.location === "Edward Klief Park") {
+      obj.latitude = 43.066663;
+      obj.longitude = -89.4065082;
+    }
     const { navigation } = this.props;
     try {
       const request = await fetch(
@@ -91,13 +119,15 @@ class createGameScreen extends Component {
           json: true
         }
       );
-      console.log(`[DEBUG] Server responded with ${request.status}`);
-      // console.log(obj);
-      console.log(await request.json());
+      if (request.status !== 200) {
+        throw new Error();
+      }
       navigation.navigate("main");
     } catch (err) {
       console.log(`Error sending request to server ${err}`);
-      // Add alert to alert user that something went wrong
+      Alert.alert("Error", "An error occured while creating a game", [
+        { text: "OK" }
+      ]);
     }
     this.setState({
       sportValue: "Basketball",
@@ -105,7 +135,8 @@ class createGameScreen extends Component {
       maxVal: 1,
       skill: 1,
       location: "Current Location",
-      duration: 1
+      duration: 1,
+      title: ""
     });
   }
 
@@ -126,15 +157,13 @@ class createGameScreen extends Component {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "blue"
-            }}
-          >
-            Sport
-          </Text>
+          <Text style={styles.text}>Game Title Here</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Basketball Game"
+            onChangeText={text => this.setState({ title: text })}
+          />
+          <Text style={styles.text}>Sport</Text>
           <Picker
             itemStyle={{ height: 144 }}
             selectedValue={(this.state && sportValue) || "a"}
@@ -148,15 +177,7 @@ class createGameScreen extends Component {
             <Picker.Item label="Soccer" value="Soccer" />
             <Picker.Item label="Tennis" value="Tennis" />
           </Picker>
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "blue"
-            }}
-          >
-            Min Number of Players
-          </Text>
+          <Text style={styles.text}>Min Number of Players</Text>
           <Picker
             itemStyle={{ height: 144 }}
             // style={{ width: 200 }}
@@ -186,18 +207,9 @@ class createGameScreen extends Component {
             <Picker.Item label="19" value="19" />
             <Picker.Item label="20" value="20" />
           </Picker>
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "blue"
-            }}
-          >
-            Max Number of Players
-          </Text>
+          <Text style={styles.text}>Max Number of Players</Text>
           <Picker
             itemStyle={{ height: 144 }}
-            // style={{ width: 200 }}
             selectedValue={(this.state && maxVal) || "a"}
             onValueChange={value => {
               this.setState({ maxVal: value });
@@ -224,28 +236,11 @@ class createGameScreen extends Component {
             <Picker.Item label="19" value="19" />
             <Picker.Item label="20" value="20" />
           </Picker>
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "blue"
-            }}
-          >
-            Date
-          </Text>
+          <Text style={styles.text}>Date</Text>
           <DatePickerIOS date={chosenDate} onDateChange={this.setDate} />
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "blue"
-            }}
-          >
-            Duration (in hours)
-          </Text>
+          <Text style={styles.text}>Duration (in hours)</Text>
           <Picker
             itemStyle={{ height: 144 }}
-            // style={{ width: 200 }}
             selectedValue={(this.state && duration) || "a"}
             onValueChange={value => {
               this.setState({ duration: value });
@@ -257,18 +252,9 @@ class createGameScreen extends Component {
             <Picker.Item label="2.5" value="2.5" />
             <Picker.Item label="3" value="3" />
           </Picker>
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "blue"
-            }}
-          >
-            Skill Level
-          </Text>
+          <Text style={styles.text}>Skill Level</Text>
           <Picker
             itemStyle={{ height: 144 }}
-            // style={{ width: 200 }}
             selectedValue={(this.state && skill) || "a"}
             onValueChange={value => {
               this.setState({ skill: value });
@@ -278,15 +264,7 @@ class createGameScreen extends Component {
             <Picker.Item label="Intermediate" value="Intermediate" />
             <Picker.Item label="Expert" value="Expert" />
           </Picker>
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "blue"
-            }}
-          >
-            Location
-          </Text>
+          <Text style={styles.text}>Location</Text>
           <Picker
             itemStyle={{ height: 144 }}
             selectedValue={(this.state && location) || "a"}
