@@ -171,7 +171,7 @@ class createGameScreen extends Component {
     } = this.state;
     return (
       <ScrollView>
-        <View style={styles.cgiontainer}>
+        <View style={styles.container}>
           <Text style={styles.text}>Game Title Here</Text>
           <TextInput
             style={styles.input}
