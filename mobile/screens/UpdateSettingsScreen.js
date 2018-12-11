@@ -56,10 +56,8 @@ class UpdateSettingsScreen extends Component {
           json: true
         }
       );
-      console.log(obj);
-      console.log(`[DEBUG] Server responded with ${request.status}`);
+
       if (request.status !== 200) {
-        console.log("whoops");
         throw new Error(await request.json());
       }
 
@@ -73,7 +71,6 @@ class UpdateSettingsScreen extends Component {
   }
 
   render() {
-    // const { emailVal, nameVal } = this.state;
     const { username, email } = this.props;
     return (
       <View style={styles.container}>
