@@ -5,9 +5,10 @@ import {
   Platform,
   Alert,
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  AsyncStorage
 } from "react-native";
-import { Button } from "react-native-elements";
+import { Button, Text } from "react-native-elements";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 // eslint-disable-next-line import/no-named-as-default
@@ -77,18 +78,26 @@ export class MainScreen extends Component {
             />
           }
         >
-          {games
-            ? games.map(game => (
-                // eslint-disable-next-line react/jsx-indent
-                <GameCard
-                  key={game.gameId}
-                  sport={game.sport}
-                  title={game.title}
-                  skillLevel={game.skillLevel}
-                  duration={game.duration}
-                />
-              ))
-            : null}
+          {games && games.length > 0 ? (
+            games.map(game => (
+              // eslint-disable-next-line react/jsx-indent
+              <GameCard
+                key={game.gameID}
+                gameID={game.gameID}
+                interested={game.interested}
+                joined={game.joined}
+                sport={game.sport}
+                title={game.title}
+                skillLevel={game.skillLevel}
+                duration={game.duration}
+              />
+            ))
+          ) : (
+            <Text style={{ textAlign: "center" }}>
+              No games available. Be the first! Click Create Game in the top
+              right corner of your screen.
+            </Text>
+          )}
         </ScrollView>
       </View>
     );
