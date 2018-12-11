@@ -1,16 +1,17 @@
 import React, { Component } from "react";
+import { Location } from "expo";
 import {
   StyleSheet,
-  TextInput,
   View,
   Picker,
   ScrollView,
   DatePickerIOS,
   Platform,
-  Text
+  Text,
+  Alert,
+  TextInput
 } from "react-native";
 import { Button } from "react-native-elements";
-// import {Text, Platform } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,6 +19,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "stretch",
     justifyContent: "center"
+  },
+  text: {
+    paddingLeft: 50,
+    paddingTop: 50,
+    color: "blue"
+  },
+  input: {
+    paddingLeft: 50,
+    paddingTop: 50
   }
 });
 class createGameScreen extends Component {
@@ -44,16 +54,73 @@ class createGameScreen extends Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  async onPressButton(state) {
+  async onPressButton(states) {
+    const state = states;
+    if (state.minVal === undefined) {
+      state.minVal = "1";
+    }
+    if (state.maxVal === undefined) {
+      state.maxVal = "1";
+    }
+    if (state.duration === undefined) {
+      state.duration = "1";
+    }
     const obj = {
+      title: state.title,
       sport: state.sportValue,
-      minVal: state.minValue,
-      maxVal: state.maxVal,
+      minVal: parseInt(state.minVal, 10),
+      maxVal: parseInt(state.maxVal, 10),
       skill: state.skill,
       chosenDate: state.chosenDate,
       location: state.location,
-      duration: state.duration
+      latitude: 0.0,
+      longitude: 0.0,
+      duration: parseInt(state.duration, 10)
     };
+    if (obj.sport === undefined) {
+      obj.sport = "Basketball";
+    }
+    if (obj.skill === undefined) {
+      obj.skill = "Beginner";
+    }
+    if (obj.location === "Current Location" || obj.location === undefined) {
+      const location = await Location.getCurrentPositionAsync({});
+      obj.location = "Current Location";
+      obj.latitude = location.coords.latitude;
+      obj.longitude = location.coords.longitude;
+    }
+
+    if (obj.location === "Shell") {
+      obj.latitude = 43.0699;
+      obj.longitude = -89.411;
+    } else if (obj.location === "Natatorium") {
+      obj.latitude = 43.0768;
+      obj.longitude = -89.4201;
+    } else if (obj.location === "Nielson Tennis") {
+      obj.latitude = 43.0796;
+      obj.longitude = -89.4303;
+    } else if (obj.location === "Gordon's Field") {
+      obj.latitude = 43.0712;
+      obj.longitude = -89.3986;
+    } else if (obj.location === "Edward Klief Park") {
+      obj.latitude = 43.066663;
+      obj.longitude = -89.4065082;
+    } else if (obj.location === "James Madison Park") {
+      obj.latitude = 43.0814;
+      obj.longitude = -89.3829;
+    } else if (obj.location === "Sellery Basketball") {
+      obj.latitude = 43.0716;
+      obj.longitude = -89.4003;
+    } else if (obj.location === "Near East Fields") {
+      obj.latitude = 43.077;
+      obj.longitude = -89.4172;
+    } else if (obj.location === "Near West Fields") {
+      obj.latitude = 43.0775;
+      obj.longitude = -89.4235;
+    } else if (obj.location === "University Bay Fields") {
+      obj.latitude = 43.0818;
+      obj.longitude = -89.4346;
+    }
     const { navigation } = this.props;
     try {
       const request = await fetch(
@@ -67,13 +134,25 @@ class createGameScreen extends Component {
           json: true
         }
       );
-      console.log(`[DEBUG] Server responded with ${request.status}`);
-      console.log(await request.json());
+      if (request.status !== 200) {
+        throw new Error();
+      }
       navigation.navigate("main");
     } catch (err) {
       console.log(`Error sending request to server ${err}`);
-      // Add alert to alert user that something went wrong
+      Alert.alert("Error", "An error occured while creating a game", [
+        { text: "OK" }
+      ]);
     }
+    this.setState({
+      sportValue: "Basketball",
+      minVal: 1,
+      maxVal: 1,
+      skill: 1,
+      location: "Current Location",
+      duration: 1,
+      title: ""
+    });
   }
 
   setDate(newDate) {
@@ -93,15 +172,13 @@ class createGameScreen extends Component {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "grey"
-            }}
-          >
-            Sport
-          </Text>
+          <Text style={styles.text}>Game Title Here</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Basketball Game"
+            onChangeText={text => this.setState({ title: text })}
+          />
+          <Text style={styles.text}>Sport</Text>
           <Picker
             itemStyle={{ height: 144 }}
             selectedValue={(this.state && sportValue) || "a"}
@@ -109,24 +186,16 @@ class createGameScreen extends Component {
               this.setState({ sportValue: value });
             }}
           >
-            <Picker.Item label="Basketball" value="basketball" />
-            <Picker.Item label="Football" value="football" />
-            <Picker.Item label="Ultimate Frisbee" value="frisbee" />
-            <Picker.Item label="Soccer" value="soccer" />
-            <Picker.Item label="Tennis" value="tennis" />
+            <Picker.Item label="Basketball" value="Basketball" />
+            <Picker.Item label="Football" value="Football" />
+            <Picker.Item label="Ultimate Frisbee" value="Ultimate Frisbee" />
+            <Picker.Item label="Soccer" value="Soccer" />
+            <Picker.Item label="Tennis" value="Tennis" />
           </Picker>
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "grey"
-            }}
-          >
-            Min Number of Players
-          </Text>
+          <Text style={styles.text}>Min Number of Players</Text>
           <Picker
             itemStyle={{ height: 144 }}
-            style={{ width: 200 }}
+            // style={{ width: 200 }}
             selectedValue={(this.state && minVal) || "a"}
             onValueChange={value => {
               this.setState({ minVal: value });
@@ -153,18 +222,9 @@ class createGameScreen extends Component {
             <Picker.Item label="19" value="19" />
             <Picker.Item label="20" value="20" />
           </Picker>
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "grey"
-            }}
-          >
-            Max Number of Players
-          </Text>
+          <Text style={styles.text}>Max Number of Players</Text>
           <Picker
             itemStyle={{ height: 144 }}
-            style={{ width: 200 }}
             selectedValue={(this.state && maxVal) || "a"}
             onValueChange={value => {
               this.setState({ maxVal: value });
@@ -191,54 +251,35 @@ class createGameScreen extends Component {
             <Picker.Item label="19" value="19" />
             <Picker.Item label="20" value="20" />
           </Picker>
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "grey"
-            }}
-          >
-            Date
-          </Text>
+          <Text style={styles.text}>Date</Text>
           <DatePickerIOS date={chosenDate} onDateChange={this.setDate} />
-          <TextInput
-            style={{ padding: 50 }}
-            placeholder="Duration (in hours)"
-            keyboardType="numeric"
-            maxLength={1}
-            selectedValue={(this.state && duration) || "a"}
-            onChangeText={text => this.setState({ duration: text })}
-          />
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "grey"
-            }}
-          >
-            Skill Level
-          </Text>
+          <Text style={styles.text}>Duration (in hours)</Text>
           <Picker
             itemStyle={{ height: 144 }}
-            style={{ width: 200 }}
+            selectedValue={(this.state && duration) || "a"}
+            onValueChange={value => {
+              this.setState({ duration: value });
+            }}
+          >
+            <Picker.Item label="1" value="1" />
+            <Picker.Item label="1.5" value="1.5" />
+            <Picker.Item label="2" value="2" />
+            <Picker.Item label="2.5" value="2.5" />
+            <Picker.Item label="3" value="3" />
+          </Picker>
+          <Text style={styles.text}>Skill Level</Text>
+          <Picker
+            itemStyle={{ height: 144 }}
             selectedValue={(this.state && skill) || "a"}
             onValueChange={value => {
               this.setState({ skill: value });
             }}
           >
-            <Picker.Item label="Beginner" value="beginner" />
-            <Picker.Item label="Intermediate" value="intermediate" />
-            <Picker.Item label="Expert" value="expert" />
+            <Picker.Item label="Beginner" value="Beginner" />
+            <Picker.Item label="Intermediate" value="Intermediate" />
+            <Picker.Item label="Expert" value="Expert" />
           </Picker>
-          <Text
-            style={{
-              paddingLeft: 50,
-              paddingTop: 50,
-              color: "grey"
-            }}
-          >
-            Location
-          </Text>
+          <Text style={styles.text}>Location</Text>
           <Picker
             itemStyle={{ height: 144 }}
             selectedValue={(this.state && location) || "a"}
@@ -246,16 +287,30 @@ class createGameScreen extends Component {
               this.setState({ location: value });
             }}
           >
-            <Picker.Item label="Shell" value="shell" />
+            <Picker.Item label="Current Location" value="Current Location" />
+            <Picker.Item label="Shell" value="Shell" />
             <Picker.Item label="Natatorium" value="Natatorium" />
-            <Picker.Item label="Nielsen Tennis" value="nielson" />
-            <Picker.Item label="Gordon's Field" value="gordon's" />
-            <Picker.Item label="Edward Klief Park" value="klief" />
-            <Picker.Item label="Sellery basketball" value="sellery" />
-            <Picker.Item label="James Madison Park" value="james" />
+            <Picker.Item label="Near East Fields" value="Near East Fields" />
+            <Picker.Item label="Near West Fields" value="Near West Fields" />
+            <Picker.Item
+              label="Sellery Basketball"
+              value="Sellery Basketball"
+            />
+            <Picker.Item label="Nielsen Tennis" value="Nielson Tennis" />
+            <Picker.Item label="Gordon's Field" value="Gordon's Field" />
+            <Picker.Item label="Edward Klief Park" value="Edward Klief Park" />
+            <Picker.Item
+              label="University Bay Fields"
+              value="University Bay Fields"
+            />
+            <Picker.Item
+              label="James Madison Park"
+              value="James Madison Park"
+            />
           </Picker>
           <View style={{ padding: 75 }}>
             <Button
+              backgroundColor="blue"
               onPress={() => this.onPressButton(this.state)}
               title="Create Game"
             />

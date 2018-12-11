@@ -4,12 +4,13 @@
 
 1. Download the entire repository into your desired directory
 2. Download both [node](https://nodejs.org/en/) and [npm](https://www.npmjs.com/get-npm)
-3. Change `cd` directories to the **mobile** folder
-4. Once inside **mobile**, use the following command line tool  
+3. `cd` directories to the **mobile** folder
+4. Once inside **mobile**, run the following commands 
 ```
 	npm install expo-cli --global
+	npm install
 ```
-5. Back out and ` cd ` into the **server** folder.
+5. ` cd ` into the **server** folder.
 6. Run another ` npm install ` in this **server** folder
 7. Run ` npm start ` within the **server** directory to start the local server
 8. Download the Expo application from the corresponding mobile store

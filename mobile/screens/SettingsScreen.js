@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import { View, Text, Button, Platform } from "react-native";
+import { View, Text, Platform } from "react-native";
+import { Button } from "react-native-elements";
+import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { doLogout } from "../actions/auth_actions";
 
 export class SettingsScreen extends Component {
   // A feature from React Navigation to define a title
@@ -21,37 +24,41 @@ export class SettingsScreen extends Component {
   });
 
   render() {
-    const { name, email, phone } = this.props;
-    console.log(`${name}, ${email}, ${phone}`);
+    const { username, email, navigation, dispatch } = this.props;
     return (
       <View>
         <Text
           style={{
             padding: 50,
-            color: "grey"
+            color: "blue"
           }}
         >
           Name:
-          {name}
+          {username}
         </Text>
         <Text
           style={{
             padding: 50,
-            color: "grey"
+            color: "blue"
           }}
         >
           Email:
           {email}
         </Text>
-        <Text
-          style={{
-            padding: 50,
-            color: "grey"
+        <Button
+          raised
+          title="Logout"
+          backgroundColor="#E31414"
+          onPress={() => {
+            dispatch(doLogout(navigation));
+            // Reset history so we won't directed back to the settings screen
+            navigation.reset(
+              [NavigationActions.navigate({ routeName: "mainScreen" })],
+              0
+            );
+            navigation.navigate("welcome");
           }}
-        >
-          Phone Number:
-          {phone}
-        </Text>
+        />
       </View>
     );
   }
@@ -62,13 +69,13 @@ const mapStateToProps = state => state.auth.userAccountData;
 export default connect(mapStateToProps)(SettingsScreen);
 
 SettingsScreen.propTypes = {
-  name: PropTypes.string,
-  email: PropTypes.string,
-  phone: PropTypes.string
+  dispatch: PropTypes.func,
+  username: PropTypes.string,
+  email: PropTypes.string
 };
 
 SettingsScreen.defaultProps = {
-  name: "",
-  email: "",
-  phone: "Not provided"
+  dispatch: null,
+  username: "",
+  email: ""
 };
