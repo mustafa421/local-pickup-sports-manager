@@ -8,7 +8,7 @@ import {
   StyleSheet
 } from "react-native";
 import { Button } from "react-native-elements";
-import { StackActions, NavigationActions } from "react-navigation";
+import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { doLogout } from "../actions/auth_actions";
@@ -57,8 +57,7 @@ export class SettingsScreen extends Component {
   });
 
   render() {
-
-    const { name, email, phone, navigation, dispatch } = this.props;
+    const { username, email, navigation, dispatch } = this.props;
     return (
       <View>
         <Text
@@ -68,7 +67,7 @@ export class SettingsScreen extends Component {
           }}
         >
           Name:
-          {name}
+          {username}
         </Text>
         <Text
           style={{
@@ -79,30 +78,22 @@ export class SettingsScreen extends Component {
           Email:
           {email}
         </Text>
-        <Text
-          style={{
-            padding: 50,
-            color: "blue"
-          }}
-        >
-          Phone Number:
-          {phone}
-        </Text>
+
         <View style={styles.logoutButton}>
-        <Button
-          raised
-          title="Logout"
-          backgroundColor="#E31414"
-          onPress={() => {
-            dispatch(doLogout(navigation));
-            // Reset history so we won't directed back to the settings screen
-            navigation.reset(
-              [NavigationActions.navigate({ routeName: "mainScreen" })],
-              0
-            );
-            navigation.navigate("welcome");
-          }}
-        />
+          <Button
+            raised
+            title="Logout"
+            backgroundColor="#E31414"
+            onPress={() => {
+              dispatch(doLogout(navigation));
+              // Reset history so we won't directed back to the settings screen
+              navigation.reset(
+                [NavigationActions.navigate({ routeName: "mainScreen" })],
+                0
+              );
+              navigation.navigate("welcome");
+            }}
+          />
         </View>
         <View style={{flex: 2}}>
           <TouchableOpacity
@@ -123,14 +114,13 @@ export default connect(mapStateToProps)(SettingsScreen);
 
 SettingsScreen.propTypes = {
   dispatch: PropTypes.func,
-  name: PropTypes.string,
-  email: PropTypes.string,
-  phone: PropTypes.string
+  username: PropTypes.string,
+  email: PropTypes.string
 };
 
 SettingsScreen.defaultProps = {
   dispatch: null,
-  name: "",
-  email: "",
-  phone: "Not provided"
+  username: "",
+  email: ""
 };
+
