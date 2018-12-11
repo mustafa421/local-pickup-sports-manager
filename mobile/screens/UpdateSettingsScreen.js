@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Platform, TextInput } from "react-native";
 import { Button } from "react-native-elements";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { UPDATE_ACCOUNT } from "../actions/types";
 // import {Text, Platform } from "react-native";
 
 const styles = StyleSheet.create({
@@ -21,14 +24,6 @@ class UpdateSettingsScreen extends Component {
         backgroundColor="rgba(0,0,0,0)"
       />
     ),
-    headerRight: (
-      <Button
-        title="Update"
-        textStyle={{ color: "rgba(0, 122, 255, 1)" }}
-        onPress={() => this.onPressButton(this.state)}
-        backgroundColor="rgba(0,0,0,0)"
-      />
-    ),
     headerStyle: {
       marginTop: Platform.OS === "android" ? 24 : 0 // To prevent overlapping from header in Android devices
     }
@@ -40,18 +35,18 @@ class UpdateSettingsScreen extends Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  async onPressButton(state) {
+  async onPressButton() {
+    const { nameVal, emailVal } = this.state;
+    const { navigation, userID, username, email, dispatch } = this.props;
     const obj = {
-      phoneVal: state.phone,
-      emailVal: state.email,
-      nameVal: state.name
+      userID,
+      name: !nameVal ? username : nameVal,
+      email: !emailVal ? email : emailVal
     };
-
-    const { navigation } = this.props;
 
     try {
       const request = await fetch(
-        "http://local-pickup-sports-manager.herokuapp.com",
+        "http://local-pickup-sports-manager.herokuapp.com/editUser",
         {
           method: "POST",
           headers: {
@@ -61,8 +56,13 @@ class UpdateSettingsScreen extends Component {
           json: true
         }
       );
-      console.log(`[DEBUG] Server responded with ${request.status}`);
-      console.log(await request.json());
+
+      if (request.status !== 200) {
+        throw new Error(await request.json());
+      }
+
+      obj.username = obj.name;
+      dispatch({ type: UPDATE_ACCOUNT, payload: { userAccountData: obj } });
       navigation.navigate("settings");
     } catch (err) {
       console.log(`Error sending request to server ${err}`);
@@ -71,31 +71,43 @@ class UpdateSettingsScreen extends Component {
   }
 
   render() {
-    const { phone, email, name } = this.state;
+    const { username, email } = this.props;
     return (
       <View style={styles.container}>
         <TextInput
           style={{ padding: 50, color: "grey" }}
           placeholder="Name"
-          selectedValue={(this.state && name) || "a"}
-          onChangeText={text => this.setState({ name: text })}
+          defaultValue={username}
+          onChangeText={text => this.setState({ nameVal: text })}
         />
         <TextInput
           style={{ padding: 50, color: "grey" }}
-          placeholder="Email address (optional)"
-          selectedValue={(this.state && email) || "a"}
-          onChangeText={text => this.setState({ email: text })}
+          placeholder="Email address"
+          defaultValue={email}
+          onChangeText={text => this.setState({ emailVal: text })}
         />
-        <TextInput
-          style={{ padding: 50, color: "grey" }}
-          placeholder="Phone Number (optional)"
-          keyboardType="numeric"
-          maxLength={10}
-          selectedValue={(this.state && phone) || "a"}
-          onChangeText={text => this.setState({ phone: text })}
+        <Button
+          title="Update"
+          backgroundColor="blue"
+          onPress={() => this.onPressButton()}
         />
       </View>
     );
   }
 }
-export default UpdateSettingsScreen;
+const mapStateToProps = state => state.auth.userAccountData;
+
+export default connect(mapStateToProps)(UpdateSettingsScreen);
+
+UpdateSettingsScreen.propTypes = {
+  // eslint-disable-next-line react/no-unused-prop-types
+  userID: PropTypes.number,
+  username: PropTypes.string,
+  email: PropTypes.string
+};
+
+UpdateSettingsScreen.defaultProps = {
+  userID: null,
+  username: "",
+  email: ""
+};
