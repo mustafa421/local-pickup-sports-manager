@@ -5,7 +5,8 @@ import {
   Platform,
   Alert,
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  AsyncStorage
 } from "react-native";
 import { Button, Text } from "react-native-elements";
 import PropTypes from "prop-types";
@@ -63,7 +64,7 @@ export class MainScreen extends Component {
   };
 
   render() {
-    const { games, name } = this.props;
+    const { games } = this.props;
     const { refreshing } = this.state;
 
     /* eslint-disable react/jsx-wrap-multilines */
@@ -83,6 +84,8 @@ export class MainScreen extends Component {
               <GameCard
                 key={game.gameID}
                 gameID={game.gameID}
+                interested={game.interested}
+                joined={game.joined}
                 sport={game.sport}
                 title={game.title}
                 skillLevel={game.skillLevel}

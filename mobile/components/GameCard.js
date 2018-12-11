@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Text, StyleSheet, Alert } from "react-native";
+import { Text, StyleSheet, Alert, AsyncStorage } from "react-native";
 import { connect } from "react-redux";
 import { Card, Button } from "react-native-elements";
 
@@ -23,9 +23,30 @@ const joinGame = async userInfo => {
         json: true
       }
     );
+
     if (request.status !== 200) {
       throw Error("Failed to connect to join game");
     }
+
+    let joinedGames = await AsyncStorage.getItem("joinedGames");
+
+    if (!joinedGames) {
+      const arr = [];
+      await AsyncStorage.setItem("joinedGames", JSON.stringify(arr));
+      joinedGames = arr;
+    } else {
+      joinedGames = JSON.parse(joinedGames);
+    }
+
+    if (!joinedGames.includes(userInfo.gameID)) {
+      joinedGames.push(userInfo.gameID);
+    }
+
+    await AsyncStorage.setItem("joinedGames", JSON.stringify(joinedGames));
+
+    Alert.alert("Success", "Successfully joined game", [{ text: "OK" }], {
+      cancelable: false
+    });
   } catch (ex) {
     console.log(ex);
     Alert.alert(
@@ -53,6 +74,33 @@ const interestedGame = async userInfo => {
     if (request.status !== 200) {
       throw new Error("Failed to send interested game");
     }
+
+    let interestedGames = await AsyncStorage.getItem("interestedGames");
+
+    if (!interestedGames) {
+      const arr = [];
+      await AsyncStorage.setItem("interestedGames", JSON.stringify(arr));
+      interestedGames = arr;
+    } else {
+      interestedGames = JSON.parse(interestedGames);
+    }
+
+    // Maybe remove interest?
+    if (!interestedGames.includes(userInfo.gameID)) {
+      interestedGames.push(userInfo.gameID);
+    }
+
+    await AsyncStorage.setItem(
+      "interestedGames",
+      JSON.stringify(interestedGames)
+    );
+
+    Alert.alert(
+      "Success",
+      "Successfully showed interest in game.",
+      [{ text: "OK" }],
+      { cancelable: false }
+    );
   } catch (err) {
     console.log(err);
     Alert.alert(
@@ -72,7 +120,9 @@ export function GameCard(props) {
     userID,
     username,
     sport,
-    gameID
+    gameID,
+    interested,
+    joined
   } = props;
 
   return (
@@ -91,6 +141,7 @@ export function GameCard(props) {
           marginBottom: 0
         }}
         title="Join Game"
+        disabled={joined}
         onPress={() =>
           joinGame({
             userID,
@@ -112,6 +163,7 @@ export function GameCard(props) {
           marginBottom: 0
         }}
         title="Interested in Game"
+        disabled={interested}
         onPress={() =>
           interestedGame({
             userID,
@@ -135,11 +187,15 @@ GameCard.propTypes = {
   duration: PropTypes.number.isRequired,
   userID: PropTypes.number.isRequired,
   gameID: PropTypes.number.isRequired,
+  interested: PropTypes.bool,
+  joined: PropTypes.bool,
   username: PropTypes.string
 };
 
 GameCard.defaultProps = {
   username: null,
   sport: null,
-  title: null
+  title: null,
+  interested: false,
+  joined: false
 };

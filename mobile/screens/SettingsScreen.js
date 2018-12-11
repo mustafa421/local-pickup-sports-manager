@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Platform } from "react-native";
 import { Button } from "react-native-elements";
-import { StackActions, NavigationActions } from "react-navigation";
+import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { doLogout } from "../actions/auth_actions";
