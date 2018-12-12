@@ -139,7 +139,6 @@ export function GameCard(props) {
         <Text style={styles.text}>Sport = {sport} </Text>
         <Text style={styles.text}>Skill Level = {skillLevel}</Text>
         <Text style={styles.text}>Time = {duration} </Text>
-        <Text style={styles.text}>Join this game now!</Text>
 
         <Button
           backgroundColor="#03A9F4"
