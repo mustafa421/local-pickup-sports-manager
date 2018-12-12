@@ -118,18 +118,12 @@ export function GameCard(props) {
     skillLevel,
     duration,
     userID,
-<<<<<<< HEAD
-    gameID,
-    name,
-    sport,
-    navigation
-=======
     username,
     sport,
     gameID,
     interested,
+    navigation,
     joined
->>>>>>> master
   } = props;
 
   return (
@@ -153,12 +147,7 @@ export function GameCard(props) {
           joinGame({
             userID,
             gameID,
-<<<<<<< HEAD
-            name,
-            interested: false
-=======
             name: username
->>>>>>> master
           })
         }
       />
@@ -177,12 +166,7 @@ export function GameCard(props) {
           interestedGame({
             userID,
             gameID,
-<<<<<<< HEAD
-            name,
-            interested: true
-=======
             name: username
->>>>>>> master
           })
         }
       />
@@ -200,15 +184,10 @@ GameCard.propTypes = {
   skillLevel: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
   userID: PropTypes.number.isRequired,
-<<<<<<< HEAD
-  name: PropTypes.string,
-  gameID: PropTypes.number.isRequired
-=======
   gameID: PropTypes.number.isRequired,
   interested: PropTypes.bool,
   joined: PropTypes.bool,
   username: PropTypes.string
->>>>>>> master
 };
 
 GameCard.defaultProps = {
