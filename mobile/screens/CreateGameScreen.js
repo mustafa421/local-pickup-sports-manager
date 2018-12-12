@@ -42,6 +42,7 @@ class createGameScreen extends Component {
       />
     ),
     headerStyle: {
+      backgroundColor: "#03A9F4",
       marginTop: Platform.OS === "android" ? 24 : 0 // To prevent overlapping from header in Android devices
     }
   });
