@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-
-import { View, Text, Platform, StyleSheet } from "react-native";
+import { View, Text, Platform, Dimensions, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
@@ -11,7 +10,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
+    backgroundColor: "paleturquoise",
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
   },
   buttons: {
     margin: 5,
@@ -29,10 +31,12 @@ export class SettingsScreen extends Component {
         title="Edit"
         textStyle={{ color: "rgba(0, 122, 255, 1)" }}
         onPress={() => navigation.navigate("updateSettingsScreen")}
-        backgroundColor="rgba(0,0,0,0)"
+        backgroundColor="paleturquoise"
+        buttonStyle={{ borderColor: "black", borderWidth: 1, borderRadius: 5 }}
       />
     ),
     headerStyle: {
+      backgroundColor: "#03A9F4",
       marginTop: Platform.OS === "android" ? 24 : 0 // To prevent overlapping from header in Android devices
     }
   });

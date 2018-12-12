@@ -5,7 +5,7 @@ import { Button } from "react-native-elements";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "paleturquoise",
     alignItems: "center",
     justifyContent: "space-evenly"
   }
@@ -14,7 +14,14 @@ const styles = StyleSheet.create({
 export default function WelcomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>Welcome to Local Pickup Sports Manager!</Text>
+      <Text
+        style={{
+          textAlign: "center",
+          fontSize: 30
+        }}
+      >
+        Welcome to Local Pickup Sports Manager!
+      </Text>
       <Button
         title="Sign in with Facebook"
         backgroundColor="#3B5998"

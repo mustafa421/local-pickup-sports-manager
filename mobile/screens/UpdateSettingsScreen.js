@@ -4,7 +4,6 @@ import { Button } from "react-native-elements";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { UPDATE_ACCOUNT } from "../actions/types";
-// import {Text, Platform } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,7 +12,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start"
   }
 });
-class UpdateSettingsScreen extends Component {
+export class UpdateSettingsScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: "Edit",
     headerLeft: (
