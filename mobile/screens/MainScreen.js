@@ -6,7 +6,7 @@ import {
   Alert,
   ScrollView,
   RefreshControl,
-  AsyncStorage
+  Dimensions
 } from "react-native";
 import { Button, Text } from "react-native-elements";
 import PropTypes from "prop-types";
@@ -17,25 +17,47 @@ import { getGames } from "../actions/game_actions";
 
 export class MainScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Active Games",
+    title: "",
     headerLeft: (
-      <Button
-        title="Settings"
-        textStyle={{ color: "rgba(0, 122, 255, 1)" }}
-        onPress={() => navigation.navigate("settings")}
-        backgroundColor="rgba(0,0,0,0)"
-      />
+      <View style={{ flexDirection: "row" }}>
+        <Button
+          title="Settings"
+          textStyle={{ color: "black" }}
+          onPress={() => navigation.navigate("settings")}
+          buttonStyle={{ padding: 10 }}
+          backgroundColor="paleturquoise"
+          buttonStyle={{
+            borderColor: "black",
+            borderWidth: 1,
+            borderRadius: 5,
+            paddingRight: 5
+          }}
+        />
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 20,
+            paddingTop: 10
+          }}
+        >
+          {" "}
+          Active Games
+        </Text>
+      </View>
     ),
     headerRight: (
       <Button
         title="Create Game"
-        textStyle={{ color: "rgba(0, 122, 255, 1)" }}
+        textStyle={{ color: "black" }}
         onPress={() => navigation.navigate("createGameScreen")}
-        backgroundColor="rgba(0,0,0,0)"
+        backgroundColor="paleturquoise"
+        buttonStyle={{ borderColor: "black", borderWidth: 1, borderRadius: 5 }}
       />
     ),
     headerStyle: {
-      marginTop: Platform.OS === "android" ? 24 : 0 // To prevent overlapping from header in Android devices
+      backgroundColor: "#03A9F4",
+      marginTop: Platform.OS === "android" ? 24 : 0, // To prevent overlapping from header in Android devices
+      textAlign: "center"
     }
   });
 
@@ -69,37 +91,46 @@ export class MainScreen extends Component {
 
     /* eslint-disable react/jsx-wrap-multilines */
     return (
-      <View>
-        <ScrollView
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={this.getLocationAsyncAndGetGames}
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={this.getLocationAsyncAndGetGames}
+          />
+        }
+        style={{
+          backgroundColor: "lightblue",
+          width: Dimensions.get("window").width,
+          height: Dimensions.get("window").height
+        }}
+      >
+        {games && games.length > 0 ? (
+          games.map(game => (
+            // eslint-disable-next-line react/jsx-indent
+            <GameCard
+              key={game.gameID}
+              gameID={game.gameID}
+              interested={game.interested}
+              joined={game.joined}
+              sport={game.sport}
+              title={game.title}
+              location={
+                game.location === "Current Location"
+                  ? `${game.latitude}, ${game.longitude}`
+                  : game.location
+              }
+              date={new Date(game.dateTime)}
+              skillLevel={game.skillLevel}
+              duration={game.duration}
             />
-          }
-        >
-          {games && games.length > 0 ? (
-            games.map(game => (
-              // eslint-disable-next-line react/jsx-indent
-              <GameCard
-                key={game.gameID}
-                gameID={game.gameID}
-                interested={game.interested}
-                joined={game.joined}
-                sport={game.sport}
-                title={game.title}
-                skillLevel={game.skillLevel}
-                duration={game.duration}
-              />
-            ))
-          ) : (
-            <Text style={{ textAlign: "center" }}>
-              No games available. Be the first! Click Create Game in the top
-              right corner of your screen.
-            </Text>
-          )}
-        </ScrollView>
-      </View>
+          ))
+        ) : (
+          <Text style={{ textAlign: "center" }}>
+            No games available. Be the first! Click Create Game in the top right
+            corner of your screen.
+          </Text>
+        )}
+      </ScrollView>
     );
     /* eslint-enable react/jsx-wrap-multilines */
   }

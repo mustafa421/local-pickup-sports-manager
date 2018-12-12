@@ -20,17 +20,20 @@ describe("Testing Main Screen functionality", () => {
       {
         title: "Basketball",
         skillLevel: "Beginner",
-        duration: "2 Hours"
+        duration: "2 Hours",
+        gameID: 1
       },
       {
         title: "Football",
         skillLevel: "Intermediate",
-        duration: "1 hour"
+        duration: "1 hour",
+        gameID: 2
       },
       {
         title: "Soccer",
         skillLevel: "Expert",
-        duration: "30 minutes"
+        duration: "30 minutes",
+        gameID: 3
       }
     ];
 
@@ -60,25 +63,25 @@ describe("Testing Main Screen functionality", () => {
   test("Main screen populates fixed games to match snapshopt", () => {
     const games = [
       {
-        gameId: 1,
+        gameID: 1,
         title: "Basketball",
         skillLevel: "Beginner",
         duration: "2 Hours"
       },
       {
-        gameId: 2,
+        gameID: 2,
         title: "Football",
         skillLevel: "Intermediate",
         duration: "1 hour"
       },
       {
-        gameId: 3,
+        gameID: 3,
         title: "Soccer",
         skillLevel: "Expert",
         duration: "30 minutes"
       },
       {
-        gameId: 4,
+        gameID: 4,
         title: "Hockey",
         skillLevel: "Beginner",
         duration: "1 hour"

@@ -9,8 +9,9 @@ describe("GameCard tests", () => {
       .create(
         <GameCard
           userID={123}
+          gameID={211}
           skillLevel="Begginner"
-          duration="1 hour"
+          duration={1}
           name="Bob"
           title="Basketball"
         />

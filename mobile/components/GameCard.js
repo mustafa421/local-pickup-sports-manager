@@ -130,24 +130,48 @@ export function GameCard(props) {
     gameID,
     interested,
     joined,
-    navigation
+    navigation,
+    location,
+    date
   } = props;
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("gameScreen")}>
-      <Card title={title}>
-        <Text style={styles.text}>Sport = {sport} </Text>
-        <Text style={styles.text}>Skill Level = {skillLevel}</Text>
-        <Text style={styles.text}>Time = {duration} </Text>
-        <Text style={styles.text}>Join this game now!</Text>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate("gameScreen", {
+          gameID,
+          title,
+          sport,
+          location,
+          date,
+          skillLevel
+        })
+      }
+    >
+      <Card
+        title={title}
+        containerStyle={{
+          backgroundColor: "#03A9F4",
+          borderColor: "black"
+        }}
+        titleStyle={{
+          fontWeight: "bold",
+          fontSize: 20
+        }}
+      >
+        <Text style={styles.text}>{sport} </Text>
+        <Text style={styles.text}>{skillLevel}</Text>
+        <Text style={styles.text}>Game Duration: {duration} </Text>
 
         <Button
-          backgroundColor="#03A9F4"
+          backgroundColor="paleturquoise"
           buttonStyle={{
-            borderRadius: 0,
+            borderRadius: 5,
             marginLeft: 0,
             marginRight: 0,
-            marginBottom: 0
+            marginBottom: 0,
+            borderColor: "black",
+            borderWidth: 1
           }}
           title="Join Game"
           disabled={joined}
@@ -161,15 +185,15 @@ export function GameCard(props) {
         />
         <Text style={{ marginBottom: 10 }} />
 
-        <Text style={{ marginBottom: 10 }}>Show interest in this game!</Text>
-
         <Button
-          backgroundColor="#03A9F4"
+          backgroundColor="paleturquoise"
           buttonStyle={{
-            borderRadius: 0,
+            borderRadius: 5,
             marginLeft: 0,
             marginRight: 0,
-            marginBottom: 0
+            marginBottom: 0,
+            borderColor: "black",
+            borderWidth: 1
           }}
           title="Interested in Game"
           disabled={interested}
@@ -197,6 +221,8 @@ GameCard.propTypes = {
   duration: PropTypes.number.isRequired,
   userID: PropTypes.number.isRequired,
   gameID: PropTypes.number.isRequired,
+  date: PropTypes.instanceOf(Date),
+  location: PropTypes.string,
   interested: PropTypes.bool,
   joined: PropTypes.bool,
   username: PropTypes.string
@@ -207,5 +233,7 @@ GameCard.defaultProps = {
   sport: null,
   title: null,
   interested: false,
-  joined: false
+  joined: false,
+  location: "",
+  date: null
 };
