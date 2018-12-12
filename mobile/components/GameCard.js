@@ -130,12 +130,23 @@ export function GameCard(props) {
     gameID,
     interested,
     joined,
-    navigation
+    navigation,
+    location,
+    date
   } = props;
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("gameScreen", { gameID })}
+      onPress={() =>
+        navigation.navigate("gameScreen", {
+          gameID,
+          title,
+          sport,
+          location,
+          date,
+          skillLevel
+        })
+      }
     >
       <Card
         title={title}
@@ -210,6 +221,8 @@ GameCard.propTypes = {
   duration: PropTypes.number.isRequired,
   userID: PropTypes.number.isRequired,
   gameID: PropTypes.number.isRequired,
+  date: PropTypes.instanceOf(Date),
+  location: PropTypes.string,
   interested: PropTypes.bool,
   joined: PropTypes.bool,
   username: PropTypes.string
@@ -220,5 +233,7 @@ GameCard.defaultProps = {
   sport: null,
   title: null,
   interested: false,
-  joined: false
+  joined: false,
+  location: "",
+  date: null
 };

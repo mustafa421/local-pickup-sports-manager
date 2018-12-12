@@ -114,6 +114,12 @@ export class MainScreen extends Component {
               joined={game.joined}
               sport={game.sport}
               title={game.title}
+              location={
+                game.location === "Current Location"
+                  ? `${game.latitude}, ${game.longitude}`
+                  : game.location
+              }
+              date={new Date(game.dateTime)}
               skillLevel={game.skillLevel}
               duration={game.duration}
             />

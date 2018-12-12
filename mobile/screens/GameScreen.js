@@ -1,52 +1,7 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { Platform, ScrollView } from "react-native";
 import { Button } from "react-native-elements";
 import Game from "../components/Game";
-
-const getJoined = async gameID => {
-  try {
-    const request = fetch(
-      `http://local-pickup-sports-manager.herokuapp.com/getJoined?gameID=${gameID}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    );
-
-    if (request.status !== 200) {
-      throw new Error(`Request returned ${request.status}`);
-    }
-
-    this.setState({ joined: await request.json() });
-  } catch (err) {
-    console.log(`Error getting joined users: ${err}`);
-  }
-};
-
-const getInterested = async gameID => {
-  try {
-    const request = fetch(
-      `https://local-pickup-sports-manager.herokuapp.com/getInterested?gameID=${gameID}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    );
-
-    if (request.status !== 200) {
-      throw new Error(`Request returned ${request.status}`);
-    }
-
-    this.setState({ interested: await request.json() });
-  } catch (err) {
-    console.log(`Error getting joined users: ${err}`);
-  }
-};
 
 class GameScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -82,23 +37,75 @@ class GameScreen extends Component {
   componentDidMount() {
     const { navigation } = this.props;
     const { gameID } = navigation.state.params;
-    getJoined(gameID);
-    getInterested(gameID);
+    console.log(gameID);
+    this.getJoined(gameID);
+    this.getInterested(gameID);
+  }
+
+  async getJoined(gameID) {
+    try {
+      const request = await fetch(
+        `http://local-pickup-sports-manager.herokuapp.com/getJoined?gameID=${gameID}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+
+      if (request.status !== 200) {
+        throw new Error(`Request returned ${request.status}`);
+      }
+
+      this.setState({ joined: await request.json() });
+    } catch (err) {
+      console.log(`Error getting joined users: ${err}`);
+    }
+  }
+
+  async getInterested(gameID) {
+    try {
+      const request = await fetch(
+        `https://local-pickup-sports-manager.herokuapp.com/getInterested?gameID=${gameID}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+
+      if (request.status !== 200) {
+        throw new Error(`Request returned ${request.status}`);
+      }
+
+      this.setState({ interested: await request.json() });
+    } catch (err) {
+      console.log(`Error getting joined users: ${err}`);
+    }
   }
 
   render() {
+    const { navigation } = this.props;
     const { joined, interested } = this.state;
+    const {
+      title,
+      sport,
+      location,
+      date,
+      skillLevel
+    } = navigation.state.params;
     return (
       <ScrollView contentContainerStyle={{ alignItems: "flex-start" }}>
         <Game
-          title="2v2 Pickup Basketball"
-          name="Basketball"
-          location="Madison"
-          date="Tomorrow"
-          time="12:00"
-          number_interested={interested.length}
-          number_going={joined.length}
-          difficulty={1}
+          title={title}
+          sport={sport}
+          location={location}
+          date={date}
+          interested={interested}
+          joined={joined}
+          skillLevel={skillLevel}
         />
       </ScrollView>
     );
