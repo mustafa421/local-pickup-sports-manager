@@ -1,7 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Text, StyleSheet, Alert, AsyncStorage } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  Alert,
+  AsyncStorage,
+  TouchableOpacity
+} from "react-native";
 import { connect } from "react-redux";
+import { withNavigation } from "react-navigation";
 import { Card, Button } from "react-native-elements";
 
 const styles = StyleSheet.create({
@@ -122,63 +129,66 @@ export function GameCard(props) {
     sport,
     gameID,
     interested,
-    joined
+    joined,
+    navigation
   } = props;
 
   return (
-    <Card title={title}>
-      <Text style={styles.text}>Sport = {sport} </Text>
-      <Text style={styles.text}>Skill Level = {skillLevel}</Text>
-      <Text style={styles.text}>Time = {duration} </Text>
-      <Text style={styles.text}>Join this game now!</Text>
+    <TouchableOpacity onPress={() => navigation.navigate("gameScreen")}>
+      <Card title={title}>
+        <Text style={styles.text}>Sport = {sport} </Text>
+        <Text style={styles.text}>Skill Level = {skillLevel}</Text>
+        <Text style={styles.text}>Time = {duration} </Text>
+        <Text style={styles.text}>Join this game now!</Text>
 
-      <Button
-        backgroundColor="#03A9F4"
-        buttonStyle={{
-          borderRadius: 0,
-          marginLeft: 0,
-          marginRight: 0,
-          marginBottom: 0
-        }}
-        title="Join Game"
-        disabled={joined}
-        onPress={() =>
-          joinGame({
-            userID,
-            gameID,
-            name: username
-          })
-        }
-      />
-      <Text style={{ marginBottom: 10 }} />
+        <Button
+          backgroundColor="#03A9F4"
+          buttonStyle={{
+            borderRadius: 0,
+            marginLeft: 0,
+            marginRight: 0,
+            marginBottom: 0
+          }}
+          title="Join Game"
+          disabled={joined}
+          onPress={() =>
+            joinGame({
+              userID,
+              gameID,
+              name: username
+            })
+          }
+        />
+        <Text style={{ marginBottom: 10 }} />
 
-      <Text style={{ marginBottom: 10 }}>Show interest in this game!</Text>
+        <Text style={{ marginBottom: 10 }}>Show interest in this game!</Text>
 
-      <Button
-        backgroundColor="#03A9F4"
-        buttonStyle={{
-          borderRadius: 0,
-          marginLeft: 0,
-          marginRight: 0,
-          marginBottom: 0
-        }}
-        title="Interested in Game"
-        disabled={interested}
-        onPress={() =>
-          interestedGame({
-            userID,
-            gameID,
-            name: username
-          })
-        }
-      />
-    </Card>
+        <Button
+          backgroundColor="#03A9F4"
+          buttonStyle={{
+            borderRadius: 0,
+            marginLeft: 0,
+            marginRight: 0,
+            marginBottom: 0
+          }}
+          title="Interested in Game"
+          disabled={interested}
+          onPress={() =>
+            interestedGame({
+              userID,
+              gameID,
+              name: username
+            })
+          }
+        />
+      </Card>
+    </TouchableOpacity>
   );
 }
 
 const mapStateToProps = state => state.auth.userAccountData;
 
-export default connect(mapStateToProps)(GameCard);
+export default withNavigation(connect(mapStateToProps)(GameCard));
 
 GameCard.propTypes = {
   title: PropTypes.string,
