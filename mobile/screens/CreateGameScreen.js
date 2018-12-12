@@ -9,7 +9,8 @@ import {
   Platform,
   Text,
   Alert,
-  TextInput
+  TextInput,
+  Dimensions
 } from "react-native";
 import { Button } from "react-native-elements";
 
@@ -38,7 +39,8 @@ class createGameScreen extends Component {
         title="Cancel"
         textStyle={{ color: "rgba(0, 122, 255, 1)" }}
         onPress={() => navigation.navigate("main")}
-        backgroundColor="rgba(0,0,0,0)"
+        backgroundColor="paleturquoise"
+        buttonStyle={{ borderColor: "black", borderWidth: 1, borderRadius: 5 }}
       />
     ),
     headerStyle: {
@@ -171,7 +173,13 @@ class createGameScreen extends Component {
       duration
     } = this.state;
     return (
-      <ScrollView>
+      <ScrollView
+        style={{
+          backgroundColor: "lightblue",
+          width: Dimensions.get("window").width,
+          height: Dimensions.get("window").height
+        }}
+      >
         <View style={styles.container}>
           <Text style={styles.text}>Game Title Here</Text>
           <TextInput
