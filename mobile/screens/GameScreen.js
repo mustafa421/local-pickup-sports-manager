@@ -37,7 +37,6 @@ class GameScreen extends Component {
   componentDidMount() {
     const { navigation } = this.props;
     const { gameID } = navigation.state.params;
-    console.log(gameID);
     this.getJoined(gameID);
     this.getInterested(gameID);
   }
