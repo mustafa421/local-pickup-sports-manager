@@ -216,6 +216,7 @@ app.get("/getJoined", (req, res) => {
  */
 app.get("/getInterested", (req, res) => {
   const { gameID } = req.query;
+
   knex("interestedgame")
     .select("name")
     .where("gameID", gameID)
