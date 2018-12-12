@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import {
   Text,
   StyleSheet,
+  View,
   Alert,
   AsyncStorage,
+  SectionList,
   TouchableOpacity
 } from "react-native";
 import { connect } from "react-redux";
 import { withNavigation } from "react-navigation";
-import { Card, Button } from "react-native-elements";
+import { Card, Button, Dimensions } from "react-native-elements";
 
 const styles = StyleSheet.create({
   text: {
@@ -174,6 +176,7 @@ export function GameCard(props) {
             borderWidth: 1
           }}
           title="Join Game"
+          textStyle={{ color: "black" }}
           disabled={joined}
           onPress={() =>
             joinGame({
@@ -196,6 +199,7 @@ export function GameCard(props) {
             borderWidth: 1
           }}
           title="Interested in Game"
+          textStyle={{ color: "black" }}
           disabled={interested}
           onPress={() =>
             interestedGame({

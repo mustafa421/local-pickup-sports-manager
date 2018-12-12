@@ -24,13 +24,13 @@ export class MainScreen extends Component {
           title="Settings"
           textStyle={{ color: "black" }}
           onPress={() => navigation.navigate("settings")}
-          buttonStyle={{ padding: 10 }}
           backgroundColor="paleturquoise"
           buttonStyle={{
             borderColor: "black",
             borderWidth: 1,
             borderRadius: 5,
-            paddingRight: 5
+            paddingRight: 5,
+            padding: 10
           }}
         />
         <Text
