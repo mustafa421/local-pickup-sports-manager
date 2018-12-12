@@ -34,7 +34,16 @@ export class MainScreen extends Component {
             paddingRight: 5
           }}
         />
-        <Text style={{ fontWeight: "bold", fontSize: 15 }}> Active Games</Text>
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 20,
+            paddingTop: 10
+          }}
+        >
+          {" "}
+          Active Games
+        </Text>
       </View>
     ),
     headerRight: (
