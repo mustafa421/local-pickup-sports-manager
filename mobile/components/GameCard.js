@@ -160,8 +160,6 @@ export function GameCard(props) {
         />
         <Text style={{ marginBottom: 10 }} />
 
-        <Text style={{ marginBottom: 10 }}>Show interest in this game!</Text>
-
         <Button
           backgroundColor="#03A9F4"
           buttonStyle={{
