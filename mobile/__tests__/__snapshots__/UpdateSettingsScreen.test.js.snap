@@ -12,9 +12,9 @@ exports[`update settings screen tests snapshot 1`] = `
 >
   <TextInput
     allowFontScaling={true}
+    defaultValue=""
     onChangeText={[Function]}
     placeholder="Name"
-    selectedValue="a"
     style={
       Object {
         "color": "grey",
@@ -25,9 +25,9 @@ exports[`update settings screen tests snapshot 1`] = `
   />
   <TextInput
     allowFontScaling={true}
+    defaultValue=""
     onChangeText={[Function]}
-    placeholder="Email address (optional)"
-    selectedValue="a"
+    placeholder="Email address"
     style={
       Object {
         "color": "grey",
@@ -36,20 +36,97 @@ exports[`update settings screen tests snapshot 1`] = `
     }
     underlineColorAndroid="transparent"
   />
-  <TextInput
-    allowFontScaling={true}
-    keyboardType="numeric"
-    maxLength={10}
-    onChangeText={[Function]}
-    placeholder="Phone Number (optional)"
-    selectedValue="a"
+  <View
     style={
-      Object {
-        "color": "grey",
-        "padding": 50,
-      }
+      Array [
+        Object {
+          "marginLeft": 15,
+          "marginRight": 15,
+        },
+        undefined,
+        undefined,
+        undefined,
+      ]
     }
-    underlineColorAndroid="transparent"
-  />
+  >
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={null}
+    >
+      <View
+        pointerEvents="box-only"
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#9E9E9E",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "padding": 19,
+            },
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            Object {
+              "backgroundColor": "blue",
+            },
+            undefined,
+            Object {
+              "padding": 12,
+            },
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {},
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              Array [
+                Object {
+                  "color": "white",
+                  "fontSize": 20,
+                },
+                undefined,
+                Object {
+                  "fontSize": 17.5,
+                },
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+              ],
+            ]
+          }
+        >
+          Update
+        </Text>
+      </View>
+    </View>
+  </View>
 </View>
 `;

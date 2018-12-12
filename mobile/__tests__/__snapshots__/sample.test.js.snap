@@ -5,13 +5,20 @@ exports[`sample test suite snapshot 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "#fff",
+      "backgroundColor": "paleturquoise",
       "flex": 1,
       "justifyContent": "space-evenly",
     }
   }
 >
-  <Text>
+  <Text
+    style={
+      Object {
+        "fontSize": 30,
+        "textAlign": "center",
+      }
+    }
+  >
     Welcome to Local Pickup Sports Manager!
   </Text>
   <View

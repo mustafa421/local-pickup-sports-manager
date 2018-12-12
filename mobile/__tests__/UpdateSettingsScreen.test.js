@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import UpdateSettingsScreen from "../screens/UpdateSettingsScreen";
+import { UpdateSettingsScreen } from "../screens/UpdateSettingsScreen";
 
 describe("update settings screen tests", () => {
   test("snapshot", () => {
