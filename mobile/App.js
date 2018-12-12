@@ -11,6 +11,7 @@ import MainScreen from "./screens/MainScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import CreateGameScreen from "./screens/CreateGameScreen";
 import UpdateSettingsScreen from "./screens/UpdateSettingsScreen";
+import GameScreen from "./screens/GameScreen";
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -31,6 +32,13 @@ export default class App extends React.Component {
         main: {
           screen: createStackNavigator({
             mainScreen: { screen: MainScreen },
+            settings: { screen: SettingsScreen }
+          })
+        },
+        game: {
+          screen: createStackNavigator({
+            gameScreen: { screen: GameScreen },
+            main: { screen: MainScreen },
             settings: { screen: SettingsScreen }
           })
         },
