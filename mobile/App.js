@@ -11,6 +11,7 @@ import MainScreen from "./screens/MainScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import CreateGameScreen from "./screens/CreateGameScreen";
 import UpdateSettingsScreen from "./screens/UpdateSettingsScreen";
+import PreferencesScreen from "./screens/PreferencesScreen";
 import GameScreen from "./screens/GameScreen";
 
 export default class App extends React.Component {
@@ -32,6 +33,7 @@ export default class App extends React.Component {
         main: {
           screen: createStackNavigator({
             mainScreen: { screen: MainScreen },
+            PreferencesScreen: { screen: PreferencesScreen },
             settings: { screen: SettingsScreen }
           })
         },
