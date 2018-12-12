@@ -132,10 +132,13 @@ export function GameCard(props) {
     gameID,
     interested,
     joined,
-    navigation
+    navigation,
+    location,
+    date
   } = props;
 
   return (
+<<<<<<< HEAD
     <View
       style={{
         backgroundColor: "lightblue"
@@ -194,6 +197,79 @@ export function GameCard(props) {
         </Card>
       </TouchableOpacity>
     </View>
+=======
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate("gameScreen", {
+          gameID,
+          title,
+          sport,
+          location,
+          date,
+          skillLevel
+        })
+      }
+    >
+      <Card
+        title={title}
+        containerStyle={{
+          backgroundColor: "#03A9F4",
+          borderColor: "black"
+        }}
+        titleStyle={{
+          fontWeight: "bold",
+          fontSize: 20
+        }}
+      >
+        <Text style={styles.text}>{sport} </Text>
+        <Text style={styles.text}>{skillLevel}</Text>
+        <Text style={styles.text}>Game Duration: {duration} </Text>
+
+        <Button
+          backgroundColor="paleturquoise"
+          buttonStyle={{
+            borderRadius: 5,
+            marginLeft: 0,
+            marginRight: 0,
+            marginBottom: 0,
+            borderColor: "black",
+            borderWidth: 1
+          }}
+          title="Join Game"
+          disabled={joined}
+          onPress={() =>
+            joinGame({
+              userID,
+              gameID,
+              name: username
+            })
+          }
+        />
+        <Text style={{ marginBottom: 10 }} />
+
+        <Button
+          backgroundColor="paleturquoise"
+          buttonStyle={{
+            borderRadius: 5,
+            marginLeft: 0,
+            marginRight: 0,
+            marginBottom: 0,
+            borderColor: "black",
+            borderWidth: 1
+          }}
+          title="Interested in Game"
+          disabled={interested}
+          onPress={() =>
+            interestedGame({
+              userID,
+              gameID,
+              name: username
+            })
+          }
+        />
+      </Card>
+    </TouchableOpacity>
+>>>>>>> master
   );
 }
 
@@ -208,6 +284,8 @@ GameCard.propTypes = {
   duration: PropTypes.number.isRequired,
   userID: PropTypes.number.isRequired,
   gameID: PropTypes.number.isRequired,
+  date: PropTypes.instanceOf(Date),
+  location: PropTypes.string,
   interested: PropTypes.bool,
   joined: PropTypes.bool,
   username: PropTypes.string
@@ -218,5 +296,7 @@ GameCard.defaultProps = {
   sport: null,
   title: null,
   interested: false,
-  joined: false
+  joined: false,
+  location: "",
+  date: null
 };
