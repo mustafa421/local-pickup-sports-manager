@@ -138,66 +138,6 @@ export function GameCard(props) {
   } = props;
 
   return (
-<<<<<<< HEAD
-    <View
-      style={{
-        backgroundColor: "lightblue"
-      }}
-    >
-      <TouchableOpacity onPress={() => navigation.navigate("gameScreen")}>
-        <Card title={title}>
-          <Text style={styles.text}>Sport = {sport} </Text>
-          <Text style={styles.text}>Skill Level = {skillLevel}</Text>
-          <Text style={styles.text}>Time = {duration} </Text>
-
-          <Button
-            backgroundColor="paleturquoise"
-            color="black"
-            buttonStyle={{
-              borderRadius: 5,
-              marginLeft: 0,
-              marginRight: 0,
-              marginBottom: 0,
-              borderColor: "black",
-              borderWidth: 1
-            }}
-            title="Join Game"
-            disabled={joined}
-            onPress={() =>
-              joinGame({
-                userID,
-                gameID,
-                name: username
-              })
-            }
-          />
-          <Text style={{ marginBottom: 10 }} />
-
-          <Button
-            backgroundColor="paleturquoise"
-            color="black"
-            buttonStyle={{
-              borderRadius: 5,
-              marginLeft: 0,
-              marginRight: 0,
-              marginBottom: 0,
-              borderColor: "black",
-              borderWidth: 1
-            }}
-            title="Interested in Game"
-            disabled={interested}
-            onPress={() =>
-              interestedGame({
-                userID,
-                gameID,
-                name: username
-              })
-            }
-          />
-        </Card>
-      </TouchableOpacity>
-    </View>
-=======
     <TouchableOpacity
       onPress={() =>
         navigation.navigate("gameScreen", {
@@ -236,6 +176,7 @@ export function GameCard(props) {
             borderWidth: 1
           }}
           title="Join Game"
+          textStyle={{ color: "black" }}
           disabled={joined}
           onPress={() =>
             joinGame({
@@ -258,6 +199,7 @@ export function GameCard(props) {
             borderWidth: 1
           }}
           title="Interested in Game"
+          textStyle={{ color: "black" }}
           disabled={interested}
           onPress={() =>
             interestedGame({
@@ -269,7 +211,6 @@ export function GameCard(props) {
         />
       </Card>
     </TouchableOpacity>
->>>>>>> master
   );
 }
 
