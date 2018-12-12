@@ -1,10 +1,24 @@
 import React, { Component } from "react";
-import { View, Text, Platform } from "react-native";
+
+import { View, Text, Platform, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { doLogout } from "../actions/auth_actions";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "space-evenly"
+  },
+  buttons: {
+    margin: 5,
+    padding: 10,
+    flex: 1
+  }
+});
 
 export class SettingsScreen extends Component {
   // A feature from React Navigation to define a title
@@ -26,7 +40,7 @@ export class SettingsScreen extends Component {
   render() {
     const { username, email, navigation, dispatch } = this.props;
     return (
-      <View>
+      <View style={styles.container}>
         <Text
           style={{
             padding: 50,
@@ -45,10 +59,19 @@ export class SettingsScreen extends Component {
           Email:
           {email}
         </Text>
+
+        <Button
+          raised
+          containerStyle={styles.buttons}
+          onPress={() => navigation.navigate("PreferencesScreen")}
+          title="Game Preferences"
+          backgroundColor="#0000FF"
+        />
         <Button
           raised
           title="Logout"
           backgroundColor="#E31414"
+          containerStyle={styles.buttons}
           onPress={() => {
             dispatch(doLogout(navigation));
             // Reset history so we won't directed back to the settings screen
