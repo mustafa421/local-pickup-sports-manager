@@ -147,10 +147,12 @@ app.post("/joinGame", (req, res) => {
               });
           });
       } else {
-        res.send(joingame).catch(err => {
+        try {
+          res.send(joingame);
+        } catch (err) {
           res.status = 500;
           res.send(`Error joining player to this game: ${err}`);
-        });
+        }
       }
     });
 });
