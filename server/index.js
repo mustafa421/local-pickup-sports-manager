@@ -199,9 +199,11 @@ app.post("/interestedGame", (req, res) => {
  * gameID: id of game to get joined players from
  */
 app.get("/getJoined", (req, res) => {
+  const { gameID } = req.query;
+
   knex("joingame")
     .select("name")
-    .where("gameID", req.body.gameID)
+    .where("gameID", gameID)
     .then(resp => res.send(resp.map(obj => obj.name)))
     .catch(err => {
       res.status = 500;
@@ -213,9 +215,10 @@ app.get("/getJoined", (req, res) => {
  * gameID: id of game to get joined players from
  */
 app.get("/getInterested", (req, res) => {
+  const { gameID } = req.query;
   knex("interestedgame")
     .select("name")
-    .where("gameID", req.body.gameID)
+    .where("gameID", gameID)
     .then(resp => res.send(resp.map(obj => obj.name)))
     .catch(err => {
       res.status = 500;
