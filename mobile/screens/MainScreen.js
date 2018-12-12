@@ -6,7 +6,6 @@ import {
   Alert,
   ScrollView,
   RefreshControl,
-  AsyncStorage,
   Dimensions
 } from "react-native";
 import { Button, Text } from "react-native-elements";

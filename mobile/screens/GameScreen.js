@@ -1,36 +1,54 @@
 import React, { Component } from "react";
-import { View, Text, Platform, ScrollView } from "react-native";
+import PropTypes from "prop-types";
+import { Platform, ScrollView } from "react-native";
 import { Button } from "react-native-elements";
 import Game from "../components/Game";
 
-const joinGame = async userInfo => {
+const getJoined = async gameID => {
   try {
-    // TODO - Swap out ip for backend value
-    const request = await fetch(
-      "http://local-pickup-sports-manager.herokuapp.com/joinGame",
+    const request = fetch(
+      `http://local-pickup-sports-manager.herokuapp.com/getJoined?gameID=${gameID}`,
       {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json"
-        },
-        body: JSON.stringify(userInfo),
-        json: true
+        }
       }
     );
 
     if (request.status !== 200) {
-      throw Error("failed to connect to API");
+      throw new Error(`Request returned ${request.status}`);
     }
-  } catch (ex) {
-    console.log(ex);
+
+    this.setState({ joined: await request.json() });
+  } catch (err) {
+    console.log(`Error getting joined users: ${err}`);
+  }
+};
+
+const getInterested = async gameID => {
+  try {
+    const request = fetch(
+      `https://local-pickup-sports-manager.herokuapp.com/getInterested?gameID=${gameID}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    if (request.status !== 200) {
+      throw new Error(`Request returned ${request.status}`);
+    }
+
+    this.setState({ interested: await request.json() });
+  } catch (err) {
+    console.log(`Error getting joined users: ${err}`);
   }
 };
 
 class GameScreen extends Component {
-  componentDidMount() {
-    const { gameID, userID } = this.props;
-  }
-
   static navigationOptions = ({ navigation }) => ({
     headerRight: (
       <Button
@@ -56,9 +74,20 @@ class GameScreen extends Component {
     }
   });
 
-  render() {
-    const { gameID, userID } = this.props;
+  state = {
+    interested: [],
+    joined: []
+  };
 
+  componentDidMount() {
+    const { navigation } = this.props;
+    const { gameID } = navigation.state.params;
+    getJoined(gameID);
+    getInterested(gameID);
+  }
+
+  render() {
+    const { joined, interested } = this.state;
     return (
       <ScrollView contentContainerStyle={{ alignItems: "flex-start" }}>
         <Game
@@ -67,8 +96,8 @@ class GameScreen extends Component {
           location="Madison"
           date="Tomorrow"
           time="12:00"
-          number_interested={3}
-          number_going={4}
+          number_interested={interested.length}
+          number_going={joined.length}
           difficulty={1}
         />
       </ScrollView>

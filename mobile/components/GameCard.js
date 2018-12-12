@@ -134,7 +134,9 @@ export function GameCard(props) {
   } = props;
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("gameScreen")}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("gameScreen", { gameID })}
+    >
       <Card
         title={title}
         containerStyle={{

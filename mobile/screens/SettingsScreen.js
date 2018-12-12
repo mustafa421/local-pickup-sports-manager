@@ -51,7 +51,8 @@ export class SettingsScreen extends Component {
             color: "blue"
           }}
         >
-          {"Name: " + username}
+          Name:
+          {username}
         </Text>
         <Text
           style={{
@@ -59,7 +60,8 @@ export class SettingsScreen extends Component {
             color: "blue"
           }}
         >
-          {"Email: " + email}
+          Email:
+          {email}
         </Text>
 
         <Button
