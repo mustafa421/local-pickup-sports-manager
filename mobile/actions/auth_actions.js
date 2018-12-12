@@ -83,6 +83,7 @@ export const fbLogin = () => async dispatch => {
     );
 
     const account = await response.json();
+    account.username = account.name;
     await setupUserData(account, token, dispatch);
   } catch (err) {
     console.log(`Error fetching user account data: ${err}`);
@@ -105,10 +106,9 @@ export const googleLogin = () => async dispatch => {
       //TODO: Cannot request gender or age yet
       //[result.user.name, result.user.id, result.user.email]
       const info = {
-        id: result.user.id,
+        id: 0,
         email: result.user.email,
-        username: result.user.name,
-        gender: "male"
+        username: result.user.name
       };
       await setupUserData(info, result.accessToken, dispatch);
     } else {

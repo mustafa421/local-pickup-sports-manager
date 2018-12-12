@@ -50,6 +50,40 @@ app.post("/createGame", (req, res) => {
   }
 });
 
+app.post("/editUser", (req, res) => {
+  const { userID, name, email } = req.body;
+
+  if (userID != null && (name != null || email != null)) {
+    let updateBody = {};
+    if (name != null && email != null) {
+      updateBody = {
+        username: name,
+        email
+      };
+    } else if (name != null) {
+      updateBody = {
+        username: name
+      };
+    } else {
+      updateBody = {
+        email
+      };
+    }
+    knex("user")
+      .where("userID", req.body.userID)
+      .update(updateBody)
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(err => {
+        res.status = 500;
+        res.send(`Error updating user: ${err}`);
+      });
+  } else {
+    res.send("One or more required fields empty");
+  }
+});
+
 /**
  * @param {*} latitude -> number
  * @param {*} longitude -> number
@@ -72,6 +106,7 @@ app.get("/getGames", (req, res) => {
      sin(radians(latitude)))
   ) AS distance   
   FROM game
+  WHERE ADDTIME(dateTime, CONCAT(duration, ":00")) > NOW()
   HAVING distance < 25  
   ORDER BY distance LIMIT 0, 20;`
     )
@@ -83,15 +118,105 @@ app.get("/getGames", (req, res) => {
 });
 
 /**
- * userId: string -> the user's db id
- * name: string -> players name
- * interested: boolean -> is the user interested or joining
+ * userID: string -> the user's db id
+ * gameID: string -> the ID of the game that is being joined
+ * name:   string -> name of the user joining this game
  */
 app.post("/joinGame", (req, res) => {
-  const { userId, name, interested } = req.body;
-  console.log(`${userId} ${interested} ${name}`);
-  console.log(req.body);
-  res.send();
+  knex("joingame")
+    .where("userID", req.body.userID)
+    .first()
+    .then(joingame => {
+      if (!joingame) {
+        knex("joingame")
+          .insert({
+            userID: req.body.userID,
+            gameID: req.body.gameID,
+            name: req.body.name
+          })
+          .then(() => {
+            knex("joingame")
+              .where("userID", req.body.userID)
+              .first()
+              .then(joinedgame => {
+                res.send(joinedgame);
+              })
+              .catch(err => {
+                res.status = 500;
+                res.send(`Error joining player to this game: ${err}`);
+              });
+          });
+      } else {
+        res.send(joingame).catch(err => {
+          res.status = 500;
+          res.send(`Error joining player to this game: ${err}`);
+        });
+      }
+    });
+});
+
+/**
+ * userID: string -> the user's db id
+ * gameID: string -> the ID of the game that is being joined
+ * name:   string -> the name of the user interested
+ */
+app.post("/interestedGame", (req, res) => {
+  knex("interestedgame")
+    .where("userID", req.body.userID)
+    .first()
+    .then(interestgame => {
+      if (!interestgame) {
+        knex("interestedgame")
+          .insert({
+            userID: req.body.userID,
+            gameID: req.body.gameID,
+            name: req.body.name
+          })
+          .then(() => {
+            knex("interestedgame")
+              .where("userID", req.body.userID)
+              .first()
+              .then(interestedgame => {
+                res.send(interestedgame);
+              })
+              .catch(err => {
+                res.status = 500;
+                res.send(`Error adding player interest to this game: ${err}`);
+              });
+          });
+      } else {
+        res.send(interestgame).catch(err => {
+          res.status = 500;
+          res.send(`Error adding player interest to this game: ${err}`);
+        });
+      }
+    });
+});
+
+/**
+ * gameID: id of game to get joined players from
+ */
+app.get("/getJoined", (req, res) => {
+  knex("joingame")
+    .where("gameID", req.body.gameID)
+    .then(resp => res.send(resp))
+    .catch(err => {
+      res.status = 500;
+      res.send(`Error, no users joined this game: ${err}`);
+    });
+});
+
+/**
+ * gameID: id of game to get joined players from
+ */
+app.get("/getInterested", (req, res) => {
+  knex("interestedgame")
+    .where("gameID", req.body.gameID)
+    .then(resp => res.send(resp))
+    .catch(err => {
+      res.status = 500;
+      res.send(`Error, no users interested in this game: ${err}`);
+    });
 });
 
 /**
