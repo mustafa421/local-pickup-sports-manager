@@ -200,8 +200,9 @@ app.post("/interestedGame", (req, res) => {
  */
 app.get("/getJoined", (req, res) => {
   knex("joingame")
+    .select("name")
     .where("gameID", req.body.gameID)
-    .then(resp => res.send(resp))
+    .then(resp => res.send(resp.map(obj => obj.name)))
     .catch(err => {
       res.status = 500;
       res.send(`Error, no users joined this game: ${err}`);
@@ -213,8 +214,9 @@ app.get("/getJoined", (req, res) => {
  */
 app.get("/getInterested", (req, res) => {
   knex("interestedgame")
+    .select("name")
     .where("gameID", req.body.gameID)
-    .then(resp => res.send(resp))
+    .then(resp => res.send(resp.map(obj => obj.name)))
     .catch(err => {
       res.status = 500;
       res.send(`Error, no users interested in this game: ${err}`);
