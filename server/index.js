@@ -123,37 +123,21 @@ app.get("/getGames", (req, res) => {
  * name:   string -> name of the user joining this game
  */
 app.post("/joinGame", (req, res) => {
+  const { userID, gameID, name } = req.body;
   knex("joingame")
-    .where("userID", req.body.userID)
-    .first()
-    .then(joingame => {
-      if (!joingame) {
-        knex("joingame")
-          .insert({
-            userID: req.body.userID,
-            gameID: req.body.gameID,
-            name: req.body.name
-          })
-          .then(() => {
-            knex("joingame")
-              .where("userID", req.body.userID)
-              .first()
-              .then(joinedgame => {
-                res.send(joinedgame);
-              })
-              .catch(err => {
-                res.status = 500;
-                res.send(`Error joining player to this game: ${err}`);
-              });
-          });
-      } else {
-        try {
-          res.send(joingame);
-        } catch (err) {
-          res.status = 500;
-          res.send(`Error joining player to this game: ${err}`);
-        }
-      }
+    .insert({
+      userID,
+      gameID,
+      name
+    })
+    .then(reply => {
+      console.log(`User ${userID} joined game: ${gameID}`);
+      res.send(reply);
+    })
+    .catch(err => {
+      console.log(`Error joining game: ${err}`);
+      res.status = 500;
+      res.send(`Error joining player to this game: ${err}`);
     });
 });
 
@@ -163,35 +147,22 @@ app.post("/joinGame", (req, res) => {
  * name:   string -> the name of the user interested
  */
 app.post("/interestedGame", (req, res) => {
+  const { userID, gameID, name } = req.body;
+
   knex("interestedgame")
-    .where("userID", req.body.userID)
-    .first()
-    .then(interestgame => {
-      if (!interestgame) {
-        knex("interestedgame")
-          .insert({
-            userID: req.body.userID,
-            gameID: req.body.gameID,
-            name: req.body.name
-          })
-          .then(() => {
-            knex("interestedgame")
-              .where("userID", req.body.userID)
-              .first()
-              .then(interestedgame => {
-                res.send(interestedgame);
-              })
-              .catch(err => {
-                res.status = 500;
-                res.send(`Error adding player interest to this game: ${err}`);
-              });
-          });
-      } else {
-        res.send(interestgame).catch(err => {
-          res.status = 500;
-          res.send(`Error adding player interest to this game: ${err}`);
-        });
-      }
+    .insert({
+      userID,
+      gameID,
+      name
+    })
+    .then(reply => {
+      console.log(`User ${userID} interested in game: ${gameID}`);
+      res.send(reply);
+    })
+    .catch(err => {
+      console.log(`Error joining game: ${err}`);
+      res.status = 500;
+      res.send(`Error adding player interest to this game: ${err}`);
     });
 });
 
@@ -200,6 +171,7 @@ app.post("/interestedGame", (req, res) => {
  */
 app.get("/getJoined", (req, res) => {
   const { gameID } = req.query;
+  console.log(`Received getJoined request for ${gameID}`);
 
   knex("joingame")
     .select("name")
@@ -216,6 +188,7 @@ app.get("/getJoined", (req, res) => {
  */
 app.get("/getInterested", (req, res) => {
   const { gameID } = req.query;
+  console.log(`Received getJoined request for ${gameID}`);
 
   knex("interestedgame")
     .select("name")

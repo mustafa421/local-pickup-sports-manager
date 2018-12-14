@@ -3,15 +3,13 @@ import PropTypes from "prop-types";
 import {
   Text,
   StyleSheet,
-  View,
   Alert,
   AsyncStorage,
-  SectionList,
   TouchableOpacity
 } from "react-native";
 import { connect } from "react-redux";
 import { withNavigation } from "react-navigation";
-import { Card, Button, Dimensions } from "react-native-elements";
+import { Card, Button } from "react-native-elements";
 
 const styles = StyleSheet.create({
   text: {
