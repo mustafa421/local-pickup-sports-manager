@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Platform, ScrollView } from "react-native";
+import { Platform, ScrollView, RefreshControl } from "react-native";
+import { NavigationEvents } from "react-navigation";
 import { Button } from "react-native-elements";
 import Game from "../components/Game";
 
@@ -31,17 +32,12 @@ class GameScreen extends Component {
 
   state = {
     interested: [],
-    joined: []
+    joined: [],
+    refreshing: false
   };
 
-  componentDidMount() {
-    const { navigation } = this.props;
-    const { gameID } = navigation.state.params;
-    this.getJoined(gameID);
-    this.getInterested(gameID);
-  }
-
   async getJoined(gameID) {
+    this.setState({ refreshing: true });
     try {
       const request = await fetch(
         `http://local-pickup-sports-manager.herokuapp.com/getJoined?gameID=${gameID}`,
@@ -79,7 +75,7 @@ class GameScreen extends Component {
         throw new Error(`Request returned ${request.status}`);
       }
 
-      this.setState({ interested: await request.json() });
+      this.setState({ interested: await request.json(), refreshing: false });
     } catch (err) {
       console.log(`Error getting joined users: ${err}`);
     }
@@ -87,16 +83,36 @@ class GameScreen extends Component {
 
   render() {
     const { navigation } = this.props;
-    const { joined, interested } = this.state;
+    const { joined, interested, refreshing } = this.state;
     const {
       title,
       sport,
       location,
       date,
-      skillLevel
+      skillLevel,
+      gameID
     } = navigation.state.params;
+
+    /* eslint-disable react/jsx-wrap-multilines */
     return (
-      <ScrollView contentContainerStyle={{ alignItems: "flex-start" }}>
+      <ScrollView
+        contentContainerStyle={{ alignItems: "flex-start" }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              this.getJoined(gameID);
+              this.getInterested(gameID);
+            }}
+          />
+        }
+      >
+        <NavigationEvents
+          onWillFocus={() => {
+            this.getJoined(gameID);
+            this.getInterested(gameID);
+          }}
+        />
         <Game
           title={title}
           sport={sport}
